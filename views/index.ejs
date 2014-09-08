@@ -4,12 +4,14 @@
               'css': [ 'index.css' ],
               'js': [
                 'angular-1.2.23.min.js',
-                'app.js'
+                'app.js',
+                'friendService.js',
+                'friendListCtrl.js'
               ]
             } 
 %>
 
-<div id="main" class="container" ng-controller="test">
+<div id="main" class="container" ng-controller="friendListCtrl">
 
   <ol class="friends">
     <li ng-repeat="friend in friends">{{friend}}</li>
