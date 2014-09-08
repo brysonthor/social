@@ -1,0 +1,44 @@
+{
+  "name": "social",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./app.js",
+  "dependencies": {
+    "async": "~0.2.10",
+    "woodruff": "git+https://github.com/fs-webdev/woodruff.git",
+    "theme-engage": "git+https://github.com/fs-webdev/theme-engage.git",
+    "frontier-build-tools": "git+https://github.com/fs-webdev/frontier-build-tools.git",
+    "gadgets-shared": "git+https://github.com/fs-webdev/gadgets-shared.git",
+    "simple-http-proxy": "~0.5.10",
+    "startup": "~0.3.0",
+    "nodetime": "~0.8.15",
+    "fs-image-viewer": "git+https://github.com/fs-webdev/fs-image-viewer.git"
+  },
+  "devDependencies": {
+    "strong": "git+https://github.com/fs-webdev/strong.git",
+    "istanbul": "~0.2.4",
+    "xunit-file": "0.0.5",
+    "mocha": "~1.8.2",
+    "expect.js": "~0.2.0",
+    "vows": "0.6.0",
+    "should": "1.1.x",
+    "sinon": "1.4.x",
+    "chai": "1.5.0",
+    "karma": "0.12.x",
+    "karma-mocha": "~0.1.x",
+    "karma-junit-reporter": "~0.2.x",
+    "karma-commonjs": "0.0.8",
+    "karma-phantomjs-launcher": "~0.1.x",
+    "karma-chai": "0.1.x",
+    "karma-chrome-launcher": "~0.1.4",
+    "karma-jasmine": "~0.1.5"
+
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "test": "bin/tests",
+    "test-ci": "run-mocha-ci"
+  }
+}

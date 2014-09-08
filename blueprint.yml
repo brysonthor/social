@@ -1,0 +1,14 @@
+version: 0.3 # Blueprint Schema Version
+app:
+  name: frontier-social
+  build:
+    type: npm
+  deploy:
+    systems:
+      integration:
+        heroku:
+      beta:
+        heroku:
+      production:
+        heroku:
+          smoke_test_url: https://familysearch.org/social

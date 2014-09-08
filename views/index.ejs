@@ -1,0 +1,18 @@
+<% 
+  page = { 'title' : 'Social', 'key': 'home', 'ngApp': 'social' } 
+  assets = { 
+              'css': [  ],
+              'js': [
+                'angular-1.2.23.min.js',
+                'app.js'
+              ]
+            } 
+%>
+
+<div id="main" class="container" ng-controller="test">
+
+  <ol>
+    <li ng-repeat="friend in friends">{{friend}}</li>
+  </ol>
+
+</div>
