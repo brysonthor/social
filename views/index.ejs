@@ -1,20 +1,20 @@
-<% 
-  page = { 'title' : 'Social', 'key': 'home', 'ngApp': 'social' } 
-  assets = { 
-              'css': [ 'index.css' ],
-              'js': [
-                'angular-1.2.23.min.js',
-                'app.js',
-                'friendService.js',
-                'friendListCtrl.js'
-              ]
-            } 
+<%
+  page = { 'title' : 'Social', 'key': 'home', 'ngApp': 'social' }
+  assets = {
+    'css': [ 'index.css' ],
+    'js': [
+      'angular-1.2.23.min.js',
+      'app.js',
+      'friendService.js',
+      'friendListCtrl.js'
+    ]
+  }
 %>
 
 <div id="main" class="container" ng-controller="friendListCtrl">
 
   <ol class="friends">
-    <li ng-repeat="friend in friends">{{friend}}</li>
+    <li ng-repeat="friend in friends">{{friend.display_name}} - {{friend.user_id}}</li>
   </ol>
 
 </div>
