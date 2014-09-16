@@ -16,7 +16,9 @@ mongoose.connect(env("MONGOLAB_URI"), function (err, res) {
 });
 
 module.exports = function(app) {
-  app.get('/', app.restrict(), function(req, res, next) { res.render('index') });
+  app.get('/', app.restrict(), function(req, res, next) {
+    res.render('index', {user: req.user});
+  });
 
 
 // -------
