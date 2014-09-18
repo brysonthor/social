@@ -25,7 +25,7 @@ module.exports = function(app) {
 //   API
 // -------
   // Get friend list
-  app.get('/api/friends', function(req, res) {
+  app.get('/api/friends', function(req, res, next) {
     var userId = req.user.profile.id.split(".")[2];
     var friends = mongoose.model('friends', friendSchema);
     friends.find({'user_id': userId}).lean().exec(function (err, rsp) {
@@ -38,7 +38,7 @@ module.exports = function(app) {
 
   });
 
-  // Add a friend
+  // Invite a friend
   app.post('/api/friends/invite', function(req, res, next) {
     // Save transaction
     var invitObj = { user_id: req.user.profile.id, display_name: req.user.profile.displayName, friend_email: req.body.email };
@@ -47,15 +47,45 @@ module.exports = function(app) {
       if (err) {
         res.send(err, 400);
       } else {
+        console.log(rsp._id);
+        // email potential friend
+        var sendgrid = require('sendgrid')(env('SENDGRID_USERNAME'), env('SENDGRID_PASSWORD'));
+        var payload = {
+          to: req.body.email,
+          from: req.user.profile.email,
+          subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
+          text: 'To accept '+req.user.profile.displayName+' as your friend click <a href="https://familysearch.org/social/api/friends/accept?id='+rsp._id+'">here<a/>'
+        }
+        sendgrid.send(payload, function(err, json) {
+          if (err) { console.error(err); }
+          console.log(json);
+        });
+
         res.send(rsp, 200);
       }
     });
   });
 
   // Add a friend
-  app.post('/api/friends/accept', function(req, res, next) {
+  app.get('/api/friends/accept', function(req, res, next) {
+    var userId = req.user.profile.id.split(".")[2];
+    Invite.find({'_id': req.query.id}).lean().exec(function (err, rsp) {
+      if (err) {
+        res.send(err, 400);
+      } else {
+        // Get current list of freinds (to add this friend to)
+        var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id };
+        Friend.findOne({'user_id': userId}, function (err, doc) {
+          console.log(doc);
+          doc.friends.push(friendObj);
+          doc.save();
+          res.send(doc, 200);
 
-    res.send({id: 'zyx'}, 200);
+          // Delete invite request
+          Invite.find({'_id': req.query.id}).remove().exec();
+        });
+      }
+    });
   });
 
 

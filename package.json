@@ -9,7 +9,8 @@
     "woodruff": "git+https://github.com/fs-webdev/woodruff.git",
     "startup": "~0.3.0",
     "mongoose": "~3.8.16",
-    "strong": "0.2.x"
+    "strong": "0.2.x",
+    "sendgrid": "1.1.1"
   },
   "devDependencies": {
     "istanbul": "~0.2.4",
