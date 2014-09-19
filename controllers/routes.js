@@ -67,6 +67,7 @@ module.exports = function(app) {
   });
 
   // Add a friend
+  // TODO: Get users's portrait url (tree PID) because we can't get it any other way.
   app.get('/api/friends/accept', function(req, res, next) {
     var userId = req.user.profile.id.split(".")[2];
     Invite.find({'_id': req.query.id}).lean().exec(function (err, rsp) {
@@ -74,12 +75,12 @@ module.exports = function(app) {
         res.send(err, 400);
       } else {
         // Get current list of freinds (to add this friend to)
-        var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id };
+        var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, treeId: "" };
         Friend.findOne({'user_id': userId}, function (err, doc) {
           console.log(doc);
           doc.friends.push(friendObj);
           doc.save();
-          res.send(doc, 200);
+          return res.redirect(req.resolvePath('/'));
 
           // Delete invite request
           Invite.find({'_id': req.query.id}).remove().exec();

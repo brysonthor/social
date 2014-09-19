@@ -1,20 +1,25 @@
 <%
-  page = { 'title' : 'Social', 'key': 'home', 'ngApp': 'social' }
+  page = { 'title': 'Social', 'key': 'Social', 'ngApp': 'social' };
+  page.description = "FamilySearch Social";
+  page.bgDark = false;
   assets = {
     'css': [ 'index.css' ],
     'js': [
       'angular-1.2.23.min.js',
       'app.js',
       'friendService.js',
-      'friendListCtrl.js'
+      'friendListCtrl.js',
+      'userPortrait.js',
+      'userPortraitService.js'
     ]
-  }
+  };
 %>
 
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
 <div id="main" class="container" ng-controller="friendListCtrl">
 
+  <user-portrait value="<%= user.profile.id %>"></user-portrait>
   <ol class="friends">
     <li ng-repeat="friend in friends">{{friend.display_name}} - {{friend.user_id}}</li>
   </ol>

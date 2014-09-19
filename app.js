@@ -10,4 +10,5 @@ app.configure('development', function() {
   var proxy = require("simple-http-proxy");
   var baseUrl = env("BASE_URL");
   app.stack.unshift({ route: "/artifactmanager", handle: proxy(baseUrl + "/artifactmanager") });
+  app.stack.unshift({ route: "/platform", handle: proxy(baseUrl + "/platform")});
 });

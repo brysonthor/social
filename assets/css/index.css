@@ -1,3 +1,2 @@
-.friends {
-  list-style-type: none;
-}
+.friends { list-style-type: none; }
+.user-portrait { width: 100px; height: 100px; border-radius: 50%; }
