@@ -1,2 +1,5 @@
-.friends { list-style-type: none; }
-.user-portrait { width: 100px; height: 100px; border-radius: 50%; }
+.banner { margin-left: 0px; padding: 20px; background-color: #A7A7A7; }
+.title { color: #ffffff; margin-left: 20px; margin-top: 20px; }
+.invite-btn { margin-top: 60px; }
+.friends { list-style-type: none; padding-left: 20px; padding-top: 10px; }
+.user-portrait { width: 80px; height: 80px; border-radius: 50%; box-shadow: 2px 4px 1px #3F3F3F; }
