@@ -1,5 +1,10 @@
 .banner { margin-left: 0px; padding: 20px; background-color: #A7A7A7; }
 .title { color: #ffffff; margin-left: 20px; margin-top: 20px; }
 .invite-btn { margin-top: 60px; }
+.invite-email { width: 195px; }
+.invite-button { margin-top: 10px; width: 208px; }
+.popover-title { text-align: center; }
+.popover-content { padding-top: 20px; padding-bottom: 20px; }
+.icon { padding-right: 10px; }
 .friends { list-style-type: none; padding-left: 20px; padding-top: 10px; }
-.user-portrait { width: 80px; height: 80px; border-radius: 50%; box-shadow: 2px 4px 1px #3F3F3F; }
+.user-portrait { margin-left: 30px; width: 80px; height: 80px; border-radius: 50%; box-shadow: 2px 4px 1px #3F3F3F; }

@@ -10,7 +10,10 @@
       'friendService.js',
       'friendListCtrl.js',
       'userPortrait.js',
-      'userPortraitService.js'
+      'userPortraitService.js',
+      'bootstrap.js',
+      'bootstrap-tooltip.js',
+      'inviteFriend.js'
     ]
   };
 %>
@@ -18,8 +21,8 @@
 
 <div class="banner row">
     <user-portrait class="pull-left" value="<%= user.profile.id %>"></user-portrait>
-    <h1 class="title pull-left">Your FamilySearch Friends</h1>
-    <button class="btn btn-success pull-right invite-btn">Invite Friend</button>
+    <h1 class="title pull-left">Friends</h1>
+    <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
 </div>
 
 <section class="friend-list">
