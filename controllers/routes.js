@@ -32,7 +32,7 @@ module.exports = function(app) {
       if (rsp.length > 0) {
         res.send({ friends: rsp[0].friends}, 200);
       } else {
-        res.send(err, 400);
+        res.send({ friends: []}, 200);
       }
     });
 
