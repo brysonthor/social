@@ -10,7 +10,7 @@
       'friendService.js',
       'friendListCtrl.js',
       'userPortrait.js',
-      'userPortraitService.js',
+      'currentUserService.js',
       'bootstrap.js',
       'bootstrap-tooltip.js',
       'inviteFriend.js',
@@ -28,8 +28,10 @@
 
 <section class="friend-list">
   <div id="main" class="container" ng-controller="friendListCtrl">
-    <ol class="friends">
-      <li ng-repeat="friend in friends">{{friend.display_name}} - {{friend.user_id}}</li>
-    </ol>
+    <div ng-repeat="friend in friends">
+      <img src="{{friend.portrait}}">
+      <span>{{friend.display_name}}</span>
+      <span>{{friend.user_id}}</span>
+    </div>
   </div>
 </section>

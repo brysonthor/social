@@ -11,34 +11,23 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
         placement: 'bottom'
       });
 
-      $(element).on('shown', function (e) {
-        alert("Success");
-      });
-
-      popover.on('shown', function (e) {
-        alert("Success");
-
-        // POST invite
-        $('.invite-button').on('click', function(e) {
-          console.log("hello");
-          var email = $('.invite-email').val();
-          inviteFriendService.inviteUser({email: email}).success(function(data) {
-            console.log(data);
-          });
+      // POST invite
+      $('body').on('click', '.invite-button', function(e) {
+        var email = $('.invite-email').val();
+        inviteFriendService.inviteUser({email: email}).success(function(data) {
+          console.log(data);
         });
-
       });
-
 
       // This closes the popover when user clicks anywhere outside the popover
       // TODO: This fires every time a cick happens anywhere
-      // $('body').on('click', function (e) {
-      //   $(element).each(function () {
-      //     if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-      //       $(this).popover('hide');
-      //     }
-      //   });
-      // });
+      $('body').on('click', function (e) {
+        $(element).each(function () {
+          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+          }
+        });
+      });
 
     }
   };
