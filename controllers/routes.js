@@ -92,7 +92,7 @@ module.exports = function(app) {
     var userId = req.user.profile.id.split(".")[2];
     Invite.find({'_id': req.query.id}).lean().exec(function (err, rsp) {
       if (err) {
-        res.send(err, 400);
+        return res.send(err, 400);
       } else {
         // Get portrait URL of current logged in user
         req.superagent

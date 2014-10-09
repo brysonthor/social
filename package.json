@@ -1,8 +1,8 @@
 {
   "name": "social",
   "version": "0.0.1",
-  "private": true,
   "main": "./app.js",
+  "private": true,
   "dependencies": {
     "theme-engage": "git+https://github.com/fs-webdev/theme-engage.git",
     "frontier-build-tools": "git+https://github.com/fs-webdev/frontier-build-tools.git",
@@ -10,7 +10,8 @@
     "startup": "~1.0.0",
     "mongoose": "~3.8.17",
     "strong": "0.2.x",
-    "sendgrid": "1.2"
+    "sendgrid": "1.2",
+    "envs": "~0.1.6"
   },
   "devDependencies": {
     "istanbul": "~0.2.4",
@@ -18,7 +19,6 @@
     "mocha": "~1.8.2",
     "expect.js": "~0.2.0",
     "should": "1.1.x",
-    "envs": "~0.1.6",
     "sinon": "1.4.x",
     "chai": "1.5.0",
     "simple-http-proxy": "~0.5.11",
@@ -30,7 +30,6 @@
     "karma-chai": "0.1.x",
     "karma-chrome-launcher": "~0.1.4",
     "karma-jasmine": "~0.1.5"
-
   },
   "engines": {
     "node": "0.10.x"

@@ -1,11 +1,15 @@
 // Module dependencies
-var woodruff = require("woodruff")
-  , env = require('envs')
-  , themeEngage = require("theme-engage");
+var woodruff = require("woodruff");
+var env = require('envs');
+var themeEngage = require("theme-engage");
 
 // Expose the app
-var app = module.exports = woodruff(__dirname, themeEngage, {proxyUser: true});
+var app = module.exports = woodruff(__dirname, themeEngage, {
+	proxyUser: true,
+	session: process.env.SESSION_SECRET || 'ReallyIntricateSecretForLocalDevUseOnly1337'
+});
 
+// localhost Proxies
 app.configure('development', function() {
   var proxy = require("simple-http-proxy");
   var baseUrl = env("BASE_URL");

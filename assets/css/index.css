@@ -1,3 +1,5 @@
+body { font-family: museo, sans-serif; }
+
 /* Header/Banner */
 .banner { margin-left: 0px; padding: 20px; background-image: url('banner_bg.jpg');
 background-repeat: no-repeat;
