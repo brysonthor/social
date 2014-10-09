@@ -16,6 +16,7 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
         var email = $('.invite-email').val();
         inviteFriendService.inviteUser({email: email}).success(function(data) {
           console.log(data);
+          popover.popover('hide');
         });
       });
 

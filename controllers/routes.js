@@ -55,7 +55,7 @@ module.exports = function(app) {
           .end(function(err, response) {
             if (err) return next(err);
             var portraitObj = JSON.parse(response.text);
-            var portraitUrl = portraitObj.sourceDescriptions[0].links['image-thumbnail'].href;
+            var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
             var invitObj = {
               user_id: req.user.profile.id,
@@ -109,7 +109,7 @@ module.exports = function(app) {
               .end(function(err, response) {
                 if (err) return next(err);
                 var portraitObj = JSON.parse(response.text);
-                var portraitUrl = portraitObj.sourceDescriptions[0].links['image-thumbnail'].href;
+                var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
                 // Get current list of freinds (to add this friend to)
                 var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait };

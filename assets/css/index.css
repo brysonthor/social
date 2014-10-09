@@ -1,9 +1,28 @@
-.banner { margin-left: 0px; padding: 20px; background-color: #A7A7A7; }
+/* Header/Banner */
+.banner { margin-left: 0px; padding: 20px; background-image: url('banner_bg.jpg');
+background-repeat: no-repeat;
+background-size: cover; }
 .title { color: #ffffff; margin-left: 20px; margin-top: 20px; }
+.user-portrait { margin-left: 30px; width: 90px; height: 90px; border-radius: 50%; box-shadow: 2px 4px 1px #808080; }
+
+/* Invite popover */
 .invite-btn { margin-top: 60px; }
 .invite-email { width: 195px; }
 .invite-button { margin-top: 10px; width: 208px; }
 .popover-title { text-align: center; }
 .popover-content { padding-top: 20px; padding-bottom: 20px; }
 .icon { padding-right: 10px; }
-.user-portrait { margin-left: 30px; width: 80px; height: 80px; border-radius: 50%; box-shadow: 2px 4px 1px #3F3F3F; }
+
+/* Friend List */
+.friend-container { background-color: #ffffff; width: 50%;
+margin-bottom: 15px;
+margin-left: 20px;
+height: 80px;
+padding-top: 20px;
+padding-left: 20px;
+border-radius: 5px;
+}
+.friend-name { font-size: 26px; }
+.friend-avatar { margin-left: 10px; margin-right: 20px; width: 60px; height: 60px; border-radius: 50%; box-shadow: 2px 4px 1px #808080; }
+.remove-btn { margin-right: 20px; }
+.no-friends { font-size: 20px; text-align: center; margin-top: 100px; }

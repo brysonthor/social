@@ -1,7 +1,7 @@
 <%
   page = { 'title': 'Social', 'key': 'Social', 'ngApp': 'social' };
   page.description = "FamilySearch Social";
-  page.bgDark = false;
+  page.bgDark = true;
   assets = {
     'css': [ 'index.css' ],
     'js': [
@@ -21,17 +21,30 @@
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
 <div class="banner row">
-    <user-portrait class="pull-left" value="<%= user.profile.id %>"></user-portrait>
-    <h1 class="title pull-left">Friends</h1>
-    <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
+  <user-portrait class="pull-left">
+    <img class="user-portrait" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  </user-portrait>
+  <h1 class="title pull-left">Friends</h1>
+  <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
+</div>
+
+<div class="alert">
+  <strong>Warning!</strong> This is a FamilySearch prototype, all social data will be deleted throughout the prototyping process.
 </div>
 
 <section class="friend-list">
-  <div id="main" class="container" ng-controller="friendListCtrl">
-    <div ng-repeat="friend in friends">
-      <img src="{{friend.portrait}}">
-      <span>{{friend.display_name}}</span>
-      <span>{{friend.user_id}}</span>
+  <div ng-controller="friendListCtrl">
+    <div class="friend-container" ng-repeat="friend in friends">
+      <img class="friend-avatar" src="{{friend.portrait}}">
+      <span class="friend-name">{{friend.display_name}}</span>
+
+      <div class="btn-group remove-btn pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sharing <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Remove Friend</a></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
