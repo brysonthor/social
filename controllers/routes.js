@@ -146,4 +146,12 @@ module.exports = function(app) {
   });
 
 
+  // Remove a friend
+  app.get('/api/friends/remove', app.restrict(), function(req, res, next) {
+    var user1 = req.user.profile.id.split(".")[2];
+    var user2 = req.query.id;
+
+  });
+
+
 };

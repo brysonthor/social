@@ -1,7 +1,6 @@
 <%
   page = { 'title': 'Social', 'key': 'Social', 'ngApp': 'social' };
   page.description = "FamilySearch Social";
-  page.bgDark = true;
   assets = {
     'css': [ 'index.css' ],
     'js': [
@@ -17,6 +16,7 @@
       'inviteFriendService.js'
     ]
   };
+  partial('partials/_pageGlobals');
 %>
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
@@ -33,13 +33,16 @@
 <section class="friend-list">
   <div ng-controller="friendListCtrl">
     <div class="friend-container" ng-repeat="friend in friends">
-      <img class="friend-avatar" src="{{friend.portrait}}">
-      <span class="friend-name">{{friend.display_name}}</span>
+      <img class="friend-avatar pull-left" src="{{friend.portrait}}">
+      <div class="name-container pull-left">
+        <span class="name">{{friend.display_name}}</span>
+        <p>Is sharing 0 people</p>
+      </div>
 
       <div class="btn-group remove-btn pull-right">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sharing <span class="caret"></span></a>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Friends <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Remove Friend</a></li>
+          <li><a href="#" class="remove-btn" data="{{friend.user_id}}">Remove Friend</a></li>
         </ul>
       </div>
 
