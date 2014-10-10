@@ -26,7 +26,7 @@ module.exports = function(app) {
   // -------
 
   // Get friend list
-  app.get('/api/friends', function(req, res, next) {
+  app.get('/api/get', function(req, res, next) {
     var userId = req.user.profile.id.split(".")[2];
     var friends = mongoose.model('friends', friendSchema);
     friends.find({'user_id': userId}).lean().exec(function (err, rsp) {
@@ -40,7 +40,7 @@ module.exports = function(app) {
   });
 
   // Invite a friend: Save invite info. Send email to invitee with the ID of the invite
-  app.post('/api/friends/invite', function(req, res, next) {
+  app.post('/api/invite', function(req, res, next) {
     // Get tree id of current logged in user
     req.superagent
       .get(baseUrl+'/platform/tree/current-person?access_token='+req.user.sessionId)
@@ -74,7 +74,7 @@ module.exports = function(app) {
                   to: req.body.email,
                   from: req.user.profile.email,
                   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                  text: 'To accept '+req.user.profile.displayName+' as your friend click <a href="https://familysearch.org/friends/api/friends/accept?id='+rsp._id+'">here<a/>'
+                  text: 'To accept '+req.user.profile.displayName+' as your friend click <a href="https://familysearch.org/friends/api/accept?id='+rsp._id+'">here<a/>'
                 }
                 sendgrid.send(payload, function(err, json) {
                   if (err) { console.error(err); }
@@ -88,7 +88,7 @@ module.exports = function(app) {
   });
 
   // Add a friend
-  app.get('/api/friends/accept', app.restrict(), function(req, res, next) {
+  app.get('/api/accept', app.restrict(), function(req, res, next) {
     var userId = req.user.profile.id.split(".")[2];
     Invite.find({'_id': req.query.id}).lean().exec(function (err, rsp) {
       if (err) {
@@ -147,7 +147,7 @@ module.exports = function(app) {
 
 
   // Remove a friend
-  app.get('/api/friends/remove', app.restrict(), function(req, res, next) {
+  app.get('/api/remove', app.restrict(), function(req, res, next) {
     var user1 = req.user.profile.id.split(".")[2];
     var user2 = req.query.id;
 
