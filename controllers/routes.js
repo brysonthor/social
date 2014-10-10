@@ -88,10 +88,9 @@ module.exports = function(app) {
   });
 
   // Add a friend
-  app.get('/api/accept', function(req, res, next) {
+  app.get('/api/accept', app.restrict(), function(req, res, next) {
     // Return error if now id query param
     if (typeof req.query.id == "undefined") return res.send({"error": "Missing id query parameter"}, 300);
-    if (typeof req.user == "undefined") return res.send({"error": "User not authenticated"}, 401);
 
     var userId = req.user.profile.id.split(".")[2];
 
