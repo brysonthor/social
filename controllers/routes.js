@@ -74,7 +74,7 @@ module.exports = function(app) {
                   to: req.body.email,
                   from: req.user.profile.email,
                   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                  text: 'To accept '+req.user.profile.displayName+' as your friend click <a href="https://familysearch.org/friends/api/accept?id='+rsp._id+'">here<a/>'
+                  text: 'To accept '+req.user.profile.displayName+' as your friend go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id
                 }
                 sendgrid.send(payload, function(err, json) {
                   if (err) { console.error(err); }
@@ -94,11 +94,11 @@ module.exports = function(app) {
 
     var userId = req.user.profile.id.split(".")[2];
 
-
     Invite.find({'_id': req.query.id}).lean().exec(function (err, rsp) {
       if (err) {
         return res.send(err, 400);
       } else {
+        if (rsp.length != 1) return res.send({error: "Invalid id"}, 300);
         // Get portrait URL of current logged in user
         req.superagent
           .get(baseUrl+'/platform/tree/current-person?access_token='+req.user.sessionId)

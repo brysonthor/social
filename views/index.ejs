@@ -33,7 +33,7 @@
 <section class="friend-list">
   <div ng-controller="friendListCtrl">
     <div class="friend-container" ng-repeat="friend in friends">
-      <img class="friend-avatar pull-left" src="{{friend.portrait}}">
+      <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
       <div class="name-container pull-left">
         <span class="name">{{friend.display_name}}</span>
         <p>Is sharing 0 people</p>

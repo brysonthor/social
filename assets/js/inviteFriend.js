@@ -13,9 +13,9 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
 
       // POST invite
       $('body').on('click', '.invite-button', function(e) {
+        $('.invite-button').attr('disabled',true);
         var email = $('.invite-email').val();
         inviteFriendService.inviteUser({email: email}).success(function(data) {
-          console.log(data);
           popover.popover('hide');
         });
       });
