@@ -11,9 +11,11 @@
       'userPortrait.js',
       'currentUserService.js',
       'bootstrap.js',
-      'bootstrap-tooltip.js',
+      // 'bootstrap-tooltip.js',
       'inviteFriend.js',
-      'inviteFriendService.js'
+      'inviteFriendService.js',
+      'sharedPeople.js',
+      'sharedPeopleService.js'
     ]
   };
   partial('partials/_pageGlobals');
@@ -24,6 +26,7 @@
   <img class="user-portrait pull-left" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
   <h1 class="title pull-left">Friends</h1>
   <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
+  <shared-people data="<%= user.profile.id %>">
 </div>
 
 <div class="alert">
@@ -42,7 +45,8 @@
       <div class="btn-group remove-btn pull-right">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Friends <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#" class="remove-btn" data="{{friend.user_id}}">Remove Friend</a></li>
+          <li><a href="" class="remove-btn" ng-click="removeFriend(friend.user_id)">Remove Friend</a></li>
+          <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li>
         </ul>
       </div>
 

@@ -3,7 +3,7 @@ var mongoose = require ("mongoose")
   , env = require('envs');
 
 // Mongo Schemas
-var friendSchema = new mongoose.Schema({ user_id: String, friends: [{display_name: String, user_id: String, portrait: String }]});
+var friendSchema = new mongoose.Schema({ user_id: String, friends: [{display_name: String, user_id: String, portrait: String, email: String }]});
 var Friend = mongoose.model('friends', friendSchema);
 var inviteSchema = new mongoose.Schema({ user_id: String, display_name: String, friend_email: String, portrait: String });
 var Invite = mongoose.model('invites', inviteSchema);
@@ -18,6 +18,7 @@ mongoose.connect(env("MONGOLAB_URI"), function (err, res) {
 
 module.exports = function(app) {
   app.get('/', app.restrict(), function(req, res, next) {
+    // console.log(req.user.profile);
     res.render('index', {user: req.user});
   });
 
@@ -87,7 +88,7 @@ module.exports = function(app) {
       });
   });
 
-  // Add a friend
+  // Add/Accept a friend
   app.get('/api/accept', app.restrict(), function(req, res, next) {
     // Return error if now id query param
     if (typeof req.query.id == "undefined") return res.send({"error": "Missing id query parameter"}, 300);
@@ -117,7 +118,7 @@ module.exports = function(app) {
                 var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
                 // Get current list of freinds (to add this friend to)
-                var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait };
+                var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait, email: rsp[0].friend_email };
                 Friend.findOne({'user_id': userId}, function (err, doc) {
                   // If first time user create new friend list, else add invitee to existing friendlist
                   if (doc == null) {
@@ -133,7 +134,7 @@ module.exports = function(app) {
                   }
 
                   // Add friend to the inviter friend list
-                  var friendObj2 = { display_name: req.user.profile.displayName, user_id: req.user.profile.id, portrait: portraitUrl };
+                  var friendObj2 = { display_name: req.user.profile.displayName, user_id: req.user.profile.id, portrait: portraitUrl, email: req.user.profile.email };
                   Friend.findOne({'user_id': rsp[0].user_id.split(".")[2]}, function (err, doc) {
                     doc.friends.push(friendObj2);
                     doc.save();
@@ -152,10 +153,32 @@ module.exports = function(app) {
 
 
   // Remove a friend
-  app.get('/api/remove', app.restrict(), function(req, res, next) {
+  app.delete('/api/remove/:id', app.restrict(), function(req, res, next) {
     var user1 = req.user.profile.id.split(".")[2];
-    var user2 = req.query.id;
+    var user2 = req.params.id.split(".")[2];
 
+    // Remove from initiator's friend list
+    Friend.findOne({'user_id': user1}, function (err, doc) {
+      if (err) return res.send({ error: err}, 300);
+      for (var i=0; i<=doc.friends.length; i++) {
+        if (typeof doc.friends[i] != "undefined") {
+          if (doc.friends[i].user_id == "cis.user."+user2) doc.friends.splice(i,1);
+        }
+      }
+      doc.save();
+    });
+
+    // Remove from friend of initiators friend list
+    Friend.findOne({'user_id': user2}, function (err, doc) {
+      if (err) return res.send({ error: err}, 300);
+      for (var i=0; i<=doc.friends.length; i++) {
+        if (typeof doc.friends[i] != "undefined") {
+          if (doc.friends[i].user_id == "cis.user."+user1) doc.friends.splice(i,1);
+        }
+      }
+      doc.save();
+    });
+    return res.send(204);
   });
 
 

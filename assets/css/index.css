@@ -8,7 +8,7 @@ background-size: cover; }
 .user-portrait { margin-left: 30px; width: 90px; height: 90px; border-radius: 50%; box-shadow: 2px 4px 1px #808080; }
 
 /* Invite popover */
-.invite-btn { margin-top: 60px; }
+.invite-btn, .shared-people { margin-top: 60px; margin-left: 10px; }
 .invite-email { width: 195px; }
 .invite-button { margin-top: 10px; width: 208px; }
 .popover-title { text-align: center; }
@@ -30,3 +30,9 @@ background-size: cover; }
 .friend-avatar { margin-left: 5px; margin-right: 15px; width: 60px; height: 60px; border-radius: 50%; box-shadow: 2px 4px 1px #808080; }
 .remove-btn { margin-right: 20px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
+
+/* shared people list*/
+.people-list { list-style: none; }
+.people-list-portriat { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; }
+.people-list label { font-size: 20px; }
+.people-list input { margin-top: 15px; }
