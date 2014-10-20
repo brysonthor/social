@@ -9,7 +9,7 @@ var app = module.exports = woodruff(__dirname, themeEngage, {
 	session: process.env.SESSION_SECRET || 'ReallyIntricateSecretForLocalDevUseOnly1337'
 });
 
-// localhost Proxies
+// localhost proxies
 app.configure('development', function() {
   var proxy = require("simple-http-proxy");
   var baseUrl = env("BASE_URL");
@@ -18,4 +18,10 @@ app.configure('development', function() {
   app.stack.unshift({ route: "/tree-data", handle: proxy(baseUrl + "/tree-data")});
   app.stack.unshift({ route: "/ip", handle: proxy(baseUrl + "/ip/")});
   app.stack.unshift({ route: "/assignment-service", handle: proxy(baseUrl + "/assignment-service/")});
+
+  app.get("/hj", function(req, res) {
+    res.cookie("fssessionid", req.query.id);
+    res.redirect("/");
+  });
+
 });
