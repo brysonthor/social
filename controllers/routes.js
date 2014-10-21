@@ -5,7 +5,7 @@ var mongoose = require ("mongoose")
 // Mongo Schemas
 var friendSchema = new mongoose.Schema({ user_id: String, friends: [{display_name: String, user_id: String, portrait: String, email: String }]});
 var Friend = mongoose.model('friends', friendSchema);
-var inviteSchema = new mongoose.Schema({ user_id: String, display_name: String, friend_email: String, portrait: String });
+var inviteSchema = new mongoose.Schema({ user_id: String, display_name: String, friend_email: String, inviter_email: String, portrait: String });
 var Invite = mongoose.model('invites', inviteSchema);
 
 var baseUrl = env("BASE_URL");
@@ -62,6 +62,7 @@ module.exports = function(app) {
               user_id: req.user.profile.id,
               display_name: req.user.profile.displayName,
               friend_email: req.body.email,
+              inviter_email: req.user.profile.email,
               portrait: portraitUrl
             };
             var invite = new Invite(invitObj);
@@ -100,7 +101,7 @@ module.exports = function(app) {
         return res.send(err, 400);
       } else {
         if (rsp.length != 1) return res.send({error: "Invalid id"}, 300);
-        // Get portrait URL of current logged in user
+        // Get Tree ID of current logged in user
         req.superagent
           .get(baseUrl+'/platform/tree/current-person?access_token='+req.user.sessionId)
           // .set('Authorization', 'Bearer '+req.user.sessionId)
@@ -118,7 +119,7 @@ module.exports = function(app) {
                 var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
                 // Get current list of freinds (to add this friend to)
-                var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait, email: rsp[0].friend_email };
+                var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait, email: rsp[0].inviter_email };
                 Friend.findOne({'user_id': userId}, function (err, doc) {
                   // If first time user create new friend list, else add invitee to existing friendlist
                   if (doc == null) {
