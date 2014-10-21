@@ -14,7 +14,6 @@
     "envs": "~0.1.6"
   },
   "devDependencies": {
-    "asset-manager": "git+https://github.com/fs-webdev/asset-manager.git",
     "istanbul": "~0.2.4",
     "xunit-file": "0.0.5",
     "mocha": "~1.8.2",

@@ -30,3 +30,4 @@ background-size: cover; }
 .friend-avatar { margin-left: 5px; margin-right: 15px; width: 60px; height: 60px; border-radius: 50%; box-shadow: 2px 4px 1px #808080; }
 .remove-btn { margin-right: 20px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
+.share-chkbox { float: right; }
