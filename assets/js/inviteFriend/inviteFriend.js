@@ -1,9 +1,11 @@
 angular.module('social').directive('inviteFriend', ['inviteFriendService', function(inviteFriendService) {
+  var styles = FS.File.loadCSS('inviteFriend.css');
+
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      var template = '<input class="invite-email" type="text" placeholder="betty@gmail.com"><button class="btn btn-primary invite-button"><i class="icon icon-envelope icon-white"></i>Send Invite</button>';
-
+      // var template = '<input class="invite-email" type="text" placeholder="betty@gmail.com"><button class="btn btn-primary invite-button"><i class="icon icon-envelope icon-white"></i>Send Invite</button>';
+      var template = getSnippets();
       var popover = $(element).popover({
         title: '<h3>Invite A Friend</h3>',
         html: true,

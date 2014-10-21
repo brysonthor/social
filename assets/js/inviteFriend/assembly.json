@@ -1,0 +1,7 @@
+{
+  "files": [
+    "inviteFriend.js",
+    "inviteFriendService.js"
+  ],
+  "simpleWrap": true
+}
