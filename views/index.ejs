@@ -32,11 +32,11 @@
 </div>
 
 <section class="friend-list">
-  <div ng-controller="friendListCtrl">
+  <div  ng-cloak ng-controller="friendListCtrl">
     <div class="friend-container" ng-repeat="friend in friends">
       <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
       <div class="name-container pull-left">
-        <span ng-cloak class="name">{{friend.display_name}}</span>
+        <span class="name">{{friend.display_name}}</span>
         <p>Is sharing 0 people</p>
       </div>
 
