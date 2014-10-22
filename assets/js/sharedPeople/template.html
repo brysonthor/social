@@ -4,18 +4,18 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3 id="myModalLabel">Shared Memory People</h3>
 		<p>Select the people you would like to share with your friends.</p>
-	</div>
-	<div class="modal-body">
 
 	  <div class="people-filter">
 	    Filter: <input ng-model="peopleText" type="text" class="search-query">
 	  </div>
 
+	</div>
+	<div class="modal-body">
 		<ul class="people-list">
 			<li ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
 				<label class="checkbox">
 				<input type="checkbox">
-				<img class="people-list-portriat" ng-src="{{person.thumbIconUrl}}">
+				<img class="people-list-portriat" ng-src="{{person.thumbIconUrl || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
 				<span>{{person.name}}</span>
 				</label>
 			</li>
