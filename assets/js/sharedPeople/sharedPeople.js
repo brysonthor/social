@@ -16,14 +16,7 @@ angular.module('social').directive('sharedPeople', ['sharedPeopleService', funct
 
         // Get user's people list
         sharedPeopleService.getPeople(userId).success(function(data) {
-          for (var i=0; i< data.taggedPerson.length; i++) {
-            var person = $(templateList.person);
-            var portrait = data.taggedPerson[i].thumbIconUrl;
-            if (data.taggedPerson[i].thumbIconUrl == null) portrait = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-            $(person).find('img').attr('src',portrait);
-            $(person).find('label').append(data.taggedPerson[i].name);
-            $('.people-list').append(person);
-          }
+          scope.people = data.taggedPerson;
         });
       });
     }

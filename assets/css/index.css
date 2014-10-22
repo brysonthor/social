@@ -25,3 +25,4 @@ background-size: cover; }
 .remove-btn { margin-right: 20px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
 .share-chkbox { float: right; }
+.friend-filter { margin-left: 20px; margin-bottom: 15px; }

@@ -6,7 +6,20 @@
 		<p>Select the people you would like to share with your friends.</p>
 	</div>
 	<div class="modal-body">
-		<ul class="people-list"></ul>
+
+	  <div class="people-filter">
+	    Filter: <input ng-model="peopleText" type="text" class="search-query">
+	  </div>
+
+		<ul class="people-list">
+			<li ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
+				<label class="checkbox">
+				<input type="checkbox">
+				<img class="people-list-portriat" ng-src="{{person.thumbIconUrl}}">
+				<span>{{person.name}}</span>
+				</label>
+			</li>
+		</ul>
 	</div>
 	<div class="modal-footer">
 		<button class="btn btn-link" data-dismiss="modal" aria-hidden="true">Cancel</button>

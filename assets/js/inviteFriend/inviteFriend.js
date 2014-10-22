@@ -15,10 +15,10 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
 
       // POST invite
       $('body').on('click', '.invite-button', function(e) {
-        $('.invite-button').attr('disabled',true);
+        popover.popover('hide');
         var email = $('.invite-email').val();
-        inviteFriendService.inviteUser({email: email}).success(function(data) {
-          popover.popover('hide');
+        inviteFriendService.inviteUser({email: email}).error(function(data) {
+          $('.page-alerts').html('Invite Failed').addClass('alert-danger');
         });
       });
 

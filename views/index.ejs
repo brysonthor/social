@@ -26,13 +26,18 @@
   <shared-people data="<%= user.profile.id %>">
 </div>
 
-<div class="alert">
+<div class="alert page-alerts">
   <strong>Warning!</strong> This is a FamilySearch prototype, all social data will be deleted throughout the prototyping process.
 </div>
 
 <section class="friend-list">
+
+  <div class="friend-filter">
+    Filter: <input ng-model="friendText" type="text" class="search-query">
+  </div>
+
   <div  ng-cloak ng-controller="friendListCtrl">
-    <div class="friend-container" ng-repeat="friend in friends">
+    <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
       <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
       <div class="name-container pull-left">
         <span class="name">{{friend.display_name}}</span>
