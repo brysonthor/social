@@ -5,8 +5,6 @@ angular.module('social').directive('sharedPeople', ['sharedPeopleService', funct
     restrict: 'E',
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
-      var userId = attrs.data;
-
       // Popup Modal when
       $('.shared-people').on('click', function(e) {
         $('.shared-people-modal').modal('show');
@@ -15,7 +13,7 @@ angular.module('social').directive('sharedPeople', ['sharedPeopleService', funct
         if ($('.people-list li').length > 0) return;
 
         // Get user's people list
-        sharedPeopleService.getPeople(userId).success(function(data) {
+        sharedPeopleService.getPeople(attrs.data).success(function(data) {
           scope.people = data.taggedPerson;
         });
       });

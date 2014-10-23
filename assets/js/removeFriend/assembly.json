@@ -1,0 +1,7 @@
+{
+  "files": [
+    "removeFriend.js",
+    "removeFriendService.js"
+  ],
+  "simpleWrap": true
+}
