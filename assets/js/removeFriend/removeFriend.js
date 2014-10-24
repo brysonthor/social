@@ -17,7 +17,8 @@ angular.module('social').directive('removeFriend', ['removeFriendService', funct
           // ajax: Remove friend
           $('.remove-friend-btn').on('click', function() {
             // Remove friend fromm DOM
-            $(element).parent().parent().parent().parent().remove();
+            // $(element).parent().parent().parent().parent().remove();
+            $(element).parent().parent().parent().parent().fadeOut(2000);
 
             // ajax call to delete friend
             removeFriendService.remove(attrs.removeFriend).error(function(data) {

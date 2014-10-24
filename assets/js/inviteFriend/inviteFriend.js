@@ -23,7 +23,6 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
       });
 
       // This closes the popover when user clicks anywhere outside the popover
-      // TODO: This fires every time a cick happens anywhere
       $('body').on('click', function (e) {
         $(element).each(function () {
           if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {

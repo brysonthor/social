@@ -37,7 +37,6 @@ module.exports = function(app) {
         res.send({ friends: []}, 200);
       }
     });
-
   });
 
   // Invite a friend: Save invite info. Send email to invitee with the ID of the invite
@@ -152,7 +151,6 @@ module.exports = function(app) {
     });
   });
 
-
   // Remove a friend
   app.delete('/api/remove/:id', app.restrict(), function(req, res, next) {
     var user1 = req.user.profile.id.split(".")[2];
@@ -182,5 +180,16 @@ module.exports = function(app) {
     return res.send(204);
   });
 
+  // Get pending invites
+  app.get('/api/invite', function(req, res, next) {
+    var invites = mongoose.model('invites', inviteSchema);
+    invites.find({'user_id': req.user.profile.id}).lean().exec(function (err, rsp) {
+      if (rsp.length > 0) {
+        res.send({ invites: rsp}, 200);
+      } else {
+        res.send({ invites: []}, 200);
+      }
+    });
+  });
 
 };
