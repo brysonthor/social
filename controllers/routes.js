@@ -27,8 +27,8 @@ module.exports = function(app) {
   // -------
 
   // Get friend list
-  app.get('/api/get', function(req, res, next) {
-    var userId = req.user.profile.id.split(".")[2];
+  app.get('/api/get/:id?', function(req, res, next) {
+    var userId = (req.params.id) ? req.params.id.split(".")[2] : req.user.profile.id.split(".")[2];
     var friends = mongoose.model('friends', friendSchema);
     friends.find({'user_id': userId}).lean().exec(function (err, rsp) {
       if (rsp.length > 0) {

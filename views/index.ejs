@@ -24,7 +24,7 @@
 
   <div class="banner row">
     <img class="user-portrait pull-left" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-    <h1 class="title pull-left">Friends</h1>
+    <h1 class="user-name pull-left"><%= user.profile.displayName %></h1>
     <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
     <button class="btn btn-success pull-right shared-people">Share Memories</button>
     <shared-people data="<%= user.profile.id %>">
@@ -35,6 +35,7 @@
   </div>
 
   <section class="friend-list">
+    <h1 class="">Friends</h1>
 
     <div class="friend-filter">
       Filter: <input ng-model="friendText" type="text" class="search-query">
@@ -43,13 +44,14 @@
     <div  ng-cloak ng-controller="friendListCtrl">
       <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
         <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
+        <span class="badge badge-info pull-left friends-number" title="Number of friends">0</span>
         <div class="name-container pull-left">
           <span class="name">{{friend.display_name}}</span>
           <p>Is sharing 0 people</p>
         </div>
 
         <div class="btn-group remove-btn pull-right">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Friends <span class="caret"></span></a>
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="" class="remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove Friend</a></li>
             <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li>
