@@ -9,7 +9,7 @@ angular.module('social').directive('removeFriend', ['removeFriendService', funct
 
       // Function runs for each instance of this directive
       return function(scope, element, attrs) {
-        // Popup Modal when
+        // Popup Modal
         $(element).on('click', function(e) {
           $('.friend-name').text(attrs.handle);
           $('.remove-friend-modal').modal('show');
@@ -17,7 +17,6 @@ angular.module('social').directive('removeFriend', ['removeFriendService', funct
           // ajax: Remove friend
           $('.remove-friend-btn').on('click', function() {
             // Remove friend fromm DOM
-            // $(element).parent().parent().parent().parent().remove();
             $(element).parent().parent().parent().parent().fadeOut(2000);
 
             // ajax call to delete friend

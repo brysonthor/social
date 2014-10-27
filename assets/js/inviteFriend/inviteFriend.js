@@ -4,7 +4,6 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      // var template = '<input class="invite-email" type="text" placeholder="betty@gmail.com"><button class="btn btn-primary invite-button"><i class="icon icon-envelope icon-white"></i>Send Invite</button>';
       var template = getSnippets();
       var popover = $(element).popover({
         title: '<h3>Invite A Friend</h3>',
@@ -20,6 +19,20 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
         inviteFriendService.inviteUser({email: email}).error(function(data) {
           $('.page-alerts').html('Invite Failed').addClass('alert-danger');
         });
+      });
+
+      // Get all pending invites from this user
+      var invites = [];
+      inviteFriendService.pendingInvitations().success(function(rsp) {
+        invites = rsp.invites;
+      });
+      $('body').on('click', '.show-pending', function(e) {
+        if (invites.length == 0) $('.no-invites').removeClass('hide');
+        $('.show-pending').hide();
+        for (var i=0; i<invites.length; i++) {
+          console.log(invites[i].friend_email);
+          $('.invites-list').append('<li>'+invites[i].friend_email+'</li>');
+        }
       });
 
       // This closes the popover when user clicks anywhere outside the popover
