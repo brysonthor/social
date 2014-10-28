@@ -1,0 +1,7 @@
+{
+  "files": [
+    "getFriends.js",
+    "getFriendsService.js"
+  ],
+  "simpleWrap": true
+}

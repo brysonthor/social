@@ -4,7 +4,7 @@
   assets = {
     'css': [ 'index.css' ],
     'js': [
-      'angular-1.3.0rc5.min.js',
+      'angular.min.js',
       'app.js',
       'friendService.js',
       'friendListCtrl.js',
@@ -13,7 +13,8 @@
       'bootstrap.js',
       'inviteFriend.js',
       'sharedPeople.js',
-      'removeFriend.js'
+      'removeFriend.js',
+      'getFriends.js'
     ]
   };
   partial('partials/_pageGlobals');
@@ -44,7 +45,7 @@
     <div  ng-cloak ng-controller="friendListCtrl">
       <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
         <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
-        <span class="badge badge-info pull-left friends-number" title="Number of friends">0</span>
+        <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
         <div class="name-container pull-left">
           <span class="name">{{friend.display_name}}</span>
           <p>Is sharing 0 people</p>

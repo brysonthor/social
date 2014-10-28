@@ -3,7 +3,6 @@ angular.module('social').service('removeFriendService', ['$http', function($http
 
   this.remove = function(userId) {
   	$http.delete('api/remove/'+userId).success(function(rsp){
-  		console.log(rsp);
   	});
   };
 }]);
