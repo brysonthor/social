@@ -26,4 +26,5 @@ background-size: cover; }
 .remove-btn { margin-right: 20px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
 .share-chkbox { float: right; }
-.friend-filter { margin-bottom: 15px; }
+.friend-filter { margin-top: 15px; }
+.friend-list-header { width: 50%; }
