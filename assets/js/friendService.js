@@ -1,5 +1,5 @@
 angular.module('social').service('friendService', ['$http', function($http) {
-  this.getFriends = function() {
-    return $http.get('api/get', {headers: {'Authorization': 'bearer '+FS.social.sessionId}});
+  this.getFriends = function(userId) {
+    return $http.get('api/get/'+userId, {headers: {'Authorization': 'bearer '+FS.social.sessionId}});
   };
 }]);

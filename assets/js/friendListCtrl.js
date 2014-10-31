@@ -1,5 +1,6 @@
-angular.module('social').controller('friendListCtrl', ['$scope', '$http', 'friendService', function($scope, $http, friendService) {
-  friendService.getFriends().success(function(data) {
+angular.module('social').controller('friendListCtrl', ['$scope', '$http', '$attrs', 'friendService', function($scope, $http, $attrs, friendService) {
+
+  friendService.getFriends($attrs.model).success(function(data) {
     $scope.friends = data.friends;
 
     // You have no friends

@@ -18,15 +18,25 @@
     ]
   };
   partial('partials/_pageGlobals');
+
+  if (isLoggedIn) {
+    userId = (user.helper) ? user.helper.id : user.profile.id;
+    helping = (user.helper) ? true : false;
+    displayName = (helping) ? user.helper.contactName : user.profile.displayName;
+  } else {
+    userId = "";
+    helping = false;
+  }
+
 %>
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
 <div class="banner row">
   <img class="user-portrait pull-left" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-  <h1 class="user-name pull-left"><%= user.profile.displayName %></h1>
+  <h1 class="user-name pull-left"><%= displayName %></h1>
   <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
   <button class="btn btn-success pull-right shared-people">Share Memories</button>
-  <shared-people data="<%= user.profile.id %>">
+  <shared-people data="<%= userId %>">
 </div>
 
 <div class="alert page-alerts">
@@ -41,8 +51,7 @@
     </div>
   </div>
 
-
-  <div ng-cloak ng-controller="friendListCtrl">
+  <div ng-cloak ng-controller="friendListCtrl" model="<%= userId %>">
     <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
       <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
       <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->

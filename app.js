@@ -18,6 +18,7 @@ app.configure('development', function() {
   app.stack.unshift({ route: "/tree-data", handle: proxy(baseUrl + "/tree-data")});
   app.stack.unshift({ route: "/ip", handle: proxy(baseUrl + "/ip/")});
   app.stack.unshift({ route: "/assignment-service", handle: proxy(baseUrl + "/assignment-service/")});
+  app.stack.unshift({ route: "/ident", handle: proxy(baseUrl + "/ident")});
 
   app.get("/hj", function(req, res) {
     res.cookie("fssessionid", req.query.id);
