@@ -73,9 +73,10 @@ module.exports = function(app) {
                 var sendgrid = require('sendgrid')(env('SENDGRID_USERNAME'), env('SENDGRID_PASSWORD'));
                 var payload = {
                   to: req.body.email,
-                  from: req.user.profile.email,
+                  fromname: "FamilySearch",
+                  from: "noreply@familysearch.org",
                   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                  text: 'To accept '+req.user.profile.displayName+' as your friend go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id
+                  text: 'You have a freind request! To accept '+req.user.profile.displayName+' as your friend on FamilySearch, go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id+'. Once you have accepted, you will be able to see shared FamilySearch content from '+req.user.profile.displayName+'.'
                 }
                 sendgrid.send(payload, function(err, json) {
                   if (err) { console.error(err); }
