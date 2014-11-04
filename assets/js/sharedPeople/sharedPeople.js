@@ -17,6 +17,12 @@ angular.module('social').directive('sharedPeople', ['sharedPeopleService', funct
           scope.people = data.taggedPerson;
         });
       });
+
+      scope.savePeople = function() {
+        sharedPeopleService.savePeople(scope.people).success(function(data) {
+        });
+      }
+
     }
   };
 }]);

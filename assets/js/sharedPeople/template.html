@@ -13,7 +13,7 @@
 		<ul class="people-list">
 			<li ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
 				<label class="checkbox">
-				<input type="checkbox">
+				<input type="checkbox" ng-model="person.selected">
 				<img class="people-list-portriat" ng-src="{{person.thumbIconUrl || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
 				<span>{{person.name}}</span>
 				</label>
@@ -22,6 +22,6 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn btn-link" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary">Share</button>
+		<button class="btn btn-primary save-people" data-dismiss="modal" ng-click="savePeople()">Share</button>
 	</div>
 </div>
