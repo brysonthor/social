@@ -13,7 +13,7 @@ angular.module('social').service('sharedPeopleService', ['$http', function($http
   	for (var i=0; i<sharedPeople.length; i++) {
   		if (sharedPeople[i].selected) peopleList.push(sharedPeople[i].id);
   	}
-    return $http.post('/api/share', {people: peopleList});
+    return $http.post('api/share', {people: peopleList});
   };
 
 }]);
