@@ -78,7 +78,7 @@ module.exports = function(app) {
                   fromname: "FamilySearch",
                   from: "noreply@familysearch.org",
                   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                  text: 'You have a freind request! To accept '+req.user.profile.displayName+' as your friend on FamilySearch, go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id+'. Once you have accepted, you will be able to see shared FamilySearch content from '+req.user.profile.displayName+'.'
+                  text: 'You have a friend request! To accept '+req.user.profile.displayName+' as your friend on FamilySearch, go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id+'. Once you have accepted, you will be able to see shared FamilySearch content from '+req.user.profile.displayName+'.'
                 }
                 sendgrid.send(payload, function(err, json) {
                   if (err) { console.error(err); }
@@ -230,10 +230,12 @@ module.exports = function(app) {
         var share = new Share(shareObj);
         share.save(function(err, rsp) {
           if (err) res.send(err, 400);
+          if (!err) res.send(rsp, 200);
         });
       } else {
         rsp.people = req.body.people;
         rsp.save();
+        res.send(200);
       }
     });
   });
