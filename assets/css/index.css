@@ -1,16 +1,35 @@
 [ng\:cloak], [ng-cloak], .ng-cloak { display: none; }
 
-body { font-family: museo, sans-serif; }
-
 /* Header/Banner */
-.banner { margin-left: 0px; padding: 20px; background-image: url('banner_bg.jpg');
-background-repeat: no-repeat;
-background-size: cover; }
-.user-name { color: #ffffff; margin-left: 20px; margin-top: 25px; text-shadow: 0px 2px #808080; }
-.user-portrait { margin-left: 30px; width: 90px; height: 90px; border-radius: 50%; box-shadow: 2px 4px 1px #808080; }
+.banner {
+	padding: 15px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url('banner_bg.jpg');
+}
+.user-name { text-align: center; color: #ffffff; margin-top: 10px; margin-bottom: 0px; text-shadow: 0px 2px #808080; font-family: museo, sans-serif; }
+.user-portrait {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 5px;
+	border-color: #ffffff;
+}
+.banner-nav { margin-left: 0px; background-color: #ffffff; padding: 10px 20px 0px 20px; box-shadow: 0px 13px 9px -8px #B5B5B5; }
+.affix { top: 0px; border-width: 3px; border-style: solid; z-index: 1; border-color: #808080; border-top: none; }
+.page-alerts { margin: 20px 20px 0px 20px; }
 
 /* Friend List */
-.friend-list { padding-left: 20px; }
+.friend-list { padding-left: 20px; margin-top: 20px;}
 .friend-container {
 	background-color: #ffffff; width: 50%;
 	margin-bottom: 15px;
@@ -26,5 +45,4 @@ background-size: cover; }
 .remove-btn { margin-right: 20px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
 .share-chkbox { float: right; }
-.friend-filter { margin-top: 15px; }
 .friend-list-header { width: 50%; }

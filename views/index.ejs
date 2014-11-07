@@ -27,30 +27,31 @@
     userId = "";
     helping = false;
   }
-
 %>
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
-<div class="banner row">
-  <img class="user-portrait pull-left" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-  <h1 class="user-name pull-left"><%= displayName %></h1>
-  <button class="btn btn-success pull-right invite-btn" invite-friend="">Invite Friend</button>
-  <button class="btn btn-success pull-right shared-people">Share Memories</button>
+<div class="banner">
+  <img class="user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  <h1 class="user-name"><%= displayName %></h1>
+</div>
+
+<div class="row banner-nav" data-spy="affix" data-offset-top="355">
+  <div class="input-prepend pull-left">
+    <span class="add-on"><i class="icon-search"></i></span>
+    <input ng-model="friendText" class="span2" type="text" placeholder="Search Friends">
+  </div>
+
+  <button class="btn pull-right invite-btn" invite-friend="">Invite a Friend</button>
+  <button class="btn pull-right shared-people">Share Memory Person</button>
   <shared-people data="<%= userId %>">
 </div>
 
 <div class="alert page-alerts">
+  <button type="button" class="close" data-dismiss="alert">×</button>
   <strong>Warning!</strong> This is a FamilySearch prototype, all social data will be deleted throughout the prototyping process.
 </div>
 
 <section class="friend-list">
-  <div class="friend-list-header clearfix">
-    <h1 class="pull-left">Friends</h1>
-    <div class="friend-filter pull-right">
-      Filter: <input ng-model="friendText" type="text" class="search-query">
-    </div>
-  </div>
-
   <div ng-cloak ng-controller="friendListCtrl" model="<%= userId %>">
     <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
       <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
