@@ -18,20 +18,13 @@
     ]
   };
   partial('partials/_pageGlobals');
-
-  if (isLoggedIn) {
-    userId = (user.helper) ? user.helper.id : user.profile.id;
-    helping = (user.helper) ? true : false;
-    displayName = (helping) ? user.helper.contactName : user.profile.displayName;
-  } else {
-    userId = "";
-    helping = false;
-  }
 %>
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
 <div class="banner">
-  <img class="user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  <a href="<%- appPath('/') %>">
+    <img class="user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  </a>
   <h1 class="user-name"><%= displayName %></h1>
 </div>
 
@@ -52,23 +45,38 @@
 </div>
 
 <section class="friend-list">
-  <div ng-cloak ng-controller="friendListCtrl" model="<%= userId %>">
-    <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
-      <img class="friend-avatar pull-left" ng-src="{{friend.portrait}}">
-      <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
-      <div class="name-container pull-left">
-        <span class="name">{{friend.display_name}}</span>
-        <p>Is sharing 0 people</p>
-      </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <h3 class="friend-list-owner"></h3>
+      <div ng-cloak ng-controller="friendListCtrl" model="<%= friendUserId %>">
+        <div class="row-fluid friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:friendText">
+          <a href="{{friend.user_id | cisid: true}}">
+            <div class="span2">
+              <img class="friend-avatar" ng-src="{{friend.portrait}}">
+            </div>
+            <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
+            <div class="span6 name-container">
+              <div class="name">{{friend.display_name}}</div>
+              <br><div class="sub-friend-text">0 Friends, sharing 0 memory people</div>
+            </div>
+          </a>
 
-      <div class="btn-group remove-btn pull-right">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="" class="remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove Friend</a></li>
-          <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li>
-        </ul>
-      </div>
+          <div class="span2 btn-group remove-btn pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="" class="remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove Friend</a></li>
+              <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li>
+            </ul>
+          </div>
 
+        </div>
+      </div>
+    </div>
+
+    <div class="span6">
+      <h3>Shared Memory People</h3>
     </div>
   </div>
+
+
 </section>

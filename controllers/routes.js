@@ -19,9 +19,13 @@ mongoose.connect(env("MONGOLAB_URI"), function (err, res) {
 });
 
 module.exports = function(app) {
-  app.get('/', app.restrict(), function(req, res, next) {
-    // console.log(req.user.profile);
-    res.render('index', {user: req.user});
+  app.get('/:id?', app.restrict(), function(req, res, next) {
+    var userId = (req.user.helper) ? req.user.helper.id : req.user.profile.id;
+    var helping = (req.user.helper) ? true : false;
+    var displayName = (helping) ? req.user.helper.contactName : req.user.profile.displayName;
+
+    friendUserId = (req.params.id) ? "cis.user."+req.params.id : userId;
+    res.render('index', {user: req.user, userId: userId, friendUserId: friendUserId, displayName: displayName});
   });
 
   // -------
@@ -34,9 +38,9 @@ module.exports = function(app) {
     var friends = mongoose.model('friends', friendSchema);
     friends.find({'user_id': userId}).lean().exec(function (err, rsp) {
       if (rsp.length > 0) {
-        res.send({ friends: rsp[0].friends}, 200);
+        res.send({ friendList: rsp[0]}, 200);
       } else {
-        res.send({ friends: []}, 200);
+        res.send({ friendList: []}, 200);
       }
     });
   });
