@@ -6,6 +6,7 @@ angular.module('social').service('sharedPeopleService', ['$http', function($http
     // return $http.get('/artifactmanager/patrons/'+userId+'/taggedPersons?maxRecords=999');
 
     $http.get('/artifactmanager/patrons/'+userId+'/taggedPersons?maxRecords=999').success(function(data) {
+      console.log(data);
       // Get shared people list
       $http.get('api/share').success(function(rsp) {
         // Iterate over shared people
@@ -13,7 +14,7 @@ angular.module('social').service('sharedPeopleService', ['$http', function($http
           // Iterate people list
           for (var j=0; j<data.taggedPerson.length; j++) {
             // Mark those in people list who have been shared
-            if (data.taggedPerson[j].id == rsp.sharedPeople[i]) {
+            if (data.taggedPerson[j].id == rsp.sharedPeople[i].id) {
               data.taggedPerson[j].selected = true;
             }
           }
@@ -29,7 +30,11 @@ angular.module('social').service('sharedPeopleService', ['$http', function($http
   	// Get & save selected people
   	var peopleList = [];
   	for (var i=0; i<sharedPeople.length; i++) {
-  		if (sharedPeople[i].selected) peopleList.push(sharedPeople[i].id);
+  		if (sharedPeople[i].selected) peopleList.push({
+        id: sharedPeople[i].id,
+        name: sharedPeople[i].name,
+        portrait: sharedPeople[i].thumbIconUrl
+      });
   	}
     return $http.post('api/share', {people: peopleList});
   };

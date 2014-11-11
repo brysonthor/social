@@ -7,7 +7,7 @@ var friendSchema = new mongoose.Schema({ user_id: String, name: String, friends:
 var Friend = mongoose.model('friends', friendSchema);
 var inviteSchema = new mongoose.Schema({ user_id: String, display_name: String, friend_email: String, inviter_email: String, portrait: String });
 var Invite = mongoose.model('invites', inviteSchema);
-var shareSchema = new mongoose.Schema({ user_id: String, people: [ Number]});
+var shareSchema = new mongoose.Schema({ user_id: String, people: {id: Number, name: String, portrait: String }});
 var Share = mongoose.model('share', shareSchema);
 
 var baseUrl = env("BASE_URL");
@@ -214,7 +214,6 @@ module.exports = function(app) {
     var userId = (req.params.id) ? req.params.id.split(".")[2] : req.user.profile.id.split(".")[2];
     var share = mongoose.model('share', shareSchema);
     share.find({'user_id': userId}).lean().exec(function (err, rsp) {
-      console.log(rsp);
       if (rsp.length > 0) {
         res.send({ sharedPeople: rsp[0].people}, 200);
       } else {
@@ -228,7 +227,6 @@ module.exports = function(app) {
     var userId = req.user.profile.id.split(".")[2];
     var share = mongoose.model('share', shareSchema);
     share.findOne({'user_id': userId}, function (err, rsp) {
-      console.log(rsp);
       if (rsp == null) {
         var shareObj = {user_id: userId, people: req.body.people};
         var share = new Share(shareObj);

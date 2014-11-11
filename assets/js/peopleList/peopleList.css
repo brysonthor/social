@@ -1,0 +1,10 @@
+.peoplelist-ul { list-style: none; }
+.peoplelist-person { width: 80px; margin-right: 20px; display: inline-block; margin-bottom: 20px; }
+.peoplelist-portrait {
+	margin-left: 6px;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #D8D8D8;
+}
+.peoplelist-name { text-align: center; }

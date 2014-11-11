@@ -1,0 +1,8 @@
+<ul class="peoplelist-ul">
+	<li class="peoplelist-person" ng-repeat="person in sharedPeople">
+		<a href="/photos/people/{{person.id}}">
+			<img class="peoplelist-portrait" ng-src="{{person.portrait || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
+			<div class="peoplelist-name">{{person.name}}</div>
+		</a>
+	</li>
+</ul>
