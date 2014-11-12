@@ -4,6 +4,7 @@
 .banner-container {
 	position: relative;
 	height: 200px;
+	overflow: hidden;
 }
 .banner-background {
 	position: absolute;
