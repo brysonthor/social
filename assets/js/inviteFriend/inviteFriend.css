@@ -1,7 +1,7 @@
 .invite-btn, .shared-people { margin-left: 10px; }
-.invite-email { width: 195px; }
-.invite-button { margin-top: 10px; width: 208px; }
+.invite-button { margin-top: 10px; width: 100%; }
 .popover-title { text-align: center; }
 .popover-content { padding-top: 20px; padding-bottom: 20px; }
-.icon { padding-right: 10px; }
-.invites-list { list-style-type: none; margin-left: 0px; }
+.invites-list { list-style-type: none; margin-left: -35px; }
+.popover { width: 250px; }
+.show-pending { word-wrap: break-word; white-space: normal; }

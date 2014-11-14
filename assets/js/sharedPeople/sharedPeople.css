@@ -7,5 +7,7 @@
 	border-width: 1px;
 	border-color: #D8D8D8;
 }
-.people-list label { font-size: 20px; }
+.people-list label { font-size: 16px; }
 .people-list input { margin-top: 15px; }
+.people-list-modal-body { max-height: 400px; overflow-y: auto; }
+.people-list-filter { width: 50% }

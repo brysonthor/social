@@ -1,18 +1,11 @@
 {
   "experiments": {
-    "bootstrap232": 1
+    "nobsheader": 1
   },
   "envs": {
-    "beta": {
-	    "bootstrap232": 1
-    },
-    "local": {
-      "boomrRum": 0,
-      "oldViewerUpdatesEx": 1,
-      "exposeErrorsEx": 1
-      },
-    "int": {
-      },
+    "beta": {},
+    "local": {},
+    "int": {},
     "sandbox": {}
   }
 }

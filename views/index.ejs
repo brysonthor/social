@@ -2,7 +2,7 @@
   page = { 'title': 'Social', 'key': 'Social', 'ngApp': 'social' };
   page.description = "FamilySearch Social";
   assets = {
-    'css': [ 'index.css' ],
+    'css': [ 'index.css', 'bootstrap.css'],
     'js': [
       'angular.min.js',
       'app.js',
@@ -27,47 +27,49 @@
   </div>
   <div class="banner">
     <a href="<%- appPath('/') %>">
-      <img class="user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+      <img class="center-block user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
     </a>
     <h1 class="user-name"><%= displayName %></h1>
   </div>
 </div>
 
-<div class="row banner-nav" data-spy="affix" data-offset-top="355">
-  <div class="input-prepend pull-left">
-    <span class="add-on"><i class="icon-search"></i></span>
-    <input ng-model="searchText.display_name" class="span2" type="text" placeholder="Search Friends">
+<div class="banner-nav" data-spy="affix" data-offset-top="355">
+  <form class="form-inline pull-left" role="form">
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+    <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
   </div>
+  </form>
 
-  <button class="btn pull-right invite-btn" invite-friend="">Invite a Friend</button>
-  <button class="btn pull-right shared-people">Share Memory Person</button>
+  <button class="btn btn-default pull-right invite-btn" invite-friend="">Invite a Friend</button>
+  <button class="btn btn-default pull-right shared-people">Share Memory Person</button>
   <shared-people data="<%= userId %>">
 </div>
 
-<div class="alert page-alerts">
-  <button type="button" class="close" data-dismiss="alert">×</button>
+<div class="page-alerts alert alert-warning alert-dismissible fade in" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
   <strong>Warning!</strong> This is a FamilySearch prototype, all social data will be deleted throughout the prototyping process.
 </div>
 
 <section class="friend-list">
-  <div class="row-fluid">
-    <div class="span6">
+  <div class="row">
+    <div class="col-md-6">
       <h3 class="friend-list-owner"></h3>
       <div ng-cloak ng-controller="friendListCtrl" model="<%= friendUserId %>">
-        <div class="row-fluid friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:searchText">
+        <div class="row friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:searchText">
           <a href="{{friend.user_id | cisid: true}}">
-            <div class="span2">
+            <div class="col-md-2">
               <img class="friend-avatar" ng-src="{{friend.portrait}}">
             </div>
             <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
-            <div class="span7 name-container">
+            <div class="col-md-7 name-container">
               <div class="name">{{friend.display_name}}</div>
-              <br><div class="sub-friend-text">0 Friends, sharing 0 memory people</div>
+              <br><div class="text-muted sub-friend-text">0 Friends, sharing 0 memory people</div>
             </div>
           </a>
 
-          <div class="span1 btn-group remove-btn">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
+          <div class="col-md-1 btn-group remove-btn">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="" class="remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove Friend</a></li>
               <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li>
@@ -78,7 +80,7 @@
       </div>
     </div>
 
-    <div class="span6">
+    <div class="col-md-6">
       <h3>Shared Memory People</h3>
       <div class="peoplelist-component" people-list="<%= friendUserId %>"></div>
     </div>

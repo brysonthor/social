@@ -1,27 +1,33 @@
-<div class="shared-people-modal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Shared Memory People</h3>
-		<p>Select the people you would like to share with your friends.</p>
+<div class="shared-people-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-	  <div class="people-filter">
-	    Filter: <input ng-model="peopleText" type="text" class="search-query">
-	  </div>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">Shared Memory People</h3>
+				<p>Select the people you would like to share with your friends.</p>
+			  <div class="input-group people-list-filter">
+			    <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+			    <input ng-model="peopleText.name" type="text" class="search-query form-control" placeholder="Filter People">
+			  </div>
+			</div>
 
-	</div>
-	<div class="modal-body">
-		<ul class="people-list">
-			<li ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
-				<label class="checkbox">
-				<input type="checkbox" ng-model="person.selected">
-				<img class="people-list-portriat" ng-src="{{person.thumbIconUrl || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
-				<span>{{person.name}}</span>
-				</label>
-			</li>
-		</ul>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-link" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary save-people" data-dismiss="modal" ng-click="savePeople()">Share</button>
+			<div class="modal-body people-list-modal-body">
+				<ul class="people-list">
+					<li ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
+						<label class="checkbox">
+						<input type="checkbox" ng-model="person.selected">
+						<img class="people-list-portriat" ng-src="{{person.thumbIconUrl || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
+						<span>{{person.name}}</span>
+						</label>
+					</li>
+				</ul>
+			</div>
+
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal" aria-hidden="true">Cancel</button>
+				<button class="btn btn-primary save-people" data-dismiss="modal" ng-click="savePeople()">Share</button>
+			</div>
+		</div>
 	</div>
 </div>

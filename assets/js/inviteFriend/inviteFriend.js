@@ -5,6 +5,7 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
     restrict: 'A',
     link: function(scope, element, attrs) {
       var template = getSnippets();
+
       var popover = $(element).popover({
         title: '<h3>Invite A Friend</h3>',
         html: true,
@@ -30,7 +31,6 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
         if (invites.length == 0) $('.no-invites').removeClass('hide');
         $('.show-pending').hide();
         for (var i=0; i<invites.length; i++) {
-          console.log(invites[i].friend_email);
           $('.invites-list').append('<li>'+invites[i].friend_email+'</li>');
         }
       });
