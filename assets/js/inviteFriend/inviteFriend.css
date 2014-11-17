@@ -4,4 +4,4 @@
 .popover-content { padding-top: 20px; padding-bottom: 20px; }
 .invites-list { list-style-type: none; margin-left: -35px; }
 .popover { width: 250px; }
-.show-pending { word-wrap: break-word; white-space: normal; }
+.show-pending { word-wrap: break-word; white-space: normal; text-align: center; }

@@ -25,7 +25,13 @@ module.exports = function(app) {
     var displayName = (helping) ? req.user.helper.contactName : req.user.profile.displayName;
 
     friendUserId = (req.params.id) ? "cis.user."+req.params.id : userId;
-    res.render('index', {user: req.user, userId: userId, friendUserId: friendUserId, displayName: displayName});
+    res.render('index', {
+      user: req.user,
+      userId: userId,
+      friendUserId: friendUserId,
+      displayName: displayName,
+      newFriendName: req.query.newFriendName
+    });
   });
 
   // -------
@@ -124,7 +130,7 @@ module.exports = function(app) {
                 var portraitObj = JSON.parse(response.text);
                 var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
-                // Add friend Get current list of freinds (to add this friend to)
+                // Add friend: Get current list of freinds (to add this friend to)
                 var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait, email: rsp[0].inviter_email };
                 Friend.findOne({'user_id': userId}, function (err, doc) {
                   // If first time user create new friend list, else add invitee to existing friendlist
@@ -160,7 +166,8 @@ module.exports = function(app) {
                   // Delete invite request
                   Invite.find({'_id': req.query.id}).remove().exec();
 
-                  return res.redirect(req.resolvePath('/'));
+                  // Take user to new friend's page
+                  return res.redirect(req.resolvePath('/'+rsp[0].user_id+'?newFriendName='+rsp[0].display_name));
                 });
               });
           });

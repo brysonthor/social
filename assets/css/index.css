@@ -1,12 +1,7 @@
 [ng\:cloak], [ng-cloak], .ng-cloak { display: none; }
 
 /* TODO: Remove this line when it gets moved to theme-engage */
-/*.secondary-nav { padding-left: 0px; list-style: none; }*/
-ul.unstyled, ol.unstyled {
-padding-left: 0;
-list-style: none;
-}
-
+ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 
 /* Header/Banner */
 .banner-container {
@@ -21,10 +16,11 @@ list-style: none;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	-webkit-filter: blur(15px);
-  -moz-filter: blur(15px);
-  -o-filter: blur(15px);
-  -ms-filter: blur(15px);
+	-webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -o-filter: blur(20px);
+  -ms-filter: blur(20px);
+  opacity: .5;
 }
 .banner {
 	position: absolute;

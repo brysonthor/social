@@ -1,6 +1,7 @@
 {
   "experiments": {
-    "nobsheader": 1
+    "nobsheader": 1,
+    "fsStylesEx": 1
   },
   "envs": {
     "beta": {},
