@@ -1,0 +1,22 @@
+<div class="new-friend-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">You have a new friend</h3>
+			</div>
+
+			<div class="modal-body people-list-modal-body">
+				<p>You and <strong>{{name}}</strong> are now friends on FamilySearch. You can now share and collaborate your family history information on FamilySearch.</p>
+				<p>To see what {{name}} has shared, click <a href="/{{id}}">here.</a>
+				</p>
+			</div>
+
+			<div class="modal-footer">
+				<button class="fs-button fs-button--tertiary" data-dismiss="modal" aria-hidden="true">Cancel</button>
+				<button class="fs-button fs-button--small save-people" data-dismiss="modal" ng-click="savePeople()">Share</button>
+			</div>
+		</div>
+	</div>
+</div>

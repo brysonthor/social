@@ -19,6 +19,7 @@ mongoose.connect(env("MONGOLAB_URI"), function (err, res) {
 });
 
 module.exports = function(app) {
+
   app.get('/:id?', app.restrict(), function(req, res, next) {
     var userId = (req.user.helper) ? req.user.helper.id : req.user.profile.id;
     var helping = (req.user.helper) ? true : false;

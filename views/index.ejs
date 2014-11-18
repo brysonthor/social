@@ -15,7 +15,8 @@
       'sharedPeople.js',
       'removeFriend.js',
       'peopleList.js',
-      'getFriends.js'
+      'getFriends.js',
+      'newFriend.js'
     ]
   };
   partial('partials/_pageGlobals');
@@ -72,6 +73,7 @@
             </div>
           </a>
 
+          <% if (userId == friendUserId) { %>
           <div class="col-md-1 btn-group remove-btn">
             <a class="fs-button fs-button--small fs-button--secondary dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -79,6 +81,7 @@
               <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li>
             </ul>
           </div>
+          <% } %>
 
         </div>
       </div>
@@ -90,3 +93,8 @@
     </div>
   </div>
 </section>
+
+<!-- Show modal when accepting new friend requests -->
+<% if (newFriendName) { %>
+  <new-friend data-name="<%= newFriendName %>" data-id="<%= userId.split(".")[2] %>">
+<% } %>
