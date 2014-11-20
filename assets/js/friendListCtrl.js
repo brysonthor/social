@@ -10,7 +10,7 @@ angular.module('social')
 	  friendService.getFriends($attrs.model).success(function(data) {
 	    $scope.friends = data.friendList.friends;
 
-	    $('.friend-list-owner').text("Friends of "+data.friendList.name);
+	    $('.friend-list-owner').text("Friends of "+data.friendList.name+" ("+data.friendList.friends.length+")");
 
 	    // You have no friends
 	    if (data.friendList.friends.length == 0) {

@@ -8,6 +8,8 @@ angular.module('social').directive('peopleList', ['peopleListService', function(
       peopleListService.getSharedPeople(attrs.peopleList).success(function(data) {
         scope.sharedPeople = data.sharedPeople;
 
+        $('.shared-people-heading').append(" ("+data.sharedPeople.length+")");
+
         // Not sharing
         if (data.sharedPeople.length < 1) {
           console.log("here")
