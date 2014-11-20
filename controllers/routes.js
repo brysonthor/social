@@ -89,7 +89,7 @@ module.exports = function(app) {
                   fromname: "FamilySearch",
                   from: "noreply@familysearch.org",
                   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                  text: 'You have a friend request! To accept '+req.user.profile.displayName+' as your friend on FamilySearch, go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id+'. Once you have accepted, you will be able to see shared FamilySearch content from '+req.user.profile.displayName+'.'
+                  html: 'You have a friend request! Accept '+req.user.profile.displayName+' as your friend now so you can begin sharing memories on FamilySearch. To accept this friend request go to the following link https://familysearch.org/friends/api/accept?id='+rsp._id+'. You will then be able to see shared FamilySearch content from '+req.user.profile.displayName+'.'
                 }
                 sendgrid.send(payload, function(err, json) {
                   if (err) { console.error(err); }

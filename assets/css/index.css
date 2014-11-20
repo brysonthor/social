@@ -4,40 +4,26 @@
 ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 
 /* Header/Banner */
-.banner-container {
-	position: relative;
-	height: 180px;
-}
-.banner-background {
-	position: absolute;
+.banner { background-color: #ffffff; padding: 10px 0px; text-align: center; }
+.banner-nav { height: 50px; padding: 10px 20px 0px 20px; box-shadow: 0px 13px 9px -8px #B5B5B5; background: linear-gradient(#f4f4f4, #ffffff); }
+.user-name {
+	text-align: center;
+	color: #4d4d4d;
 	margin-top: 10px;
-	height: 165px;
-	width: 100%;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	-webkit-filter: blur(20px);
-  -moz-filter: blur(20px);
-  -o-filter: blur(20px);
-  -ms-filter: blur(20px);
-  opacity: .5;
+	margin-bottom: 0px;
+	text-shadow: 0px 2px #b5b5b5;
+	font-family: museo, sans-serif;
+	display: inline;
+	font-size: 26px;
+	margin-left: 10px;
 }
-.banner {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(rgba(0, 0, 0, 0.0),rgba(0, 0, 0, 0.7));
-}
-.banner-nav { height: 50px; background-color: #ffffff; padding: 10px 20px 0px 20px; box-shadow: 0px 13px 9px -8px #B5B5B5; }
-.user-name { text-align: center; color: #ffffff; margin-top: 10px; margin-bottom: 0px; text-shadow: 0px 2px #808080; font-family: museo, sans-serif; }
 .user-portrait {
-	margin-top: 15px;
-	width: 110px;
-	height: 110px;
+	width: 80px;
+	height: 80px;
 	border-radius: 50%;
 	border-style: solid;
 	border-width: 5px;
-	border-color: #ffffff;
+	border-color: #c8c8c8;
 }
 .affix {
 	top: 0px;
