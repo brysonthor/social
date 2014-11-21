@@ -4,26 +4,26 @@
 ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 
 /* Header/Banner */
-.banner { background-color: #ffffff; padding: 10px 0px; text-align: center; }
-.banner-nav { height: 50px; padding: 10px 20px 0px 20px; box-shadow: 0px 13px 9px -8px #B5B5B5; background: linear-gradient(#f4f4f4, #ffffff); }
+.banner { background-color: #ffffff; padding: 10px 0px; text-align: center; background-image: url('banner_bg.jpg') }
+.banner-nav-container { height: 50px; }
+.banner-nav { height: 50px; padding: 10px 20px 10px 20px; box-shadow: 0px 13px 9px -8px #B5B5B5; background: linear-gradient(#f4f4f4, #ffffff); }
 .user-name {
-	text-align: center;
-	color: #4d4d4d;
-	margin-top: 10px;
-	margin-bottom: 0px;
-	text-shadow: 0px 2px #b5b5b5;
+	text-shadow: 0px 2px #838383;
 	font-family: museo, sans-serif;
-	display: inline;
 	font-size: 26px;
 	margin-left: 10px;
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	color: #ffffff;
 }
 .user-portrait {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
 	border-style: solid;
-	border-width: 5px;
-	border-color: #c8c8c8;
+	border-width: 3px;
+	border-color: #ffffff;
 }
 .affix {
 	top: 0px;
@@ -37,6 +37,7 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
 .page-alerts { margin: 20px 20px 0px 20px; }
 
 /* Friend List */
@@ -58,3 +59,7 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 .friends-number { margin-left: -30px; margin-top: 50px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
 .friend-list-header { width: 50%; }
+
+@media (max-width: 1200px) {
+  .affix { position: static !important; }
+}

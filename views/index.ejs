@@ -28,21 +28,23 @@
 <div class="banner">
     <a id="decoration" href="<%- appPath('/') %>"><img class=" user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
     <% if (userId == friendUserId) { %>
-    <span class="user-name"><%= displayName %></span>
+    <div class="user-name"><%= displayName %></div>
     <% } %>
 </div>
 
 <!-- Banner Nav -->
-<div class="banner-nav" data-spy="affix" data-offset-top="260">
-  <form class="form-inline pull-left" role="form">
-  <div class="input-group">
-    <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-    <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
+<div class="banner-nav-container">
+  <div class="banner-nav" data-spy="affix" data-offset-top="260">
+    <form class="form-inline pull-left" role="form">
+    <div class="input-group">
+      <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+      <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
+    </div>
+    </form>
+    <button class="fs-button fs-button--secondary fs-button--small pull-right invite-btn" invite-friend="">Invite a Friend</button>
+    <button class="fs-button fs-button--secondary fs-button--small pull-right shared-people">Share Memory Person</button>
+    <shared-people data="<%= userId %>">
   </div>
-  </form>
-  <button class="fs-button fs-button--secondary fs-button--small pull-right invite-btn" invite-friend="">Invite a Friend</button>
-  <button class="fs-button fs-button--secondary fs-button--small pull-right shared-people">Share Memory Person</button>
-  <shared-people data="<%= userId %>">
 </div>
 <% } %>
 
