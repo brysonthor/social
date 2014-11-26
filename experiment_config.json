@@ -1,11 +1,12 @@
 {
   "experiments": {
     "nobsheader": 1,
-    "fsStylesEx": 1
+    "fsStylesEx": 1,
+    "chatEx": 0
   },
   "envs": {
     "beta": {},
-    "local": {},
+    "local": { "chatEx": 1 },
     "int": {},
     "sandbox": {}
   }

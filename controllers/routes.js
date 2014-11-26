@@ -1,6 +1,9 @@
 // Module dependencies
-var mongoose = require ("mongoose")
-  , env = require('envs');
+var mongoose = require ("mongoose");
+var env = require('envs');
+var serviceAccount = require('fs-service-account');
+var FirebaseTokenGenerator = require("firebase-token-generator");
+
 
 // Mongo Schemas
 var friendSchema = new mongoose.Schema({ user_id: String, name: String, friends: [{display_name: String, user_id: String, portrait: String, email: String }]});
@@ -25,13 +28,18 @@ module.exports = function(app) {
     var helping = (req.user.helper) ? true : false;
     var displayName = (helping) ? req.user.helper.contactName : req.user.profile.displayName;
 
+    // Generate firechat auth token
+    var tokenGenerator = new FirebaseTokenGenerator(env("FIREBASE_SECRET"));
+    var token = tokenGenerator.createToken({uid: userId.split('.')[2], name: displayName}, {admin: false, debug: false});
+
     friendUserId = (req.params.id) ? "cis.user."+req.params.id : userId;
     res.render('index', {
       user: req.user,
       userId: userId,
       friendUserId: friendUserId,
       displayName: displayName,
-      newFriendName: req.query.newFriendName
+      newFriendName: req.query.newFriendName,
+      firechatToken: token
     });
   });
 
@@ -82,6 +90,12 @@ module.exports = function(app) {
               if (err) {
                 res.send(err, 400);
               } else {
+                // Service account is required to talk to UMS
+                // serviceAccount.appLogin(function(err, sessionId) {
+                //   if (err) return console.log(err);
+                //   console.log('session:', sessionId);
+                // });
+
                 // email potential friend
                 var sendgrid = require('sendgrid')(env('SENDGRID_USERNAME'), env('SENDGRID_PASSWORD'));
                 var payload = {

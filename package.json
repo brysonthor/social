@@ -7,11 +7,13 @@
     "theme-engage": "git+https://github.com/fs-webdev/theme-engage.git",
     "frontier-build-tools": "git+https://github.com/fs-webdev/frontier-build-tools.git",
     "woodruff": "git+https://github.com/fs-webdev/woodruff.git",
+    "fs-service-account": "git+https://github.com/fs-webdev/fs-service-account.git",
     "startup": "~1.0.0",
     "mongoose": "~3.8.17",
     "strong": "0.2.x",
     "sendgrid": "1.2",
-    "envs": "~0.1.6"
+    "envs": "~0.1.6",
+    "firebase-token-generator": "~2.0.0"
   },
   "devDependencies": {
     "istanbul": "~0.2.4",

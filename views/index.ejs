@@ -2,7 +2,7 @@
   page = { 'title': 'Social', 'key': 'Social', 'ngApp': 'social' };
   page.description = "FamilySearch Social";
   assets = {
-    'css': [ 'index.css', 'bootstrap.css'],
+    'css': [ 'index.css', 'bootstrap.css', 'firechat.css'],
     'js': [
       'angular.min.js',
       'app.js',
@@ -16,7 +16,9 @@
       'removeFriend.js',
       'peopleList.js',
       'getFriends.js',
-      'newFriend.js'
+      'newFriend.js',
+      'firebase.js',
+      'firechat.js'
     ]
   };
   partial('partials/_pageGlobals');
@@ -41,6 +43,9 @@
       <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
     </div>
     </form>
+<% if (feature('chatEx')) { %>
+    <a href=""><span class="friend-chat glyphicon glyphicon-comment pull-right" title="Chat" aria-hidden="true"></span></a>
+<% } %>
     <button class="fs-button fs-button--secondary fs-button--small pull-right invite-btn" invite-friend="">Invite a Friend</button>
     <button class="fs-button fs-button--secondary fs-button--small pull-right shared-people">Share Memory Person</button>
     <shared-people data="<%= userId %>">
@@ -95,4 +100,26 @@
 <!-- Show modal when accepting new friend requests -->
 <% if (newFriendName) { %>
   <new-friend data-name="<%= newFriendName %>" data-id="<%= userId.split(".")[2] %>">
+<% } %>
+
+<!-- Firechat -->
+<% if (feature('chatEx')) { %>
+<script type='text/javascript'>
+  $( document ).ready(function() {
+    var firechatRef = new Firebase('https://luminous-torch-8189.firebaseio.com/chat');
+    firechatRef.authWithCustomToken("<%= firechatToken %>", function(error, authData) {
+      if (error) return console.log(error);
+      if (authData) {
+        var chat = new FirechatUI(firechatRef, document.getElementById('firechat-wrapper'));
+        chat.setUser(authData.uid, authData.auth.name);
+      }
+    });
+  });
+  $('.hide-chat, .friend-chat').on('click', function(event) {
+    $('.chat-container').toggle();
+  });
+</script>
+<div class="chat-container">
+  <div id='firechat-wrapper'></div>
+</div>
 <% } %>

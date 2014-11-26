@@ -63,3 +63,21 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 @media (max-width: 1200px) {
   .affix { position: static !important; }
 }
+
+/* Firechat */
+.friend-chat { font-size: 25px; padding-left: 15px; color: #000000; }
+.chat-container {
+	display: none;
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	width: 300px;
+	z-index: 1;
+	border-bottom-width: 3px;
+	border-color: #919191;
+	border-style: solid;
+	background-color: #FFF;
+	padding: 10px;
+	height: 540px;
+	border-radius: 7px;
+}
