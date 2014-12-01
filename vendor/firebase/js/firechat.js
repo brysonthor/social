@@ -1,2 +1,1874 @@
-(function(){var e=this,t=e._,n=Array.prototype,a=Object.prototype,r=Function.prototype,i=n.push,s=n.slice,o=n.concat,c=a.toString,l=a.hasOwnProperty,u=Array.isArray,h=Object.keys,d=r.bind,f=function(e){return e instanceof f?e:this instanceof f?void(this._wrapped=e):new f(e)};"undefined"!=typeof exports?("undefined"!=typeof module&&module.exports&&(exports=module.exports=f),exports._=f):e._=f,f.VERSION="1.7.0";var p=function(e,t,n){if(void 0===t)return e;switch(null==n?3:n){case 1:return function(n){return e.call(t,n)};case 2:return function(n,a){return e.call(t,n,a)};case 3:return function(n,a,r){return e.call(t,n,a,r)};case 4:return function(n,a,r,i){return e.call(t,n,a,r,i)}}return function(){return e.apply(t,arguments)}};f.iteratee=function(e,t,n){return null==e?f.identity:f.isFunction(e)?p(e,t,n):f.isObject(e)?f.matches(e):f.property(e)},f.each=f.forEach=function(e,t,n){if(null==e)return e;t=p(t,n);var a,r=e.length;if(r===+r)for(a=0;r>a;a++)t(e[a],a,e);else{var i=f.keys(e);for(a=0,r=i.length;r>a;a++)t(e[i[a]],i[a],e)}return e},f.map=f.collect=function(e,t,n){if(null==e)return[];t=f.iteratee(t,n);for(var a,r=e.length!==+e.length&&f.keys(e),i=(r||e).length,s=Array(i),o=0;i>o;o++)a=r?r[o]:o,s[o]=t(e[a],a,e);return s};var m="Reduce of empty array with no initial value";f.reduce=f.foldl=f.inject=function(e,t,n,a){null==e&&(e=[]),t=p(t,a,4);var r,i=e.length!==+e.length&&f.keys(e),s=(i||e).length,o=0;if(3>arguments.length){if(!s)throw new TypeError(m);n=e[i?i[o++]:o++]}for(;s>o;o++)r=i?i[o]:o,n=t(n,e[r],r,e);return n},f.reduceRight=f.foldr=function(e,t,n,a){null==e&&(e=[]),t=p(t,a,4);var r,i=e.length!==+e.length&&f.keys(e),s=(i||e).length;if(3>arguments.length){if(!s)throw new TypeError(m);n=e[i?i[--s]:--s]}for(;s--;)r=i?i[s]:s,n=t(n,e[r],r,e);return n},f.find=f.detect=function(e,t,n){var a;return t=f.iteratee(t,n),f.some(e,function(e,n,r){return t(e,n,r)?(a=e,!0):void 0}),a},f.filter=f.select=function(e,t,n){var a=[];return null==e?a:(t=f.iteratee(t,n),f.each(e,function(e,n,r){t(e,n,r)&&a.push(e)}),a)},f.reject=function(e,t,n){return f.filter(e,f.negate(f.iteratee(t)),n)},f.every=f.all=function(e,t,n){if(null==e)return!0;t=f.iteratee(t,n);var a,r,i=e.length!==+e.length&&f.keys(e),s=(i||e).length;for(a=0;s>a;a++)if(r=i?i[a]:a,!t(e[r],r,e))return!1;return!0},f.some=f.any=function(e,t,n){if(null==e)return!1;t=f.iteratee(t,n);var a,r,i=e.length!==+e.length&&f.keys(e),s=(i||e).length;for(a=0;s>a;a++)if(r=i?i[a]:a,t(e[r],r,e))return!0;return!1},f.contains=f.include=function(e,t){return null==e?!1:(e.length!==+e.length&&(e=f.values(e)),f.indexOf(e,t)>=0)},f.invoke=function(e,t){var n=s.call(arguments,2),a=f.isFunction(t);return f.map(e,function(e){return(a?t:e[t]).apply(e,n)})},f.pluck=function(e,t){return f.map(e,f.property(t))},f.where=function(e,t){return f.filter(e,f.matches(t))},f.findWhere=function(e,t){return f.find(e,f.matches(t))},f.max=function(e,t,n){var a,r,i=-1/0,s=-1/0;if(null==t&&null!=e){e=e.length===+e.length?e:f.values(e);for(var o=0,c=e.length;c>o;o++)a=e[o],a>i&&(i=a)}else t=f.iteratee(t,n),f.each(e,function(e,n,a){r=t(e,n,a),(r>s||r===-1/0&&i===-1/0)&&(i=e,s=r)});return i},f.min=function(e,t,n){var a,r,i=1/0,s=1/0;if(null==t&&null!=e){e=e.length===+e.length?e:f.values(e);for(var o=0,c=e.length;c>o;o++)a=e[o],i>a&&(i=a)}else t=f.iteratee(t,n),f.each(e,function(e,n,a){r=t(e,n,a),(s>r||1/0===r&&1/0===i)&&(i=e,s=r)});return i},f.shuffle=function(e){for(var t,n=e&&e.length===+e.length?e:f.values(e),a=n.length,r=Array(a),i=0;a>i;i++)t=f.random(0,i),t!==i&&(r[i]=r[t]),r[t]=n[i];return r},f.sample=function(e,t,n){return null==t||n?(e.length!==+e.length&&(e=f.values(e)),e[f.random(e.length-1)]):f.shuffle(e).slice(0,Math.max(0,t))},f.sortBy=function(e,t,n){return t=f.iteratee(t,n),f.pluck(f.map(e,function(e,n,a){return{value:e,index:n,criteria:t(e,n,a)}}).sort(function(e,t){var n=e.criteria,a=t.criteria;if(n!==a){if(n>a||void 0===n)return 1;if(a>n||void 0===a)return-1}return e.index-t.index}),"value")};var v=function(e){return function(t,n,a){var r={};return n=f.iteratee(n,a),f.each(t,function(a,i){var s=n(a,i,t);e(r,a,s)}),r}};f.groupBy=v(function(e,t,n){f.has(e,n)?e[n].push(t):e[n]=[t]}),f.indexBy=v(function(e,t,n){e[n]=t}),f.countBy=v(function(e,t,n){f.has(e,n)?e[n]++:e[n]=1}),f.sortedIndex=function(e,t,n,a){n=f.iteratee(n,a,1);for(var r=n(t),i=0,s=e.length;s>i;){var o=i+s>>>1;r>n(e[o])?i=o+1:s=o}return i},f.toArray=function(e){return e?f.isArray(e)?s.call(e):e.length===+e.length?f.map(e,f.identity):f.values(e):[]},f.size=function(e){return null==e?0:e.length===+e.length?e.length:f.keys(e).length},f.partition=function(e,t,n){t=f.iteratee(t,n);var a=[],r=[];return f.each(e,function(e,n,i){(t(e,n,i)?a:r).push(e)}),[a,r]},f.first=f.head=f.take=function(e,t,n){return null==e?void 0:null==t||n?e[0]:0>t?[]:s.call(e,0,t)},f.initial=function(e,t,n){return s.call(e,0,Math.max(0,e.length-(null==t||n?1:t)))},f.last=function(e,t,n){return null==e?void 0:null==t||n?e[e.length-1]:s.call(e,Math.max(e.length-t,0))},f.rest=f.tail=f.drop=function(e,t,n){return s.call(e,null==t||n?1:t)},f.compact=function(e){return f.filter(e,f.identity)};var _=function(e,t,n,a){if(t&&f.every(e,f.isArray))return o.apply(a,e);for(var r=0,s=e.length;s>r;r++){var c=e[r];f.isArray(c)||f.isArguments(c)?t?i.apply(a,c):_(c,t,n,a):n||a.push(c)}return a};f.flatten=function(e,t){return _(e,t,!1,[])},f.without=function(e){return f.difference(e,s.call(arguments,1))},f.uniq=f.unique=function(e,t,n,a){if(null==e)return[];f.isBoolean(t)||(a=n,n=t,t=!1),null!=n&&(n=f.iteratee(n,a));for(var r=[],i=[],s=0,o=e.length;o>s;s++){var c=e[s];if(t)s&&i===c||r.push(c),i=c;else if(n){var l=n(c,s,e);0>f.indexOf(i,l)&&(i.push(l),r.push(c))}else 0>f.indexOf(r,c)&&r.push(c)}return r},f.union=function(){return f.uniq(_(arguments,!0,!0,[]))},f.intersection=function(e){if(null==e)return[];for(var t=[],n=arguments.length,a=0,r=e.length;r>a;a++){var i=e[a];if(!f.contains(t,i)){for(var s=1;n>s&&f.contains(arguments[s],i);s++);s===n&&t.push(i)}}return t},f.difference=function(e){var t=_(s.call(arguments,1),!0,!0,[]);return f.filter(e,function(e){return!f.contains(t,e)})},f.zip=function(e){if(null==e)return[];for(var t=f.max(arguments,"length").length,n=Array(t),a=0;t>a;a++)n[a]=f.pluck(arguments,a);return n},f.object=function(e,t){if(null==e)return{};for(var n={},a=0,r=e.length;r>a;a++)t?n[e[a]]=t[a]:n[e[a][0]]=e[a][1];return n},f.indexOf=function(e,t,n){if(null==e)return-1;var a=0,r=e.length;if(n){if("number"!=typeof n)return a=f.sortedIndex(e,t),e[a]===t?a:-1;a=0>n?Math.max(0,r+n):n}for(;r>a;a++)if(e[a]===t)return a;return-1},f.lastIndexOf=function(e,t,n){if(null==e)return-1;var a=e.length;for("number"==typeof n&&(a=0>n?a+n+1:Math.min(a,n+1));--a>=0;)if(e[a]===t)return a;return-1},f.range=function(e,t,n){1>=arguments.length&&(t=e||0,e=0),n=n||1;for(var a=Math.max(Math.ceil((t-e)/n),0),r=Array(a),i=0;a>i;i++,e+=n)r[i]=e;return r};var g=function(){};f.bind=function(e,t){var n,a;if(d&&e.bind===d)return d.apply(e,s.call(arguments,1));if(!f.isFunction(e))throw new TypeError("Bind must be called on a function");return n=s.call(arguments,2),a=function(){if(!(this instanceof a))return e.apply(t,n.concat(s.call(arguments)));g.prototype=e.prototype;var r=new g;g.prototype=null;var i=e.apply(r,n.concat(s.call(arguments)));return f.isObject(i)?i:r}},f.partial=function(e){var t=s.call(arguments,1);return function(){for(var n=0,a=t.slice(),r=0,i=a.length;i>r;r++)a[r]===f&&(a[r]=arguments[n++]);for(;arguments.length>n;)a.push(arguments[n++]);return e.apply(this,a)}},f.bindAll=function(e){var t,n,a=arguments.length;if(1>=a)throw Error("bindAll must be passed function names");for(t=1;a>t;t++)n=arguments[t],e[n]=f.bind(e[n],e);return e},f.memoize=function(e,t){var n=function(a){var r=n.cache,i=t?t.apply(this,arguments):a;return f.has(r,i)||(r[i]=e.apply(this,arguments)),r[i]};return n.cache={},n},f.delay=function(e,t){var n=s.call(arguments,2);return setTimeout(function(){return e.apply(null,n)},t)},f.defer=function(e){return f.delay.apply(f,[e,1].concat(s.call(arguments,1)))},f.throttle=function(e,t,n){var a,r,i,s=null,o=0;n||(n={});var c=function(){o=n.leading===!1?0:f.now(),s=null,i=e.apply(a,r),s||(a=r=null)};return function(){var l=f.now();o||n.leading!==!1||(o=l);var u=t-(l-o);return a=this,r=arguments,0>=u||u>t?(clearTimeout(s),s=null,o=l,i=e.apply(a,r),s||(a=r=null)):s||n.trailing===!1||(s=setTimeout(c,u)),i}},f.debounce=function(e,t,n){var a,r,i,s,o,c=function(){var l=f.now()-s;t>l&&l>0?a=setTimeout(c,t-l):(a=null,n||(o=e.apply(i,r),a||(i=r=null)))};return function(){i=this,r=arguments,s=f.now();var l=n&&!a;return a||(a=setTimeout(c,t)),l&&(o=e.apply(i,r),i=r=null),o}},f.wrap=function(e,t){return f.partial(t,e)},f.negate=function(e){return function(){return!e.apply(this,arguments)}},f.compose=function(){var e=arguments,t=e.length-1;return function(){for(var n=t,a=e[t].apply(this,arguments);n--;)a=e[n].call(this,a);return a}},f.after=function(e,t){return function(){return 1>--e?t.apply(this,arguments):void 0}},f.before=function(e,t){var n;return function(){return--e>0?n=t.apply(this,arguments):t=null,n}},f.once=f.partial(f.before,2),f.keys=function(e){if(!f.isObject(e))return[];if(h)return h(e);var t=[];for(var n in e)f.has(e,n)&&t.push(n);return t},f.values=function(e){for(var t=f.keys(e),n=t.length,a=Array(n),r=0;n>r;r++)a[r]=e[t[r]];return a},f.pairs=function(e){for(var t=f.keys(e),n=t.length,a=Array(n),r=0;n>r;r++)a[r]=[t[r],e[t[r]]];return a},f.invert=function(e){for(var t={},n=f.keys(e),a=0,r=n.length;r>a;a++)t[e[n[a]]]=n[a];return t},f.functions=f.methods=function(e){var t=[];for(var n in e)f.isFunction(e[n])&&t.push(n);return t.sort()},f.extend=function(e){if(!f.isObject(e))return e;for(var t,n,a=1,r=arguments.length;r>a;a++){t=arguments[a];for(n in t)l.call(t,n)&&(e[n]=t[n])}return e},f.pick=function(e,t,n){var a,r={};if(null==e)return r;if(f.isFunction(t)){t=p(t,n);for(a in e){var i=e[a];t(i,a,e)&&(r[a]=i)}}else{var c=o.apply([],s.call(arguments,1));e=Object(e);for(var l=0,u=c.length;u>l;l++)a=c[l],a in e&&(r[a]=e[a])}return r},f.omit=function(e,t,n){if(f.isFunction(t))t=f.negate(t);else{var a=f.map(o.apply([],s.call(arguments,1)),String);t=function(e,t){return!f.contains(a,t)}}return f.pick(e,t,n)},f.defaults=function(e){if(!f.isObject(e))return e;for(var t=1,n=arguments.length;n>t;t++){var a=arguments[t];for(var r in a)void 0===e[r]&&(e[r]=a[r])}return e},f.clone=function(e){return f.isObject(e)?f.isArray(e)?e.slice():f.extend({},e):e},f.tap=function(e,t){return t(e),e};var b=function(e,t,n,a){if(e===t)return 0!==e||1/e===1/t;if(null==e||null==t)return e===t;e instanceof f&&(e=e._wrapped),t instanceof f&&(t=t._wrapped);var r=c.call(e);if(r!==c.call(t))return!1;switch(r){case"[object RegExp]":case"[object String]":return""+e==""+t;case"[object Number]":return+e!==+e?+t!==+t:0===+e?1/+e===1/t:+e===+t;case"[object Date]":case"[object Boolean]":return+e===+t}if("object"!=typeof e||"object"!=typeof t)return!1;for(var i=n.length;i--;)if(n[i]===e)return a[i]===t;var s=e.constructor,o=t.constructor;if(s!==o&&"constructor"in e&&"constructor"in t&&!(f.isFunction(s)&&s instanceof s&&f.isFunction(o)&&o instanceof o))return!1;n.push(e),a.push(t);var l,u;if("[object Array]"===r){if(l=e.length,u=l===t.length)for(;l--&&(u=b(e[l],t[l],n,a)););}else{var h,d=f.keys(e);if(l=d.length,u=f.keys(t).length===l)for(;l--&&(h=d[l],u=f.has(t,h)&&b(e[h],t[h],n,a)););}return n.pop(),a.pop(),u};f.isEqual=function(e,t){return b(e,t,[],[])},f.isEmpty=function(e){if(null==e)return!0;if(f.isArray(e)||f.isString(e)||f.isArguments(e))return 0===e.length;for(var t in e)if(f.has(e,t))return!1;return!0},f.isElement=function(e){return!(!e||1!==e.nodeType)},f.isArray=u||function(e){return"[object Array]"===c.call(e)},f.isObject=function(e){var t=typeof e;return"function"===t||"object"===t&&!!e},f.each(["Arguments","Function","String","Number","Date","RegExp"],function(e){f["is"+e]=function(t){return c.call(t)==="[object "+e+"]"}}),f.isArguments(arguments)||(f.isArguments=function(e){return f.has(e,"callee")}),true&&(f.isFunction=function(e){return"function"==typeof e||!1}),f.isFinite=function(e){return isFinite(e)&&!isNaN(parseFloat(e))},f.isNaN=function(e){return f.isNumber(e)&&e!==+e},f.isBoolean=function(e){return e===!0||e===!1||"[object Boolean]"===c.call(e)},f.isNull=function(e){return null===e},f.isUndefined=function(e){return void 0===e},f.has=function(e,t){return null!=e&&l.call(e,t)},f.noConflict=function(){return e._=t,this},f.identity=function(e){return e},f.constant=function(e){return function(){return e}},f.noop=function(){},f.property=function(e){return function(t){return t[e]}},f.matches=function(e){var t=f.pairs(e),n=t.length;return function(e){if(null==e)return!n;e=Object(e);for(var a=0;n>a;a++){var r=t[a],i=r[0];if(r[1]!==e[i]||!(i in e))return!1}return!0}},f.times=function(e,t,n){var a=Array(Math.max(0,e));t=p(t,n,1);for(var r=0;e>r;r++)a[r]=t(r);return a},f.random=function(e,t){return null==t&&(t=e,e=0),e+Math.floor(Math.random()*(t-e+1))},f.now=Date.now||function(){return(new Date).getTime()};var y={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},w=f.invert(y),x=function(e){var t=function(t){return e[t]},n="(?:"+f.keys(e).join("|")+")",a=RegExp(n),r=RegExp(n,"g");return function(e){return e=null==e?"":""+e,a.test(e)?e.replace(r,t):e}};f.escape=x(y),f.unescape=x(w),f.result=function(e,t){if(null==e)return void 0;var n=e[t];return f.isFunction(n)?e[t]():n};var j=0;f.uniqueId=function(e){var t=++j+"";return e?e+t:t},f.templateSettings={evaluate:/<%([\s\S]+?)%>/g,interpolate:/<%=([\s\S]+?)%>/g,escape:/<%-([\s\S]+?)%>/g};var R=/(.)^/,k={"'":"'","\\":"\\","\r":"r","\n":"n","\u2028":"u2028","\u2029":"u2029"},I=/\\|'|\r|\n|\u2028|\u2029/g,T=function(e){return"\\"+k[e]};f.template=function(e,t,n){!t&&n&&(t=n),t=f.defaults({},t,f.templateSettings);var a=RegExp([(t.escape||R).source,(t.interpolate||R).source,(t.evaluate||R).source].join("|")+"|$","g"),r=0,i="__p+='";e.replace(a,function(t,n,a,s,o){return i+=e.slice(r,o).replace(I,T),r=o+t.length,n?i+="'+\n((__t=("+n+"))==null?'':_.escape(__t))+\n'":a?i+="'+\n((__t=("+a+"))==null?'':__t)+\n'":s&&(i+="';\n"+s+"\n__p+='"),t}),i+="';\n",t.variable||(i="with(obj||{}){\n"+i+"}\n"),i="var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};\n"+i+"return __p;\n";try{var s=Function(t.variable||"obj","_",i)}catch(o){throw o.source=i,o}var c=function(e){return s.call(this,e,f)},l=t.variable||"obj";return c.source="function("+l+"){\n"+i+"}",c},f.chain=function(e){var t=f(e);return t._chain=!0,t};var F=function(e){return this._chain?f(e).chain():e};f.mixin=function(e){f.each(f.functions(e),function(t){var n=f[t]=e[t];f.prototype[t]=function(){var e=[this._wrapped];return i.apply(e,arguments),F.call(this,n.apply(f,e))}})},f.mixin(f),f.each(["pop","push","reverse","shift","sort","splice","unshift"],function(e){var t=n[e];f.prototype[e]=function(){var n=this._wrapped;return t.apply(n,arguments),"shift"!==e&&"splice"!==e||0!==n.length||delete n[0],F.call(this,n)}}),f.each(["concat","join","slice"],function(e){var t=n[e];f.prototype[e]=function(){return F.call(this,t.apply(this._wrapped,arguments))}}),f.prototype.value=function(){return this._wrapped},"function"==typeof define&&define.amd&&define("underscore",[],function(){return f})}).call(this),this.FirechatDefaultTemplates=this.FirechatDefaultTemplates||{},this.FirechatDefaultTemplates["templates/layout-full.html"]=function(obj){obj||(obj={});var __p="";with(_.escape,obj)__p+="<div id='firechat' class='full'>\n<div id='firechat-header' class='clearfix'>\n<div class='clearfix'><div class='half firechat-dropdown' style=''>\n<a id='firechat-btn-rooms' class='firechat-dropdown-toggle btn full' data-toggle=\"firechat-dropdown\" href='#'>\n<span class='icon user-chat'></span>\nChat Rooms\n<span class='caret'></span>\n</a>\n<div class='firechat-dropdown-menu full' role='menu'><ul id='firechat-room-list'></ul><div class='firechat-dropdown-footer aligncenter'>\n<button type='button' class='btn twothird center' id='firechat-btn-create-room-prompt'>Create Room</button>\n</div></div></div>\n<div class='half firechat-dropdown' style=''>\n<a data-event='firechat-user-search-btn' class='btn full firechat-dropdown-toggle' data-toggle=\"firechat-dropdown\" href='#'>\n<span class='icon user-group'></span>\nVisitors\n<span class='caret'></span>\n</a>\n<div class='firechat-dropdown-menu' role='menu'>\n<div class='firechat-dropdown-header aligncenter clearfix'>\n<div class='search-wrapper'>\n<span class='icon search'></span>\n<input type='text' data-event='firechat-user-search' data-template='templates/user-search-list-item.html' data-target='firechat-user-search' data-controls='firechat-user-search-controls' class='center fivesixth'>\n</div>\n</div>\n<ul id='firechat-user-search'></ul><div class='firechat-dropdown-footer aligncenter clearfix'>\n<div id='firechat-user-search-controls' class='clearfix'>\n<span class=\"quarter\"></span>\n<button type='button' class='btn half' data-event='firechat-user-search' data-toggle='firechat-pagination-next' data-template='templates/user-search-list-item.html' data-target='firechat-user-search' data-controls='firechat-user-search-controls' disabled=disabled>Next</button>\n</div><label class='center full'>\n<small>Use \"+ Invite\" button within chat rooms for regular invites.</small>\n</label>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div id='firechat-tabs' class='clearfix'>\n<ul id='firechat-tab-list' class='nav nav-tabs clearfix'></ul>\n<div id='firechat-tab-content' class='tab-content'></div>\n</div><div id='firechat-footer' class='clearfix'></div>\n</div>";return __p},this.FirechatDefaultTemplates["templates/layout-popout.html"]=function(obj){obj||(obj={});var __p="";with(_.escape,obj)__p+="<div id='firechat' class='full'>\n<div id='firechat-tabs' class='clearfix'>\n<ul id='firechat-tab-list' class='nav nav-tabs clearfix'></ul>\n<div id='firechat-tab-content' class='tab-content'></div>\n</div>\n</div>";return __p},this.FirechatDefaultTemplates["templates/message-context-menu.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<div data-toggle='firechat-contextmenu' class='contextmenu' data-message-id='"+__e(id)+"'>\n<ul>\n<li><a href='#!' data-event='firechat-user-warn'>Warn User</a></li>\n",allowKick&&(__p+="\n<li><a href='#!' data-event='firechat-user-kick'>Kick User</a></li>\n"),__p+="\n<li><a href='#!' data-event='firechat-user-suspend-hour'>Suspend User (1 Hour)</a></li>\n<li><a href='#!' data-event='firechat-user-suspend-day'>Suspend User (1 Day)</a></li>\n<li><a href='#!' data-event='firechat-message-delete'>Delete Message</a></li>\n</ul>\n</div>";return __p},this.FirechatDefaultTemplates["templates/message.html"]=function(obj){obj||(obj={});var __t,__p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<div class='message message-"+__e(type)+" ",isSelfMessage&&(__p+=" message-self "),__p+="' data-message-id='"+__e(id)+"' data-user-id='"+__e(userId)+"' data-user-name='"+__e(name)+"' data-class=\"firechat-message\">\n<div class='clearfix'>\n<label class='fourfifth'>\n<strong class='name' title='"+__e(name)+"'>"+__e(name)+"</strong>\n<em>("+__e(localtime)+")</em>:\n</label>",disableActions||(__p+="\n<label class='fifth alignright'>\n<a href='#!' data-event='firechat-user-chat' class='icon user-chat' title='Invite to Private Chat'>&nbsp;</a>\n<a href='#!' data-event='firechat-user-mute-toggle' class='icon user-mute' title='Mute User'>&nbsp;</a>\n</label>\n"),__p+="</div>\n<div class='clearfix message-content'>\n"+(null==(__t=message)?"":__t)+"\n</div>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt-alert.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<div class='aligncenter clearfix'>\n<h6>"+__e(message)+"</h6>\n<p class='clearfix'>\n<button type='button' class='btn quarter right close'>Close</button>\n</p>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt-create-room.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<div class='clearfix'>\n<h6>Give your chat room a name:</h6>\n<input data-input='firechat-room-name' type='text' placeholder='Room name...' style='margin-bottom: 5px;' maxlength='"+__e(maxLengthRoomName)+"'>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt-invitation.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<div class='aligncenter clearfix'>\n<h5>"+__e(fromUserName)+"</h5>\n<p>invited you to join</p>\n<h5>"+__e(toRoomName)+"</h5>\n<p class='clearfix'>\n<button data-toggle='accept' type='button' class='btn'>Accept</button>\n<button data-toggle='decline' type='button' class='btn'>Decline</button>\n</p>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt-invite-private.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<div class='aligncenter clearfix'>\n<h6>Invite <strong>"+__e(userName)+"</strong> to "+__e(roomName)+"?</h6>\n<p class='clearfix'>\n<button data-toggle='accept' type='button' class='btn'>Invite</button>\n<button data-toggle='decline' type='button' class='close btn'>Cancel</button>\n</p>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt-invite-reply.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<div class='aligncenter clearfix'>\n<h5>"+__e(toUserName)+"</h5>\n<p>\n",__p+="accepted"===status?" accepted your invite. ":" declined your invite. ",__p+="\n</p>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt-user-mute.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<div class='aligncenter clearfix'>\n<h5>"+__e(userName)+"</h5>\n<p class='clearfix'>\n<button data-toggle='accept' type='button' class='btn'>Mute</button>\n<button data-toggle='decline' type='button' class='btn'>Cancel</button>\n</p>\n</div>";return __p},this.FirechatDefaultTemplates["templates/prompt.html"]=function(obj){obj||(obj={});var __t,__p="",__e=_.escape;with(obj)__p+="<div class='prompt hidden'>\n<div class='prompt-header'>\n"+__e(title)+"\n<a href='#!' class='close right'>X</a>\n</div>\n<div class='prompt-body clearfix'>\n"+(null==(__t=content)?"":__t)+"\n</div>\n<div class='prompt-footer'></div>\n</div>";return __p},this.FirechatDefaultTemplates["templates/room-list-item.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<li data-room-type='"+__e(type)+"' data-room-id='"+__e(id)+"' data-room-name='"+__e(name)+"'>\n<a href='#!' class='clearfix ",isRoomOpen&&(__p+=" highlight "),__p+="'>\n<span class='left' title='"+__e(name)+"'>"+__e(name)+"</span>\n</a>\n</li>";return __p},this.FirechatDefaultTemplates["templates/room-user-list-item.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<li data-user-id='"+__e(id)+"' data-user-name='"+__e(name)+"'>\n<a href='#!' class='clearfix'>\n<span class='left twothird clipped' title='"+__e(name)+"'>"+__e(name)+"</span>",disableActions||(__p+="\n<span data-event='firechat-user-mute-toggle' class='icon user-mute right ",isMuted&&(__p+=" red "),__p+="' title='Toggle User Mute'>&nbsp;</span>\n<span data-event='firechat-user-chat' class='icon user-chat right' title='Invite to Private Chat'>&nbsp;</span>\n"),__p+="\n</a>\n</li>";return __p},this.FirechatDefaultTemplates["templates/room-user-search-list-item.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<li data-user-id='"+__e(id)+"' data-user-name='"+__e(name)+"'>\n<a href='#!' class='clearfix'>\n",__p+=disableActions?"\n<span class='left fourfifth clipped' title='"+__e(name)+"'>"+__e(name)+"</span>\n":"\n<span data-event='firechat-user-invite' class='left fourfifth clipped' title='"+__e(name)+"'>"+__e(name)+"</span>\n<span data-event='firechat-user-invite' class='icon plus right' title='Invite to Room'>+</span>\n",__p+="\n</a>\n</li>";return __p},this.FirechatDefaultTemplates["templates/tab-content.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<div id='"+__e(id)+"' data-room-id='"+__e(id)+"' class='tab-pane'>\n<div class='tab-pane-menu clearfix'><div class='firechat-dropdown twofifth'>\n<a data-event='firechat-user-room-list-btn' class='full btn firechat-dropdown-toggle' data-toggle=\"firechat-dropdown\" href='#' data-target='firechat-room-user-list-"+__e(id)+"'>\n<span class='icon user-group'></span>\nIn Room\n<span class='caret'></span>\n</a>\n<div class='firechat-dropdown-menu' role='menu'>\n<ul id='firechat-room-user-list-"+__e(id)+"' class='full'></ul>\n</div>\n</div><div class='firechat-dropdown twofifth'>\n<a data-event='firechat-user-search-btn' class='full btn firechat-dropdown-toggle' data-toggle=\"firechat-dropdown\" href='#'>\n<span class='icon plus'>+</span>\nInvite\n<span class='caret'></span>\n</a><div class='firechat-dropdown-menu' role='menu'>\n<div class='firechat-dropdown-header aligncenter clearfix'>\n<div class='search-wrapper'>\n<span class='icon search'></span>\n<input type='text' data-event='firechat-user-search' data-template='templates/room-user-search-list-item.html' data-target='firechat-room-user-search-"+__e(id)+"' data-controls='firechat-room-user-search-controls-"+__e(id)+"' class='center fivesixth'>\n</div>\n</div>\n<ul id='firechat-room-user-search-"+__e(id)+"'></ul><div class='firechat-dropdown-footer aligncenter clearfix'>\n<div id='firechat-room-user-search-controls-"+__e(id)+"' class='clearfix'><span class=\"quarter\"></span>\n<!--\n<button type='button' class='btn third disabled' data-event='firechat-user-search' data-template='templates/room-user-search-list-item.html' data-target='firechat-room-user-search-"+__e(id)+"' data-controls='firechat-room-user-search-controls-"+__e(id)+"' data-toggle='firechat-pagination-prev' disabled=disabled>Prev</button>\n-->\n<button type='button' class='btn half disabled' data-event='firechat-user-search' data-template='templates/room-user-search-list-item.html' data-target='firechat-room-user-search-"+__e(id)+"' data-controls='firechat-room-user-search-controls-"+__e(id)+"' data-toggle='firechat-pagination-next'  disabled=disabled>Next</button>\n</div>\n</div>\n</div>\n</div><a href='#!' data-event='firechat-close-tab' class='icon close right' style='15px 5px' title='Leave Room'></a></div><div class='clearfix'>\n<div id='firechat-messages"+__e(id)+"' class='chat'></div>\n</div><div class='clearfix'>\n<label>Your message:</label>\n<textarea id='textarea"+__e(id)+"' placeholder='Type your message here...'></textarea>\n</div>\n</div>";return __p},this.FirechatDefaultTemplates["templates/tab-menu-item.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(obj)__p+="<li data-room-id='"+__e(id)+"'>\n<a href='#"+__e(id)+"' data-toggle='firechat-tab' title='"+__e(name)+"'>"+__e(name)+"</a>\n</li>";return __p},this.FirechatDefaultTemplates["templates/user-search-list-item.html"]=function(obj){obj||(obj={});var __p="",__e=_.escape;with(Array.prototype.join,obj)__p+="<li data-user-id='"+__e(id)+"' data-user-name='"+__e(name)+"'>\n<a href='#!' class='clearfix'>\n",__p+=disableActions?"\n<span class='left fivesixth clipped' title='"+__e(name)+"'>"+__e(name)+"</span>\n":"\n<span data-event='firechat-user-chat' class='left fivesixth clipped' title='"+__e(name)+"'>"+__e(name)+"</span>\n<span data-event='firechat-user-chat' class='icon user-chat right' title='Invite to Private Chat'>&nbsp;</span>\n",__p+="\n</a>\n</li>";return __p},function(){Function.prototype.bind||(Function.prototype.bind=function(e){if("function"!=typeof this)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");var t=Array.prototype.slice.call(arguments,1),n=this,a=function(){},r=function(){return n.apply(this instanceof a&&e?this:e,t.concat(Array.prototype.slice.call(arguments)))};return a.prototype=this.prototype,r.prototype=new a,r}),Object.keys=Object.keys||function(e){var t=[];for(var n in e)e.hasOwnProperty(n)&&t.push(n);return t}}(),function(e){function t(e,t){this._firebase=e,this._user=null,this._userId=null,this._userName=null,this._isModerator=!1,this._sessionId=null,this._events={},this._rooms={},this._presenceBits={},this._userRef=null,this._messageRef=this._firebase.child("room-messages"),this._roomRef=this._firebase.child("room-metadata"),this._privateRoomRef=this._firebase.child("room-private-metadata"),this._moderatorsRef=this._firebase.child("moderators"),this._suspensionsRef=this._firebase.child("suspensions"),this._usersOnlineRef=this._firebase.child("user-names-online"),this._options=t||{},this._options.numMaxMessages=this._options.numMaxMessages||50}var n=this,a=n.Firechat;t.noConflict=function(){return n.Firechat=a,t},n.Firechat=t,t.prototype={_loadUserMetadata:function(e){var t=this;this._userRef.transaction(function(e){return e&&e.id&&e.name?void 0:{id:t._userId,name:t._userName}},function(a,r,i){t._user=i.val(),t._moderatorsRef.child(t._userId).once("value",function(a){t._isModerator=!!a.val(),n.setTimeout(e,0)})})},_setupDataEvents:function(){this._firebase.root().child(".info/connected").on("value",function(e){if(e.val()===!0)for(var t=0;this._presenceBits>t;t++){var n=this._presenceBits[t],a=this._firebase.root().child(n.ref);a.onDisconnect().set(n.offlineValue),a.set(n.onlineValue)}},this);var e=this._userRef.child("sessions").push();this._sessionId=e.key(),this._queuePresenceOperation(e,!0,null);var t=this._usersOnlineRef.child(this._userName.toLowerCase()),n=t.child(this._sessionId);this._queuePresenceOperation(n,{id:this._userId,name:this._userName},null),this._userRef.on("value",this._onUpdateUser,this),this._userRef.child("invites").on("child_added",this._onFirechatInvite,this),this._userRef.child("notifications").on("child_added",this._onNotification,this)},_addEventCallback:function(e,t){this._events[e]=this._events[e]||[],this._events[e].push(t)},_getEventCallbacks:function(e){return this._events.hasOwnProperty(e)?this._events[e]:[]},_invokeEventCallbacks:function(e){var t=[],n=this._getEventCallbacks(e);Array.prototype.push.apply(t,arguments),t=t.slice(1);for(var a=0;n.length>a;a+=1)n[a].apply(null,t)},_queuePresenceOperation:function(e,t,n){e.onDisconnect().set(n),e.set(t),this._presenceBits[""+e]={ref:e,onlineValue:t,offlineValue:n}},_removePresenceOperation:function(t,n){var a=new e(t);a.onDisconnect().cancel(),a.set(n),delete this._presenceBits[t]},_onUpdateUser:function(e){this._user=e.val(),this._invokeEventCallbacks("user-update",this._user)},_onAuthRequired:function(){this._invokeEventCallbacks("auth-required")},_onEnterRoom:function(e){this._invokeEventCallbacks("room-enter",e)},_onNewMessage:function(e,t){var n=t.val();n.id=t.key(),this._invokeEventCallbacks("message-add",e,n)},_onRemoveMessage:function(e,t){var n=t.key();this._invokeEventCallbacks("message-remove",e,n)},_onLeaveRoom:function(e){this._invokeEventCallbacks("room-exit",e)},_onNotification:function(e){var t=e.val();t.read||(("suspension"!==t.notificationType||t.data.suspendedUntil<(new Date).getTime())&&e.ref().child("read").set(!0),this._invokeEventCallbacks("notification",t))},_onFirechatInvite:function(e){var t=this,n=e.val();n.status||(n.id=n.id||e.key(),t.getRoom(n.roomId,function(e){n.toRoomName=e.name,t._invokeEventCallbacks("room-invite",n)}))},_onFirechatInviteResponse:function(e){var t=e.val();t.id=t.id||e.key(),this._invokeEventCallbacks("room-invite-response",t)}},t.prototype.setUser=function(e,t,a){var r=this;r._firebase.onAuth(function(i){i?(r._userId=""+e,r._userName=""+t,r._userRef=r._firebase.child("users").child(r._userId),r._loadUserMetadata(function(){n.setTimeout(function(){a(r._user),r._setupDataEvents()},0)})):r.warn("Firechat requires an authenticated Firebase reference. Pass an authenticated reference before loading.")})},t.prototype.resumeSession=function(){this._userRef.child("rooms").once("value",function(e){var t=e.val();for(var n in t)this.enterRoom(t[n].id)
-},function(){},this)},t.prototype.on=function(e,t){this._addEventCallback(e,t)},t.prototype.createRoom=function(t,n,a){var r=this,i=this._roomRef.push(),s={id:i.key(),name:t,type:n||"public",createdByUserId:this._userId,createdAt:e.ServerValue.TIMESTAMP};"private"===n&&(s.authorizedUsers={},s.authorizedUsers[this._userId]=!0),i.set(s,function(e){e||r.enterRoom(i.key()),a&&a(i.key())})},t.prototype.enterRoom=function(e){var t=this;t.getRoom(e,function(n){var a=n.name;if(e&&a&&!t._rooms[e]){if(t._rooms[e]=!0,t._user){t._userRef.child("rooms").child(e).set({id:e,name:a,active:!0});var r=t._firebase.child("room-users").child(e).child(t._userId).child(t._sessionId);t._queuePresenceOperation(r,{id:t._userId,name:t._userName},null)}t._onEnterRoom({id:e,name:a}),t._roomRef.child(e).once("value",function(){t._messageRef.child(e).limitToLast(t._options.numMaxMessages).on("child_added",function(n){t._onNewMessage(e,n)},function(){t.leaveRoom(e)},t),t._messageRef.child(e).limitToLast(t._options.numMaxMessages).on("child_removed",function(n){t._onRemoveMessage(e,n)},function(){},t)},function(){},t)}})},t.prototype.leaveRoom=function(e){var t=this,n=t._firebase.child("room-users").child(e);if(t._messageRef.child(e).off(),t._user){var a=n.child(t._userId).child(t._sessionId);t._removePresenceOperation(""+a,null),t._userRef.child("rooms").child(e).remove()}delete t._rooms[e],t._onLeaveRoom(e)},t.prototype.sendMessage=function(t,n,a,r){var i,s=this,o={userId:s._userId,name:s._userName,timestamp:e.ServerValue.TIMESTAMP,message:n,type:a||"default"};return s._user?(i=s._messageRef.child(t).push(),i.setWithPriority(o,e.ServerValue.TIMESTAMP,r),void 0):(s._onAuthRequired(),r&&r(Error("Not authenticated or user not set!")),void 0)},t.prototype.deleteMessage=function(e,t,n){var a=this;a._messageRef.child(e).child(t).remove(n)},t.prototype.toggleUserMute=function(e,t){var n=this;return n._user?(n._userRef.child("muted").child(e).transaction(function(e){return e?null:!0},t),void 0):(n._onAuthRequired(),t&&t(Error("Not authenticated or user not set!")),void 0)},t.prototype.sendSuperuserNotification=function(t,n,a,r){var i=this,s=i._firebase.child("users").child(t).child("notifications");s.push({fromUserId:i._userId,timestamp:e.ServerValue.TIMESTAMP,notificationType:n,data:a||{}},r)},t.prototype.warnUser=function(e){var t=this;t.sendSuperuserNotification(e,"warning")},t.prototype.suspendUser=function(e,t,n){var a=this,r=(new Date).getTime()+1e3*t;a._suspensionsRef.child(e).set(r,function(t){return t&&n?n(t):(a.sendSuperuserNotification(e,"suspension",{suspendedUntil:r}),n(null))})},t.prototype.inviteUser=function(e,t){var n=this,a=function(){var a=n._firebase.child("users").child(e).child("invites").push();a.set({id:a.key(),fromUserId:n._userId,fromUserName:n._userName,roomId:t}),a.on("value",n._onFirechatInviteResponse,function(){},n)};return n._user?(n.getRoom(t,function(r){if("private"===r.type){var i=n._roomRef.child(t).child("authorizedUsers");i.child(e).set(!0,function(e){e||a()})}else a()}),void 0):(n._onAuthRequired(),void 0)},t.prototype.acceptInvite=function(e,t){var n=this;n._userRef.child("invites").child(e).once("value",function(a){var r=a.val();return null===r&&t?t(Error("acceptInvite("+e+"): invalid invite id")):(n.enterRoom(r.roomId),n._userRef.child("invites").child(e).update({status:"accepted",toUserName:n._userName},t),void 0)},n)},t.prototype.declineInvite=function(e,t){var n=this,a={status:"declined",toUserName:n._userName};n._userRef.child("invites").child(e).update(a,t)},t.prototype.getRoomList=function(e){var t=this;t._roomRef.once("value",function(t){e(t.val())})},t.prototype.getUsersByRoom=function(){var e=this,t=arguments[0],a=e._firebase.child("room-users").child(t),r=arguments[arguments.length-1],i=null;arguments.length>2&&(i=arguments[1]),a=i?a.limitToLast(i):a,a.once("value",function(e){var t=e.val()||{},a={};for(var i in t)for(var s in t[i]){a[i]=t[i][s];break}n.setTimeout(function(){r(a)},0)})},t.prototype.getUsersByPrefix=function(e,t,a,r,i){var s=this._usersOnlineRef,o=e.toLowerCase();s=t?s.startAt(null,t):a?s.endAt(null,a):o?s.startAt(null,o):s.startAt(),s=r?s.limitToLast(r):s,s.once("value",function(t){var a=t.val()||{},r={};for(var s in a){var c,l,u=a[s];for(var h in u){c=u[h].name,l=u[h].id;break}e.length>0&&0!==c.toLowerCase().indexOf(o)||(r[c]={name:c,id:l})}n.setTimeout(function(){i(r)},0)})},t.prototype.getRoom=function(e,t){this._roomRef.child(e).once("value",function(e){t(e.val())})},t.prototype.userIsModerator=function(){return this._isModerator},t.prototype.warn=function(e){console&&(e="Firechat Warning: "+e,"function"==typeof console.warn?console.warn(e):"function"==typeof console.log&&console.log(e))}}(Firebase),function(e){function t(t,n,a){if(!t)throw Error("FirechatUI: Missing required argument `firebaseRef`");if(!n)throw Error("FirechatUI: Missing required argument `el`");a=a||{},this._options=a,this._el=n,this._user=null,this._chat=new Firechat(t,a),this._roomQueue=[],this.maxLengthUsername=15,this.maxLengthUsernameDisplay=15,this.maxLengthRoomName=24,this.maxLengthMessage=120,this.maxUserSearchResults=100,this.urlPattern=/\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim,this.pseudoUrlPattern=/(^|[^\/])(www\.[\S]+(\b|$))/gim,this._renderLayout(),this.$wrapper=e("#firechat"),this.$roomList=e("#firechat-room-list"),this.$tabList=e("#firechat-tab-list"),this.$tabContent=e("#firechat-tab-content"),this.$messages={},this.$rateLimit={limitCount:10,limitInterval:1e4,limitWaitTime:3e4,history:{}},this._bindUIEvents(),this._bindDataEvents()}if(!e||170>parseInt(e().jquery.replace(/\./g,""),10))throw Error("jQuery 1.7 or later required!");var n=this,a=n.FirechatUI;if(n.FirechatUI=t,!self.FirechatDefaultTemplates)throw Error("Unable to find chat templates!");t.noConflict=function(){return n.FirechatUI=a,t},t.prototype={_bindUIEvents:function(){this._bindForHeightChange(),this._bindForTabControls(),this._bindForRoomList(),this._bindForUserRoomList(),this._bindForUserSearch(),this._bindForUserMuting(),this._bindForChatInvites(),this._bindForRoomListing(),this._setupTabs(),this._setupDropdowns(),this._bindTextInputFieldLimits()},_bindDataEvents:function(){this._chat.on("user-update",this._onUpdateUser.bind(this)),this._chat.on("room-enter",this._onEnterRoom.bind(this)),this._chat.on("room-exit",this._onLeaveRoom.bind(this)),this._chat.on("message-add",this._onNewMessage.bind(this)),this._chat.on("message-remove",this._onRemoveMessage.bind(this)),this._chat.on("room-invite",this._onChatInvite.bind(this)),this._chat.on("room-invite-response",this._onChatInviteResponse.bind(this)),this._chat.on("notification",this._onNotification.bind(this))},_renderLayout:function(){var t=FirechatDefaultTemplates["templates/layout-full.html"];e(this._el).html(t({maxLengthUsername:this.maxLengthUsername}))},_onUpdateUser:function(t){this._user=t;var n=this._user.muted||{};e('[data-event="firechat-user-mute-toggle"]').each(function(){var t=e(this).closest("[data-user-id]").data("user-id");e(this).toggleClass("red",!!n[t])});for(var a in n)e('.message[data-user-id="'+a+'"]').fadeOut()},_onEnterRoom:function(e){this.attachTab(e.id,e.name)},_onLeaveRoom:function(e){this.removeTab(e),this._roomQueue.length>0&&this._chat.enterRoom(this._roomQueue.shift(e))},_onNewMessage:function(e,t){var n=t.userId;this._user&&this._user.muted&&this._user.muted[n]||this.showMessage(e,t)},_onRemoveMessage:function(e,t){this.removeMessage(e,t)},_onChatInvite:function(e){var t=this,n=FirechatDefaultTemplates["templates/prompt-invitation.html"],a=this.prompt("Invite",n(e));a.find("a.close").click(function(){return a.remove(),t._chat.declineInvite(e.id),!1}),a.find("[data-toggle=accept]").click(function(){return a.remove(),t._chat.acceptInvite(e.id),!1}),a.find("[data-toggle=decline]").click(function(){return a.remove(),t._chat.declineInvite(e.id),!1})},_onChatInviteResponse:function(e){if(e.status){var t,n=this,a=FirechatDefaultTemplates["templates/prompt-invite-reply.html"];e.status&&"accepted"===e.status?(t=this.prompt("Accepted",a(e)),this._chat.getRoom(e.roomId,function(t){n.attachTab(e.roomId,t.name)})):t=this.prompt("Declined",a(e)),t.find("a.close").click(function(){return t.remove(),!1})}},_onNotification:function(e){if("warning"===e.notificationType)this.renderAlertPrompt("Warning","You are being warned for inappropriate messaging. Further violation may result in temporary or permanent ban of service.");else if("suspension"===e.notificationType){var t=e.data.suspendedUntil,n=Math.round((t-(new Date).getTime())/1e3),a="";if(n>0){if(n>7200){var r=Math.floor(n/3600);a=r+" hours, ",n-=3600*r}a+=Math.floor(n/60)+" minutes",this.renderAlertPrompt("Suspended","A moderator has suspended you for violating site rules. You cannot send messages for another "+a+".")}}}},t.prototype.setUser=function(e,t){var n=this;n._chat.setUser(e,t,function(e){n._user=e,n._chat.userIsModerator()&&n._bindSuperuserUIEvents(),n._chat.resumeSession()})},t.prototype.on=function(e,t){this._chat.on(e,t)},t.prototype._bindSuperuserUIEvents=function(){var t=this,n=function(){var t=e(this),n=t.closest("[data-message-id]").data("message-id"),a=e('[data-message-id="'+n+'"]').closest("[data-user-id]").data("user-id"),r=e('[data-message-id="'+n+'"]').closest("[data-room-id]").data("room-id");return{messageId:n,userId:a,roomId:r}},a=function(){e('[data-toggle="firechat-contextmenu"]').each(function(){e(this).remove()}),e("#firechat .message.highlighted").each(function(){e(this).removeClass("highlighted")})},r=function(r){var i,s=e(this),o=s.closest("[data-message-id]"),c=FirechatDefaultTemplates["templates/message-context-menu.html"],l=n.call(this,r);r.preventDefault(),a(),s.addClass("highlighted"),t._chat.getRoom(l.roomId,function(){i=e(c({id:o.data("message-id")})),i.css({left:r.clientX,top:r.clientY}).appendTo(t.$wrapper)})};e(document).bind("click",{self:this},function(e){e.button&&2==e.button||a()}),e(document).delegate('[data-class="firechat-message"]',"contextmenu",r),e(document).delegate('[data-event="firechat-user-warn"]',"click",function(e){var a=n.call(this,e);t._chat.warnUser(a.userId)}),e(document).delegate('[data-event="firechat-user-suspend-hour"]',"click",function(e){var a=n.call(this,e);t._chat.suspendUser(a.userId,3600)}),e(document).delegate('[data-event="firechat-user-suspend-day"]',"click",function(e){var a=n.call(this,e);t._chat.suspendUser(a.userId,86400)}),e(document).delegate('[data-event="firechat-message-delete"]',"click",function(e){var a=n.call(this,e);t._chat.deleteMessage(a.roomId,a.messageId)})},t.prototype._bindForHeightChange=function(){var t=e(this._el),n=null;setInterval(function(){var a=t.height();a!=n&&(n=a,e(".chat").each(function(){}))},500)},t.prototype._bindForTabControls=function(){var t=this;e(document).delegate('[data-event="firechat-close-tab"]',"click",function(){var n=e(this).closest("[data-room-id]").data("room-id");return t._chat.leaveRoom(n),!1})},t.prototype._bindForRoomList=function(){var t=this;e("#firechat-btn-rooms").bind("click",function(){if(!e(this).parent().hasClass("open")){var n=(e(this),FirechatDefaultTemplates["templates/room-list-item.html"]),a=function(){var n=e(this).parent(),a=n.data("room-id"),r=n.data("room-name");return t.$messages[a]?t.focusTab(a):t._chat.enterRoom(a,r),!1};t._chat.getRoomList(function(r){t.$roomList.empty();for(var i in r){var s=r[i];if("public"==s.type){s.isRoomOpen=!!t.$messages[s.id];var o=e(n(s));o.children("a").bind("click",a),t.$roomList.append(o.toggle(!0))}}})}})},t.prototype._bindForUserRoomList=function(){var t=this;e(document).delegate('[data-event="firechat-user-room-list-btn"]',"click",function(n){n.stopPropagation();var a=e(this),r=a.closest("[data-room-id]").data("room-id"),i=FirechatDefaultTemplates["templates/room-user-list-item.html"],s=a.data("target"),o=e("#"+s);o.empty(),t._chat.getUsersByRoom(r,function(n){for(var a in n)user=n[a],user.disableActions=!t._user||user.id===t._user.id,user.nameTrimmed=t.trimWithEllipsis(user.name,t.maxLengthUsernameDisplay),user.isMuted=t._user&&t._user.muted&&t._user.muted[user.id],o.append(e(i(user)));t.sortListLexicographically("#"+s)})})},t.prototype._bindForUserSearch=function(){var t=this,n=function(t){var n=e(this),r=n.data("target"),i=n.data("controls"),s=n.data("template"),o=n.val()||n.data("prefix")||"",c=n.data("startAt")||null,l=n.data("endAt")||null;t.preventDefault(),a(r,s,i,o,c,l)},a=function(n,a,r,i,s,o){var c=e("#"+n),l=e("#"+r),u=FirechatDefaultTemplates[a];t._chat.getUsersByPrefix(i,s,o,t.maxUserSearchResults,function(e){var n,a,r,s,o,h=0;c.empty();for(r in e){var d=e[r];if(d.disableActions=!t._user||d.id===t._user.id,h+=1,c.append(u(d)),1===h)s=d.name.toLowerCase();else if(h>=t.maxUserSearchResults){o=d.name.toLowerCase();break}}l&&(n=l.find('[data-toggle="firechat-pagination-prev"]'),a=l.find('[data-toggle="firechat-pagination-next"]'),o?a.data("event","firechat-user-search").data("startAt",o).data("prefix",i).removeClass("disabled").removeAttr("disabled"):a.data("event",null).data("startAt",null).data("prefix",null).addClass("disabled").attr("disabled","disabled"))})};e(document).delegate('[data-event="firechat-user-search"]',"keyup",n),e(document).delegate('[data-event="firechat-user-search"]',"click",n),e(document).delegate('[data-event="firechat-user-search-btn"]',"click",function(t){t.stopPropagation();var n=e(this).next("div.firechat-dropdown-menu").find("input");n.focus(),n.trigger(jQuery.Event("keyup"))}),e(document).delegate('[data-event="firechat-user-search"]',"click",function(e){e.stopPropagation()})},t.prototype._bindForUserMuting=function(){var t=this;e(document).delegate('[data-event="firechat-user-mute-toggle"]',"click",function(n){var a=e(this),r=a.closest("[data-user-id]").data("user-id"),i=a.closest("[data-user-name]").data("user-name"),s=a.hasClass("red"),o=FirechatDefaultTemplates["templates/prompt-user-mute.html"];if(n.preventDefault(),s)t._chat.toggleUserMute(r);else{var c=t.prompt("Mute User?",o({userName:i}));c.find("a.close").first().click(function(){return c.remove(),!1}),c.find("[data-toggle=decline]").first().click(function(){return c.remove(),!1}),c.find("[data-toggle=accept]").first().click(function(){return t._chat.toggleUserMute(r),c.remove(),!1})}})},t.prototype._bindForChatInvites=function(){var t=this,n=function(){var n,a=e(this),r=a.closest("[data-user-id]").data("user-id"),i=a.closest("[data-room-id]").data("room-id"),s=a.closest("[data-user-name]").data("user-name"),o=FirechatDefaultTemplates["templates/prompt-invite-private.html"];return t._chat.getRoom(i,function(e){return n=t.prompt("Invite",o({userName:s,roomName:e.name})),n.find("a.close").click(function(){return n.remove(),!1}),n.find("[data-toggle=decline]").click(function(){return n.remove(),!1}),n.find("[data-toggle=accept]").first().click(function(){return n.remove(),t._chat.inviteUser(r,i,e.name),!1}),!1}),!1},a=function(){var n,a=e(this),r=a.closest("[data-user-id]").data("user-id"),i=a.closest("[data-user-name]").data("user-name"),s=FirechatDefaultTemplates["templates/prompt-invite-private.html"];return r&&i&&(n=t.prompt("Private Invite",s({userName:i,roomName:"Private Chat"})),n.find("a.close").click(function(){return n.remove(),!1}),n.find("[data-toggle=decline]").click(function(){return n.remove(),!1}),n.find("[data-toggle=accept]").first().click(function(){n.remove();var e="Private Chat";return t._chat.createRoom(e,"private",function(n){t._chat.inviteUser(r,n,e)}),!1})),!1};e(document).delegate('[data-event="firechat-user-chat"]',"click",a),e(document).delegate('[data-event="firechat-user-invite"]',"click",n)},t.prototype._bindForRoomListing=function(){var t=this,n=e("#firechat-btn-create-room-prompt"),a=e("#firechat-btn-create-room");n.bind("click",function(){return t.promptCreateRoom(),!1}),a.bind("click",function(){var n=e("#firechat-input-room-name").val();return e("#firechat-prompt-create-room").remove(),t._chat.createRoom(n),!1})},t.prototype._setupTabs=function(){var t=function(t){var a,r,i=t,s=i.closest("ul:not(.firechat-dropdown-menu)"),o=i.attr("data-target"),c=s.find(".active:last a")[0];o||(o=i.attr("href"),o=o&&o.replace(/.*(?=#[^\s]*$)/,"")),i.parent("li").hasClass("active")||(r=e.Event("show",{relatedTarget:c}),i.trigger(r),r.isDefaultPrevented()||(a=e(o),n(i.parent("li"),s),n(a,a.parent(),function(){i.trigger({type:"shown",relatedTarget:c})})))},n=function(t,n,a){function r(){i.removeClass("active").find("> .firechat-dropdown-menu > .active").removeClass("active"),t.addClass("active"),s?t.addClass("in"):t.removeClass("fade"),t.parent(".firechat-dropdown-menu")&&t.closest("li.firechat-dropdown").addClass("active"),a&&a()}var i=n.find("> .active"),s=a&&e.support.transition&&i.hasClass("fade");s?i.one(e.support.transition.end,r):r(),i.removeClass("in")};e(document).delegate('[data-toggle="firechat-tab"]',"click",function(n){n.preventDefault(),t(e(this))})},t.prototype._setupDropdowns=function(){var t=function(){var t=e(this),r=a(t),i=r.hasClass("open");if(!t.is(".disabled, :disabled"))return n(),i||r.toggleClass("open"),t.focus(),!1},n=function(){e("[data-toggle=firechat-dropdown]").each(function(){a(e(this)).removeClass("open")})},a=function(t){var n,a=t.attr("data-target");return a||(a=t.attr("href"),a=a&&/#/.test(a)&&a.replace(/.*(?=#[^\s]*$)/,"")),n=a&&e(a),n&&n.length||(n=t.parent()),n};e(document).bind("click",n).delegate(".firechat-dropdown-menu","click",function(e){e.stopPropagation()}).delegate("[data-toggle=firechat-dropdown]","click",t)},t.prototype._bindTextInputFieldLimits=function(){e("body").delegate('input[data-provide="limit"], textarea[data-provide="limit"]',"keyup",function(){var t=e(this),n=e(t.data("counter")),a=t.attr("maxlength"),r=t.val().length;n.html(Math.max(0,a-r))})},t.prototype.renderAlertPrompt=function(e,t){var n=FirechatDefaultTemplates["templates/prompt-alert.html"],a=this.prompt(e,n({message:t}));a.find(".close").click(function(){return a.remove(),!1})},t.prototype.toggleInputs=function(t){e("#firechat-tab-content textarea").each(function(){var n=e(this);t?e(this).val(""):e(this).val("You have exceeded the message limit, please wait before sending."),n.prop("disabled",!t)}),e("#firechat-input-name").prop("disabled",!t)},t.prototype.attachTab=function(t,n){var a=this;if(this.$messages[t])return this.focusTab(t),void 0;var r={id:t,name:n},i=FirechatDefaultTemplates["templates/tab-content.html"],s=e(i(r));this.$tabContent.prepend(s);var o=e("#firechat-messages"+t);this.$messages[t]=o;var c=s.find("textarea").first();c.bind("keydown",function(e){var n=a.trimWithEllipsis(c.val(),a.maxLengthMessage);return 13===e.which&&""!==n?(c.val(""),a._chat.sendMessage(t,n),!1):void 0});var l=FirechatDefaultTemplates["templates/tab-menu-item.html"],u=e(l(r));this.$tabList.prepend(u),u.bind("shown",function(){o.scrollTop(o[0].scrollHeight)});var h=this.$tabList.children("li"),d=Math.floor(e("#firechat-tab-list").width()/h.length);this.$tabList.children("li").css("width",d),this.$roomList.children("[data-room-id="+t+"]").children("a").addClass("highlight"),e("#firechat-btn-room-user-list-"+t).bind("click",function(){return a.sortListLexicographically("#firechat-room-user-list-"+t),!1}),this.focusTab(t)},t.prototype.focusTab=function(e){if(this.$messages[e]){var t=this.$tabList.find("[data-room-id="+e+"]").find("a");t.length&&t.first().trigger("click")}},t.prototype.removeTab=function(t){delete this.$messages[t],this.$tabContent.find("[data-room-id="+t+"]").remove(),this.$tabList.find("[data-room-id="+t+"]").remove();var n=this.$tabList.children("li"),a=Math.floor(e("#firechat-tab-list").width()/n.length);this.$tabList.children("li").css("width",a),this.$tabList.find('[data-toggle="firechat-tab"]').first().trigger("click"),this.$roomList.children("[data-room-id="+t+"]").children("a").removeClass("highlight")},t.prototype.showMessage=function(t,n){var a=this,r={id:n.id,localtime:a.formatTime(n.timestamp),message:n.message||"",userId:n.userId,name:n.name,type:n.type||"default",isSelfMessage:a._user&&n.userId==a._user.id,disableActions:!a._user||n.userId==a._user.id};r.message=_.map(r.message.split(" "),function(e){return a.urlPattern.test(e)||a.pseudoUrlPattern.test(e)?a.linkify(encodeURI(e)):_.escape(e)}).join(" "),r.message=a.trimWithEllipsis(r.message,a.maxLengthMessage);var i=FirechatDefaultTemplates["templates/message.html"],s=e(i(r)),o=a.$messages[t];if(o){var c=!1;o.scrollTop()/(o[0].scrollHeight-o[0].offsetHeight)>=.95?c=!0:o[0].scrollHeight<=o.height()&&(c=!0),o.append(s),c&&o.scrollTop(o[0].scrollHeight)}},t.prototype.removeMessage=function(t,n){e('.message[data-message-id="'+n+'"]').remove()},t.prototype.sortListLexicographically=function(t){e(t).children("li").sort(function(t,n){var a=e(t).text().toUpperCase(),r=e(n).text().toUpperCase();return r>a?-1:a>r?1:0}).appendTo(t)},t.prototype.trimWithEllipsis=function(e,t){return e=e.replace(/^\s\s*/,"").replace(/\s\s*$/,""),t&&t>=e.length?e:e.substring(0,t)+"..."},t.prototype.formatTime=function(e){var t=e?new Date(e):new Date,n=t.getHours()||12,a=""+t.getMinutes(),r=t.getHours()>=12?"pm":"am";return n=n>12?n-12:n,a=2>a.length?"0"+a:a,""+n+":"+a+r},t.prototype.promptCreateRoom=function(){var e=this,t=FirechatDefaultTemplates["templates/prompt-create-room.html"],n=this.prompt("Create Public Room",t({maxLengthRoomName:this.maxLengthRoomName,isModerator:e._chat.userIsModerator()}));n.find("a.close").first().click(function(){return n.remove(),!1}),n.find("[data-toggle=submit]").first().click(function(){var t=n.find("[data-input=firechat-room-name]").first().val();return""!==t&&(e._chat.createRoom(t,"public"),n.remove()),!1}),n.find("[data-input=firechat-room-name]").first().focus(),n.find("[data-input=firechat-room-name]").first().bind("keydown",function(t){if(13===t.which){var a=n.find("[data-input=firechat-room-name]").first().val();if(""!==a)return e._chat.createRoom(a,"public"),n.remove(),!1}})},t.prototype.prompt=function(t,n){var a,r=FirechatDefaultTemplates["templates/prompt.html"];return a=e(r({title:t,content:n})).css({top:this.$wrapper.position().top+.333*this.$wrapper.height(),left:this.$wrapper.position().left+.125*this.$wrapper.width(),width:.75*this.$wrapper.width()}),this.$wrapper.append(a.removeClass("hidden")),a},t.prototype.linkify=function(e){var t=this;return e.replace(t.urlPattern,'<a target="_blank" href="$&">$&</a>').replace(t.pseudoUrlPattern,'$1<a target="_blank" href="http://$2">$2</a>')}}(jQuery);
+//     Underscore.js 1.7.0
+//     http://underscorejs.org
+//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
+(function(){var n=this,t=n._,r=Array.prototype,e=Object.prototype,u=Function.prototype,i=r.push,a=r.slice,o=r.concat,l=e.toString,c=e.hasOwnProperty,f=Array.isArray,s=Object.keys,p=u.bind,h=function(n){return n instanceof h?n:this instanceof h?void(this._wrapped=n):new h(n)};"undefined"!=typeof exports?("undefined"!=typeof module&&module.exports&&(exports=module.exports=h),exports._=h):n._=h,h.VERSION="1.7.0";var g=function(n,t,r){if(t===void 0)return n;switch(null==r?3:r){case 1:return function(r){return n.call(t,r)};case 2:return function(r,e){return n.call(t,r,e)};case 3:return function(r,e,u){return n.call(t,r,e,u)};case 4:return function(r,e,u,i){return n.call(t,r,e,u,i)}}return function(){return n.apply(t,arguments)}};h.iteratee=function(n,t,r){return null==n?h.identity:h.isFunction(n)?g(n,t,r):h.isObject(n)?h.matches(n):h.property(n)},h.each=h.forEach=function(n,t,r){if(null==n)return n;t=g(t,r);var e,u=n.length;if(u===+u)for(e=0;u>e;e++)t(n[e],e,n);else{var i=h.keys(n);for(e=0,u=i.length;u>e;e++)t(n[i[e]],i[e],n)}return n},h.map=h.collect=function(n,t,r){if(null==n)return[];t=h.iteratee(t,r);for(var e,u=n.length!==+n.length&&h.keys(n),i=(u||n).length,a=Array(i),o=0;i>o;o++)e=u?u[o]:o,a[o]=t(n[e],e,n);return a};var v="Reduce of empty array with no initial value";h.reduce=h.foldl=h.inject=function(n,t,r,e){null==n&&(n=[]),t=g(t,e,4);var u,i=n.length!==+n.length&&h.keys(n),a=(i||n).length,o=0;if(arguments.length<3){if(!a)throw new TypeError(v);r=n[i?i[o++]:o++]}for(;a>o;o++)u=i?i[o]:o,r=t(r,n[u],u,n);return r},h.reduceRight=h.foldr=function(n,t,r,e){null==n&&(n=[]),t=g(t,e,4);var u,i=n.length!==+n.length&&h.keys(n),a=(i||n).length;if(arguments.length<3){if(!a)throw new TypeError(v);r=n[i?i[--a]:--a]}for(;a--;)u=i?i[a]:a,r=t(r,n[u],u,n);return r},h.find=h.detect=function(n,t,r){var e;return t=h.iteratee(t,r),h.some(n,function(n,r,u){return t(n,r,u)?(e=n,!0):void 0}),e},h.filter=h.select=function(n,t,r){var e=[];return null==n?e:(t=h.iteratee(t,r),h.each(n,function(n,r,u){t(n,r,u)&&e.push(n)}),e)},h.reject=function(n,t,r){return h.filter(n,h.negate(h.iteratee(t)),r)},h.every=h.all=function(n,t,r){if(null==n)return!0;t=h.iteratee(t,r);var e,u,i=n.length!==+n.length&&h.keys(n),a=(i||n).length;for(e=0;a>e;e++)if(u=i?i[e]:e,!t(n[u],u,n))return!1;return!0},h.some=h.any=function(n,t,r){if(null==n)return!1;t=h.iteratee(t,r);var e,u,i=n.length!==+n.length&&h.keys(n),a=(i||n).length;for(e=0;a>e;e++)if(u=i?i[e]:e,t(n[u],u,n))return!0;return!1},h.contains=h.include=function(n,t){return null==n?!1:(n.length!==+n.length&&(n=h.values(n)),h.indexOf(n,t)>=0)},h.invoke=function(n,t){var r=a.call(arguments,2),e=h.isFunction(t);return h.map(n,function(n){return(e?t:n[t]).apply(n,r)})},h.pluck=function(n,t){return h.map(n,h.property(t))},h.where=function(n,t){return h.filter(n,h.matches(t))},h.findWhere=function(n,t){return h.find(n,h.matches(t))},h.max=function(n,t,r){var e,u,i=-1/0,a=-1/0;if(null==t&&null!=n){n=n.length===+n.length?n:h.values(n);for(var o=0,l=n.length;l>o;o++)e=n[o],e>i&&(i=e)}else t=h.iteratee(t,r),h.each(n,function(n,r,e){u=t(n,r,e),(u>a||u===-1/0&&i===-1/0)&&(i=n,a=u)});return i},h.min=function(n,t,r){var e,u,i=1/0,a=1/0;if(null==t&&null!=n){n=n.length===+n.length?n:h.values(n);for(var o=0,l=n.length;l>o;o++)e=n[o],i>e&&(i=e)}else t=h.iteratee(t,r),h.each(n,function(n,r,e){u=t(n,r,e),(a>u||1/0===u&&1/0===i)&&(i=n,a=u)});return i},h.shuffle=function(n){for(var t,r=n&&n.length===+n.length?n:h.values(n),e=r.length,u=Array(e),i=0;e>i;i++)t=h.random(0,i),t!==i&&(u[i]=u[t]),u[t]=r[i];return u},h.sample=function(n,t,r){return null==t||r?(n.length!==+n.length&&(n=h.values(n)),n[h.random(n.length-1)]):h.shuffle(n).slice(0,Math.max(0,t))},h.sortBy=function(n,t,r){return t=h.iteratee(t,r),h.pluck(h.map(n,function(n,r,e){return{value:n,index:r,criteria:t(n,r,e)}}).sort(function(n,t){var r=n.criteria,e=t.criteria;if(r!==e){if(r>e||r===void 0)return 1;if(e>r||e===void 0)return-1}return n.index-t.index}),"value")};var m=function(n){return function(t,r,e){var u={};return r=h.iteratee(r,e),h.each(t,function(e,i){var a=r(e,i,t);n(u,e,a)}),u}};h.groupBy=m(function(n,t,r){h.has(n,r)?n[r].push(t):n[r]=[t]}),h.indexBy=m(function(n,t,r){n[r]=t}),h.countBy=m(function(n,t,r){h.has(n,r)?n[r]++:n[r]=1}),h.sortedIndex=function(n,t,r,e){r=h.iteratee(r,e,1);for(var u=r(t),i=0,a=n.length;a>i;){var o=i+a>>>1;r(n[o])<u?i=o+1:a=o}return i},h.toArray=function(n){return n?h.isArray(n)?a.call(n):n.length===+n.length?h.map(n,h.identity):h.values(n):[]},h.size=function(n){return null==n?0:n.length===+n.length?n.length:h.keys(n).length},h.partition=function(n,t,r){t=h.iteratee(t,r);var e=[],u=[];return h.each(n,function(n,r,i){(t(n,r,i)?e:u).push(n)}),[e,u]},h.first=h.head=h.take=function(n,t,r){return null==n?void 0:null==t||r?n[0]:0>t?[]:a.call(n,0,t)},h.initial=function(n,t,r){return a.call(n,0,Math.max(0,n.length-(null==t||r?1:t)))},h.last=function(n,t,r){return null==n?void 0:null==t||r?n[n.length-1]:a.call(n,Math.max(n.length-t,0))},h.rest=h.tail=h.drop=function(n,t,r){return a.call(n,null==t||r?1:t)},h.compact=function(n){return h.filter(n,h.identity)};var y=function(n,t,r,e){if(t&&h.every(n,h.isArray))return o.apply(e,n);for(var u=0,a=n.length;a>u;u++){var l=n[u];h.isArray(l)||h.isArguments(l)?t?i.apply(e,l):y(l,t,r,e):r||e.push(l)}return e};h.flatten=function(n,t){return y(n,t,!1,[])},h.without=function(n){return h.difference(n,a.call(arguments,1))},h.uniq=h.unique=function(n,t,r,e){if(null==n)return[];h.isBoolean(t)||(e=r,r=t,t=!1),null!=r&&(r=h.iteratee(r,e));for(var u=[],i=[],a=0,o=n.length;o>a;a++){var l=n[a];if(t)a&&i===l||u.push(l),i=l;else if(r){var c=r(l,a,n);h.indexOf(i,c)<0&&(i.push(c),u.push(l))}else h.indexOf(u,l)<0&&u.push(l)}return u},h.union=function(){return h.uniq(y(arguments,!0,!0,[]))},h.intersection=function(n){if(null==n)return[];for(var t=[],r=arguments.length,e=0,u=n.length;u>e;e++){var i=n[e];if(!h.contains(t,i)){for(var a=1;r>a&&h.contains(arguments[a],i);a++);a===r&&t.push(i)}}return t},h.difference=function(n){var t=y(a.call(arguments,1),!0,!0,[]);return h.filter(n,function(n){return!h.contains(t,n)})},h.zip=function(n){if(null==n)return[];for(var t=h.max(arguments,"length").length,r=Array(t),e=0;t>e;e++)r[e]=h.pluck(arguments,e);return r},h.object=function(n,t){if(null==n)return{};for(var r={},e=0,u=n.length;u>e;e++)t?r[n[e]]=t[e]:r[n[e][0]]=n[e][1];return r},h.indexOf=function(n,t,r){if(null==n)return-1;var e=0,u=n.length;if(r){if("number"!=typeof r)return e=h.sortedIndex(n,t),n[e]===t?e:-1;e=0>r?Math.max(0,u+r):r}for(;u>e;e++)if(n[e]===t)return e;return-1},h.lastIndexOf=function(n,t,r){if(null==n)return-1;var e=n.length;for("number"==typeof r&&(e=0>r?e+r+1:Math.min(e,r+1));--e>=0;)if(n[e]===t)return e;return-1},h.range=function(n,t,r){arguments.length<=1&&(t=n||0,n=0),r=r||1;for(var e=Math.max(Math.ceil((t-n)/r),0),u=Array(e),i=0;e>i;i++,n+=r)u[i]=n;return u};var d=function(){};h.bind=function(n,t){var r,e;if(p&&n.bind===p)return p.apply(n,a.call(arguments,1));if(!h.isFunction(n))throw new TypeError("Bind must be called on a function");return r=a.call(arguments,2),e=function(){if(!(this instanceof e))return n.apply(t,r.concat(a.call(arguments)));d.prototype=n.prototype;var u=new d;d.prototype=null;var i=n.apply(u,r.concat(a.call(arguments)));return h.isObject(i)?i:u}},h.partial=function(n){var t=a.call(arguments,1);return function(){for(var r=0,e=t.slice(),u=0,i=e.length;i>u;u++)e[u]===h&&(e[u]=arguments[r++]);for(;r<arguments.length;)e.push(arguments[r++]);return n.apply(this,e)}},h.bindAll=function(n){var t,r,e=arguments.length;if(1>=e)throw new Error("bindAll must be passed function names");for(t=1;e>t;t++)r=arguments[t],n[r]=h.bind(n[r],n);return n},h.memoize=function(n,t){var r=function(e){var u=r.cache,i=t?t.apply(this,arguments):e;return h.has(u,i)||(u[i]=n.apply(this,arguments)),u[i]};return r.cache={},r},h.delay=function(n,t){var r=a.call(arguments,2);return setTimeout(function(){return n.apply(null,r)},t)},h.defer=function(n){return h.delay.apply(h,[n,1].concat(a.call(arguments,1)))},h.throttle=function(n,t,r){var e,u,i,a=null,o=0;r||(r={});var l=function(){o=r.leading===!1?0:h.now(),a=null,i=n.apply(e,u),a||(e=u=null)};return function(){var c=h.now();o||r.leading!==!1||(o=c);var f=t-(c-o);return e=this,u=arguments,0>=f||f>t?(clearTimeout(a),a=null,o=c,i=n.apply(e,u),a||(e=u=null)):a||r.trailing===!1||(a=setTimeout(l,f)),i}},h.debounce=function(n,t,r){var e,u,i,a,o,l=function(){var c=h.now()-a;t>c&&c>0?e=setTimeout(l,t-c):(e=null,r||(o=n.apply(i,u),e||(i=u=null)))};return function(){i=this,u=arguments,a=h.now();var c=r&&!e;return e||(e=setTimeout(l,t)),c&&(o=n.apply(i,u),i=u=null),o}},h.wrap=function(n,t){return h.partial(t,n)},h.negate=function(n){return function(){return!n.apply(this,arguments)}},h.compose=function(){var n=arguments,t=n.length-1;return function(){for(var r=t,e=n[t].apply(this,arguments);r--;)e=n[r].call(this,e);return e}},h.after=function(n,t){return function(){return--n<1?t.apply(this,arguments):void 0}},h.before=function(n,t){var r;return function(){return--n>0?r=t.apply(this,arguments):t=null,r}},h.once=h.partial(h.before,2),h.keys=function(n){if(!h.isObject(n))return[];if(s)return s(n);var t=[];for(var r in n)h.has(n,r)&&t.push(r);return t},h.values=function(n){for(var t=h.keys(n),r=t.length,e=Array(r),u=0;r>u;u++)e[u]=n[t[u]];return e},h.pairs=function(n){for(var t=h.keys(n),r=t.length,e=Array(r),u=0;r>u;u++)e[u]=[t[u],n[t[u]]];return e},h.invert=function(n){for(var t={},r=h.keys(n),e=0,u=r.length;u>e;e++)t[n[r[e]]]=r[e];return t},h.functions=h.methods=function(n){var t=[];for(var r in n)h.isFunction(n[r])&&t.push(r);return t.sort()},h.extend=function(n){if(!h.isObject(n))return n;for(var t,r,e=1,u=arguments.length;u>e;e++){t=arguments[e];for(r in t)c.call(t,r)&&(n[r]=t[r])}return n},h.pick=function(n,t,r){var e,u={};if(null==n)return u;if(h.isFunction(t)){t=g(t,r);for(e in n){var i=n[e];t(i,e,n)&&(u[e]=i)}}else{var l=o.apply([],a.call(arguments,1));n=new Object(n);for(var c=0,f=l.length;f>c;c++)e=l[c],e in n&&(u[e]=n[e])}return u},h.omit=function(n,t,r){if(h.isFunction(t))t=h.negate(t);else{var e=h.map(o.apply([],a.call(arguments,1)),String);t=function(n,t){return!h.contains(e,t)}}return h.pick(n,t,r)},h.defaults=function(n){if(!h.isObject(n))return n;for(var t=1,r=arguments.length;r>t;t++){var e=arguments[t];for(var u in e)n[u]===void 0&&(n[u]=e[u])}return n},h.clone=function(n){return h.isObject(n)?h.isArray(n)?n.slice():h.extend({},n):n},h.tap=function(n,t){return t(n),n};var b=function(n,t,r,e){if(n===t)return 0!==n||1/n===1/t;if(null==n||null==t)return n===t;n instanceof h&&(n=n._wrapped),t instanceof h&&(t=t._wrapped);var u=l.call(n);if(u!==l.call(t))return!1;switch(u){case"[object RegExp]":case"[object String]":return""+n==""+t;case"[object Number]":return+n!==+n?+t!==+t:0===+n?1/+n===1/t:+n===+t;case"[object Date]":case"[object Boolean]":return+n===+t}if("object"!=typeof n||"object"!=typeof t)return!1;for(var i=r.length;i--;)if(r[i]===n)return e[i]===t;var a=n.constructor,o=t.constructor;if(a!==o&&"constructor"in n&&"constructor"in t&&!(h.isFunction(a)&&a instanceof a&&h.isFunction(o)&&o instanceof o))return!1;r.push(n),e.push(t);var c,f;if("[object Array]"===u){if(c=n.length,f=c===t.length)for(;c--&&(f=b(n[c],t[c],r,e)););}else{var s,p=h.keys(n);if(c=p.length,f=h.keys(t).length===c)for(;c--&&(s=p[c],f=h.has(t,s)&&b(n[s],t[s],r,e)););}return r.pop(),e.pop(),f};h.isEqual=function(n,t){return b(n,t,[],[])},h.isEmpty=function(n){if(null==n)return!0;if(h.isArray(n)||h.isString(n)||h.isArguments(n))return 0===n.length;for(var t in n)if(h.has(n,t))return!1;return!0},h.isElement=function(n){return!(!n||1!==n.nodeType)},h.isArray=f||function(n){return"[object Array]"===l.call(n)},h.isObject=function(n){var t=typeof n;return"function"===t||"object"===t&&!!n},h.each(["Arguments","Function","String","Number","Date","RegExp"],function(n){h["is"+n]=function(t){return l.call(t)==="[object "+n+"]"}}),h.isArguments(arguments)||(h.isArguments=function(n){return h.has(n,"callee")}),"function"!=typeof/./&&(h.isFunction=function(n){return"function"==typeof n||!1}),h.isFinite=function(n){return isFinite(n)&&!isNaN(parseFloat(n))},h.isNaN=function(n){return h.isNumber(n)&&n!==+n},h.isBoolean=function(n){return n===!0||n===!1||"[object Boolean]"===l.call(n)},h.isNull=function(n){return null===n},h.isUndefined=function(n){return n===void 0},h.has=function(n,t){return null!=n&&c.call(n,t)},h.noConflict=function(){return n._=t,this},h.identity=function(n){return n},h.constant=function(n){return function(){return n}},h.noop=function(){},h.property=function(n){return function(t){return t[n]}},h.matches=function(n){var t=h.pairs(n),r=t.length;return function(n){if(null==n)return!r;n=new Object(n);for(var e=0;r>e;e++){var u=t[e],i=u[0];if(u[1]!==n[i]||!(i in n))return!1}return!0}},h.times=function(n,t,r){var e=Array(Math.max(0,n));t=g(t,r,1);for(var u=0;n>u;u++)e[u]=t(u);return e},h.random=function(n,t){return null==t&&(t=n,n=0),n+Math.floor(Math.random()*(t-n+1))},h.now=Date.now||function(){return(new Date).getTime()};var _={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},w=h.invert(_),j=function(n){var t=function(t){return n[t]},r="(?:"+h.keys(n).join("|")+")",e=RegExp(r),u=RegExp(r,"g");return function(n){return n=null==n?"":""+n,e.test(n)?n.replace(u,t):n}};h.escape=j(_),h.unescape=j(w),h.result=function(n,t){if(null==n)return void 0;var r=n[t];return h.isFunction(r)?n[t]():r};var x=0;h.uniqueId=function(n){var t=++x+"";return n?n+t:t},h.templateSettings={evaluate:/<%([\s\S]+?)%>/g,interpolate:/<%=([\s\S]+?)%>/g,escape:/<%-([\s\S]+?)%>/g};var A=/(.)^/,k={"'":"'","\\":"\\","\r":"r","\n":"n","\u2028":"u2028","\u2029":"u2029"},O=/\\|'|\r|\n|\u2028|\u2029/g,F=function(n){return"\\"+k[n]};h.template=function(n,t,r){!t&&r&&(t=r),t=h.defaults({},t,h.templateSettings);var e=RegExp([(t.escape||A).source,(t.interpolate||A).source,(t.evaluate||A).source].join("|")+"|$","g"),u=0,i="__p+='";n.replace(e,function(t,r,e,a,o){return i+=n.slice(u,o).replace(O,F),u=o+t.length,r?i+="'+\n((__t=("+r+"))==null?'':_.escape(__t))+\n'":e?i+="'+\n((__t=("+e+"))==null?'':__t)+\n'":a&&(i+="';\n"+a+"\n__p+='"),t}),i+="';\n",t.variable||(i="with(obj||{}){\n"+i+"}\n"),i="var __t,__p='',__j=Array.prototype.join,"+"print=function(){__p+=__j.call(arguments,'');};\n"+i+"return __p;\n";try{var a=new Function(t.variable||"obj","_",i)}catch(o){throw o.source=i,o}var l=function(n){return a.call(this,n,h)},c=t.variable||"obj";return l.source="function("+c+"){\n"+i+"}",l},h.chain=function(n){var t=h(n);return t._chain=!0,t};var E=function(n){return this._chain?h(n).chain():n};h.mixin=function(n){h.each(h.functions(n),function(t){var r=h[t]=n[t];h.prototype[t]=function(){var n=[this._wrapped];return i.apply(n,arguments),E.call(this,r.apply(h,n))}})},h.mixin(h),h.each(["pop","push","reverse","shift","sort","splice","unshift"],function(n){var t=r[n];h.prototype[n]=function(){var r=this._wrapped;return t.apply(r,arguments),"shift"!==n&&"splice"!==n||0!==r.length||delete r[0],E.call(this,r)}}),h.each(["concat","join","slice"],function(n){var t=r[n];h.prototype[n]=function(){return E.call(this,t.apply(this._wrapped,arguments))}}),h.prototype.value=function(){return this._wrapped},"function"==typeof define&&define.amd&&define("underscore",[],function(){return h})}).call(this);
+
+this["FirechatDefaultTemplates"] = this["FirechatDefaultTemplates"] || {};
+
+// this["FirechatDefaultTemplates"]["templates/layout-full.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div id=\'firechat\' class=\'full\'>\n<div id=\'firechat-header\' class=\'clearfix\'>\n<div class=\'clearfix\'><div class=\'half firechat-dropdown\' style=\'\'>\n<a id=\'firechat-btn-rooms\' class=\'firechat-dropdown-toggle btn full\' data-toggle="firechat-dropdown" href=\'#\'>\n<span class=\'icon user-chat\'></span>\nChat Rooms\n<span class=\'caret\'></span>\n</a>\n<div class=\'firechat-dropdown-menu full\' role=\'menu\'><ul id=\'firechat-room-list\'></ul><div class=\'firechat-dropdown-footer aligncenter\'>\n<button type=\'button\' class=\'btn twothird center\' id=\'firechat-btn-create-room-prompt\'>Create Room</button>\n</div></div></div>\n<div class=\'half firechat-dropdown\' style=\'\'>\n<a data-event=\'firechat-user-search-btn\' class=\'btn full firechat-dropdown-toggle\' data-toggle="firechat-dropdown" href=\'#\'>\n<span class=\'icon user-group\'></span>\nVisitors\n<span class=\'caret\'></span>\n</a>\n<div class=\'firechat-dropdown-menu\' role=\'menu\'>\n<div class=\'firechat-dropdown-header aligncenter clearfix\'>\n<div class=\'search-wrapper\'>\n<span class=\'icon search\'></span>\n<input type=\'text\' data-event=\'firechat-user-search\' data-template=\'templates/user-search-list-item.html\' data-target=\'firechat-user-search\' data-controls=\'firechat-user-search-controls\' class=\'center fivesixth\'>\n</div>\n</div>\n<ul id=\'firechat-user-search\'></ul><div class=\'firechat-dropdown-footer aligncenter clearfix\'>\n<div id=\'firechat-user-search-controls\' class=\'clearfix\'>\n<span class="quarter"></span>\n<button type=\'button\' class=\'btn half\' data-event=\'firechat-user-search\' data-toggle=\'firechat-pagination-next\' data-template=\'templates/user-search-list-item.html\' data-target=\'firechat-user-search\' data-controls=\'firechat-user-search-controls\' disabled=disabled>Next</button>\n</div><label class=\'center full\'>\n<small>Use "+ Invite" button within chat rooms for regular invites.</small>\n</label>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div id=\'firechat-tabs\' class=\'clearfix\'>\n<ul id=\'firechat-tab-list\' class=\'nav nav-tabs clearfix\'></ul>\n<div id=\'firechat-tab-content\' class=\'tab-content\'></div>\n</div><div id=\'firechat-footer\' class=\'clearfix\'></div>\n</div>';}return __p};
+this["FirechatDefaultTemplates"]["templates/layout-full.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div id=\'firechat\' class=\'full\'>\n<div id=\'firechat-header\' class=\'clearfix\'>\n<div class=\'clearfix\'><div class=\'half firechat-dropdown\' style=\'\'>\n<a data-event=\'firechat-user-search-btn\' class=\'btn full firechat-dropdown-toggle\' data-toggle="firechat-dropdown" href=\'#\'>\n<span class=\'icon user-group\'></span>\nFriends Online\n<span class=\'caret\'></span>\n</a>\n<div class=\'firechat-dropdown-menu\' role=\'menu\'>\n<div class=\'firechat-dropdown-header aligncenter clearfix\'>\n<div class=\'search-wrapper\'>\n<span class=\'icon search\'></span>\n<input type=\'text\' data-event=\'firechat-user-search\' data-template=\'templates/user-search-list-item.html\' data-target=\'firechat-user-search\' data-controls=\'firechat-user-search-controls\' class=\'center fivesixth\'>\n</div>\n</div>\n<ul id=\'firechat-user-search\'></ul><div class=\'firechat-dropdown-footer aligncenter clearfix\'>\n<div id=\'firechat-user-search-controls\' class=\'clearfix\'>\n<span class="quarter"></span>\n</div></div>\n</div>\n</div>\n</div>\n</div>\n<div id=\'firechat-tabs\' class=\'clearfix\'>\n<ul id=\'firechat-tab-list\' class=\'nav nav-tabs clearfix\'></ul>\n<div id=\'firechat-tab-content\' class=\'tab-content\'></div>\n</div><div id=\'firechat-footer\' class=\'clearfix\'></div>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/layout-popout.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div id=\'firechat\' class=\'full\'>\n<div id=\'firechat-tabs\' class=\'clearfix\'>\n<ul id=\'firechat-tab-list\' class=\'nav nav-tabs clearfix\'></ul>\n<div id=\'firechat-tab-content\' class=\'tab-content\'></div>\n</div>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/message-context-menu.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<div data-toggle=\'firechat-contextmenu\' class=\'contextmenu\' data-message-id=\'' +__e( id ) +'\'>\n<ul>\n<li><a href=\'#!\' data-event=\'firechat-user-warn\'>Warn User</a></li>\n'; if (allowKick) { ;__p += '\n<li><a href=\'#!\' data-event=\'firechat-user-kick\'>Kick User</a></li>\n'; } ;__p += '\n<li><a href=\'#!\' data-event=\'firechat-user-suspend-hour\'>Suspend User (1 Hour)</a></li>\n<li><a href=\'#!\' data-event=\'firechat-user-suspend-day\'>Suspend User (1 Day)</a></li>\n<li><a href=\'#!\' data-event=\'firechat-message-delete\'>Delete Message</a></li>\n</ul>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/message.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<div class=\'message message-' +__e( type ) +' '; if (isSelfMessage) { ;__p += ' message-self '; } ;__p += '\' data-message-id=\'' +__e( id ) +'\' data-user-id=\'' +__e( userId ) +'\' data-user-name=\'' +__e( name ) +'\' data-class="firechat-message">\n<div class=\'clearfix\'>\n<label class=\'fourfifth\'>\n<strong class=\'name\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</strong>\n<em>(' +__e( localtime ) +')</em>:\n</label>'; if (!disableActions) { ;__p += '\n<label class=\'fifth alignright\'>\n<a href=\'#!\' data-event=\'firechat-user-chat\' class=\'icon user-chat\' title=\'Invite to Private Chat\'>&nbsp;</a>\n<a href=\'#!\' data-event=\'firechat-user-mute-toggle\' class=\'icon user-mute\' title=\'Mute User\'>&nbsp;</a>\n</label>\n'; } ;__p += '</div>\n<div class=\'clearfix message-content\'>\n' +((__t = ( message )) == null ? '' : __t) +'\n</div>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt-alert.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div class=\'aligncenter clearfix\'>\n<h6>' +__e( message ) +'</h6>\n<p class=\'clearfix\'>\n<button type=\'button\' class=\'btn quarter right close\'>Close</button>\n</p>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt-create-room.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div class=\'clearfix\'>\n<h6>Give your chat room a name:</h6>\n<input data-input=\'firechat-room-name\' type=\'text\' placeholder=\'Room name...\' style=\'margin-bottom: 5px;\' maxlength=\'' +__e( maxLengthRoomName ) +'\'>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt-invitation.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div class=\'aligncenter clearfix\'>\n<h5>' +__e( fromUserName ) +'</h5>\n<p>invited you to join</p>\n<h5>' +__e( toRoomName ) +'</h5>\n<p class=\'clearfix\'>\n<button data-toggle=\'accept\' type=\'button\' class=\'btn\'>Accept</button>\n<button data-toggle=\'decline\' type=\'button\' class=\'btn\'>Decline</button>\n</p>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt-invite-private.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div class=\'aligncenter clearfix\'>\n<h6>Invite <strong>' +__e( userName ) +'</strong> to ' +__e( roomName ) +'?</h6>\n<p class=\'clearfix\'>\n<button data-toggle=\'accept\' type=\'button\' class=\'btn\'>Invite</button>\n<button data-toggle=\'decline\' type=\'button\' class=\'close btn\'>Cancel</button>\n</p>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt-invite-reply.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<div class=\'aligncenter clearfix\'>\n<h5>' +__e( toUserName ) +'</h5>\n<p>\n'; if (status === 'accepted') { ;__p += ' accepted your invite. '; } else { ;__p += ' declined your invite. '; } ;__p += '\n</p>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt-user-mute.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div class=\'aligncenter clearfix\'>\n<h5>' +__e( userName ) +'</h5>\n<p class=\'clearfix\'>\n<button data-toggle=\'accept\' type=\'button\' class=\'btn\'>Mute</button>\n<button data-toggle=\'decline\' type=\'button\' class=\'btn\'>Cancel</button>\n</p>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/prompt.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div class=\'prompt hidden\'>\n<div class=\'prompt-header\'>\n' +__e( title ) +'\n<a href=\'#!\' class=\'close right\'>X</a>\n</div>\n<div class=\'prompt-body clearfix\'>\n' +((__t = ( content )) == null ? '' : __t) +'\n</div>\n<div class=\'prompt-footer\'></div>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/room-list-item.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<li data-room-type=\'' +__e( type ) +'\' data-room-id=\'' +__e( id ) +'\' data-room-name=\'' +__e( name ) +'\'>\n<a href=\'#!\' class=\'clearfix '; if (isRoomOpen) { ;__p += ' highlight '; } ;__p += '\'>\n<span class=\'left\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</span>\n</a>\n</li>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/room-user-list-item.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<li data-user-id=\'' +__e( id ) +'\' data-user-name=\'' +__e( name ) +'\'>\n<a href=\'#!\' class=\'clearfix\'>\n<span class=\'left twothird clipped\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</span>'; if (!disableActions) { ;__p += '\n<span data-event=\'firechat-user-mute-toggle\' class=\'icon user-mute right '; if (isMuted) { ;__p += ' red '; } ;__p += '\' title=\'Toggle User Mute\'>&nbsp;</span>\n<span data-event=\'firechat-user-chat\' class=\'icon user-chat right\' title=\'Invite to Private Chat\'>&nbsp;</span>\n'; } ;__p += '\n</a>\n</li>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/room-user-search-list-item.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<li data-user-id=\'' +__e( id ) +'\' data-user-name=\'' +__e( name ) +'\'>\n<a href=\'#!\' class=\'clearfix\'>\n'; if (disableActions) { ;__p += '\n<span class=\'left fourfifth clipped\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</span>\n'; } else { ;__p += '\n<span data-event=\'firechat-user-invite\' class=\'left fourfifth clipped\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</span>\n<span data-event=\'firechat-user-invite\' class=\'icon plus right\' title=\'Invite to Room\'>+</span>\n'; } ;__p += '\n</a>\n</li>';}return __p};
+
+// this["FirechatDefaultTemplates"]["templates/tab-content.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div id=\'' +__e( id ) +'\' data-room-id=\'' +__e( id ) +'\' class=\'tab-pane\'>\n<div class=\'tab-pane-menu clearfix\'><div class=\'firechat-dropdown twofifth\'>\n<a data-event=\'firechat-user-room-list-btn\' class=\'full btn firechat-dropdown-toggle\' data-toggle="firechat-dropdown" href=\'#\' data-target=\'firechat-room-user-list-' +__e( id ) +'\'>\n<span class=\'icon user-group\'></span>\nIn Room\n<span class=\'caret\'></span>\n</a>\n<div class=\'firechat-dropdown-menu\' role=\'menu\'>\n<ul id=\'firechat-room-user-list-' +__e( id ) +'\' class=\'full\'></ul>\n</div>\n</div><div class=\'firechat-dropdown twofifth\'>\n<a data-event=\'firechat-user-search-btn\' class=\'full btn firechat-dropdown-toggle\' data-toggle="firechat-dropdown" href=\'#\'>\n<span class=\'icon plus\'>+</span>\nInvite\n<span class=\'caret\'></span>\n</a><div class=\'firechat-dropdown-menu\' role=\'menu\'>\n<div class=\'firechat-dropdown-header aligncenter clearfix\'>\n<div class=\'search-wrapper\'>\n<span class=\'icon search\'></span>\n<input type=\'text\' data-event=\'firechat-user-search\' data-template=\'templates/room-user-search-list-item.html\' data-target=\'firechat-room-user-search-' +__e( id ) +'\' data-controls=\'firechat-room-user-search-controls-' +__e( id ) +'\' class=\'center fivesixth\'>\n</div>\n</div>\n<ul id=\'firechat-room-user-search-' +__e( id ) +'\'></ul><div class=\'firechat-dropdown-footer aligncenter clearfix\'>\n<div id=\'firechat-room-user-search-controls-' +__e( id ) +'\' class=\'clearfix\'><span class="quarter"></span>\n<!--\n<button type=\'button\' class=\'btn third disabled\' data-event=\'firechat-user-search\' data-template=\'templates/room-user-search-list-item.html\' data-target=\'firechat-room-user-search-' +__e( id ) +'\' data-controls=\'firechat-room-user-search-controls-' +__e( id ) +'\' data-toggle=\'firechat-pagination-prev\' disabled=disabled>Prev</button>\n-->\n<button type=\'button\' class=\'btn half disabled\' data-event=\'firechat-user-search\' data-template=\'templates/room-user-search-list-item.html\' data-target=\'firechat-room-user-search-' +__e( id ) +'\' data-controls=\'firechat-room-user-search-controls-' +__e( id ) +'\' data-toggle=\'firechat-pagination-next\'  disabled=disabled>Next</button>\n</div>\n</div>\n</div>\n</div><a href=\'#!\' data-event=\'firechat-close-tab\' class=\'icon close right\' style=\'15px 5px\' title=\'Leave Room\'></a></div><div class=\'clearfix\'>\n<div id=\'firechat-messages' +__e( id ) +'\' class=\'chat\'></div>\n</div><div class=\'clearfix\'>\n<label>Your message:</label>\n<textarea id=\'textarea' +__e( id ) +'\' placeholder=\'Type your message here...\'></textarea>\n</div>\n</div>';}return __p};
+this["FirechatDefaultTemplates"]["templates/tab-content.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<div id=\'' +__e( id ) +'\' data-room-id=\'' +__e( id ) +'\' class=\'tab-pane\'>\n<div class=\'tab-pane-menu clearfix\'><div class=\'firechat-dropdown twofifth\'>\n<a data-event=\'firechat-user-room-list-btn\' class=\'full btn firechat-dropdown-toggle\' data-toggle="firechat-dropdown" href=\'#\' data-target=\'firechat-room-user-list-' +__e( id ) +'\'>\n<span class=\'icon user-group\'></span>\nIn Room\n<span class=\'caret\'></span>\n</a>\n<div class=\'firechat-dropdown-menu\' role=\'menu\'>\n<ul id=\'firechat-room-user-list-' +__e( id ) +'\' class=\'full\'></ul>\n</div>\n</div><div class=\'firechat-dropdown twofifth\'>\n<a data-event=\'firechat-user-search-btn\' class=\'full btn firechat-dropdown-toggle\' data-toggle="firechat-dropdown" href=\'#\'>\n<span class=\'icon plus\'>+</span>\nInvite\n<span class=\'caret\'></span>\n</a><div class=\'firechat-dropdown-menu\' role=\'menu\'>\n<div class=\'firechat-dropdown-header aligncenter clearfix\'>\n<div class=\'search-wrapper\'>\n<span class=\'icon search\'></span>\n<input type=\'text\' data-event=\'firechat-user-search\' data-template=\'templates/room-user-search-list-item.html\' data-target=\'firechat-room-user-search-' +__e( id ) +'\' data-controls=\'firechat-room-user-search-controls-' +__e( id ) +'\' class=\'center fivesixth\'>\n</div>\n</div>\n<ul id=\'firechat-room-user-search-' +__e( id ) +'\'></ul><div class=\'firechat-dropdown-footer aligncenter clearfix\'>\n<div id=\'firechat-room-user-search-controls-' +__e( id ) +'\' class=\'clearfix\'><span class="quarter"></span>\n<!--\n<button type=\'button\' class=\'btn third disabled\' data-event=\'firechat-user-search\' data-template=\'templates/room-user-search-list-item.html\' data-target=\'firechat-room-user-search-' +__e( id ) +'\' data-controls=\'firechat-room-user-search-controls-' +__e( id ) +'\' data-toggle=\'firechat-pagination-prev\' disabled=disabled>Prev</button>\n-->\n</div>\n</div>\n</div>\n</div><a href=\'#!\' data-event=\'firechat-close-tab\' class=\'icon close right\' style=\'15px 5px\' title=\'Leave Room\'></a></div><div class=\'clearfix\'>\n<div id=\'firechat-messages' +__e( id ) +'\' class=\'chat\'></div>\n</div><div class=\'clearfix\'>\n<label>Your message:</label>\n<textarea id=\'textarea' +__e( id ) +'\' placeholder=\'Type your message here...\'></textarea>\n</div>\n</div>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/tab-menu-item.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<li data-room-id=\'' +__e( id ) +'\'>\n<a href=\'#' +__e( id ) +'\' data-toggle=\'firechat-tab\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</a>\n</li>';}return __p};
+
+this["FirechatDefaultTemplates"]["templates/user-search-list-item.html"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) {__p += '<li data-user-id=\'' +__e( id ) +'\' data-user-name=\'' +__e( name ) +'\'>\n<a href=\'#!\' class=\'clearfix\'>\n'; if (disableActions) { ;__p += '\n<span class=\'left fivesixth clipped\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</span>\n'; } else { ;__p += '\n<span data-event=\'firechat-user-chat\' class=\'left fivesixth clipped\' title=\'' +__e( name ) +'\'>' +__e( name ) +'</span>\n<span data-event=\'firechat-user-chat\' class=\'icon user-chat right\' title=\'Invite to Private Chat\'>&nbsp;</span>\n'; } ;__p += '\n</a>\n</li>';}return __p};
+(function($) {
+
+  // Shim for Function.bind(...) - (Required by IE < 9, FF < 4, SF < 6)
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function(oThis) {
+      if (typeof this !== "function") {
+        throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+      }
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function() {},
+          fBound = function() {
+            return fToBind.apply(this instanceof fNOP && oThis ? this : oThis,
+                                 aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+      return fBound;
+    };
+  }
+
+  // Shim for Object.keys(...) - (Required by IE < 9, FF < 4)
+  Object.keys = Object.keys || function(oObj) {
+    var result = [];
+    for (var name in oObj) {
+      if (oObj.hasOwnProperty(name)) {
+        result.push(name);
+      }
+    }
+    return result;
+  };
+
+})();
+
+// Firechat is a simple, easily-extensible data layer for multi-user,
+// multi-room chat, built entirely on [Firebase](https://firebase.com).
+//
+// The Firechat object is the primary conduit for all underlying data events.
+// It exposes a number of methods for binding event listeners, creating,
+// entering, or leaving chat rooms, initiating chats, sending messages,
+// and moderator actions such as warning, kicking, or suspending users.
+//
+//     Firechat.js 2.0.1
+//     https://firebase.com
+//     (c) 2014 Firebase
+//     License: MIT
+
+// Setup
+// --------------
+(function(Firebase) {
+
+  // Establish a reference to the `window` object, and save the previous value
+  // of the `Firechat` variable.
+  var root = this,
+      previousFirechat = root.Firechat;
+
+  function Firechat(firebaseRef, options) {
+
+    // Instantiate a new connection to Firebase.
+    this._firebase = firebaseRef;
+
+    // User-specific instance variables.
+    this._user = null;
+    this._userId = null;
+    this._userName = null;
+    this._isModerator = false;
+
+    // A unique id generated for each session.
+    this._sessionId = null;
+
+    // A mapping of event IDs to an array of callbacks.
+    this._events = {};
+
+    // A mapping of room IDs to a boolean indicating presence.
+    this._rooms = {};
+
+    // A mapping of operations to re-queue on disconnect.
+    this._presenceBits = {};
+
+    // Commonly-used Firebase references.
+    this._userRef        = null;
+    this._messageRef     = this._firebase.child('room-messages');
+    this._roomRef        = this._firebase.child('room-metadata');
+    this._privateRoomRef = this._firebase.child('room-private-metadata');
+    this._moderatorsRef  = this._firebase.child('moderators');
+    this._suspensionsRef = this._firebase.child('suspensions');
+    this._usersOnlineRef = this._firebase.child('user-names-online');
+
+    // Setup and establish default options.
+    this._options = options || {};
+
+    // The number of historical messages to load per room.
+    this._options.numMaxMessages = this._options.numMaxMessages || 50;
+  }
+
+  // Run Firechat in *noConflict* mode, returning the `Firechat` variable to
+  // its previous owner, and returning a reference to the Firechat object.
+  Firechat.noConflict = function noConflict() {
+    root.Firechat = previousFirechat;
+    return Firechat;
+  };
+
+  // Export the Firechat object as a global.
+  root.Firechat = Firechat;
+
+  // Firechat Internal Methods
+  // --------------
+  Firechat.prototype = {
+
+    // Load the initial metadata for the user's account and set initial state.
+    _loadUserMetadata: function(onComplete) {
+      var self = this;
+
+      // Update the user record with a default name on user's first visit.
+      this._userRef.transaction(function(current) {
+        if (!current || !current.id || !current.name) {
+          return {
+            id: self._userId,
+            name: self._userName
+          };
+        }
+      }, function(error, committed, snapshot) {
+        self._user = snapshot.val();
+        self._moderatorsRef.child(self._userId).once('value', function(snapshot) {
+          self._isModerator = !!snapshot.val();
+          root.setTimeout(onComplete, 0);
+        });
+      });
+    },
+
+    // Initialize Firebase listeners and callbacks for the supported bindings.
+    _setupDataEvents: function() {
+      // Monitor connection state so we can requeue disconnect operations if need be.
+      this._firebase.root().child('.info/connected').on('value', function(snapshot) {
+        if (snapshot.val() === true) {
+          // We're connected (or reconnected)! Set up our presence state.
+          for (var i = 0; i < this._presenceBits; i++) {
+            var op = this._presenceBits[i],
+                ref = this._firebase.root().child(op.ref);
+
+            ref.onDisconnect().set(op.offlineValue);
+            ref.set(op.onlineValue);
+          }
+        }
+      }, this);
+
+      // Generate a unique session id for the visit.
+      var sessionRef = this._userRef.child('sessions').push();
+      this._sessionId = sessionRef.key();
+      this._queuePresenceOperation(sessionRef, true, null);
+
+      // Register our username in the public user listing.
+      var usernameRef = this._usersOnlineRef.child(this._userName.toLowerCase());
+      var usernameSessionRef = usernameRef.child(this._sessionId);
+      this._queuePresenceOperation(usernameSessionRef, {
+        id: this._userId,
+        name: this._userName
+      }, null);
+
+      // Listen for state changes for the given user.
+      this._userRef.on('value', this._onUpdateUser, this);
+
+      // Listen for chat invitations from other users.
+      this._userRef.child('invites').on('child_added', this._onFirechatInvite, this);
+
+      // Listen for messages from moderators and adminstrators.
+      this._userRef.child('notifications').on('child_added', this._onNotification, this);
+    },
+
+    // Append the new callback to our list of event handlers.
+    _addEventCallback: function(eventId, callback) {
+      this._events[eventId] = this._events[eventId] || [];
+      this._events[eventId].push(callback);
+    },
+
+    // Retrieve the list of event handlers for a given event id.
+    _getEventCallbacks: function(eventId) {
+      if (this._events.hasOwnProperty(eventId)) {
+        return this._events[eventId];
+      }
+      return [];
+    },
+
+    // Invoke each of the event handlers for a given event id with specified data.
+    _invokeEventCallbacks: function(eventId) {
+      var args = [],
+          callbacks = this._getEventCallbacks(eventId);
+
+      Array.prototype.push.apply(args, arguments);
+      args = args.slice(1);
+
+      for (var i = 0; i < callbacks.length; i += 1) {
+        callbacks[i].apply(null, args);
+      }
+    },
+
+    // Keep track of on-disconnect events so they can be requeued if we disconnect the reconnect.
+    _queuePresenceOperation: function(ref, onlineValue, offlineValue) {
+      ref.onDisconnect().set(offlineValue);
+      ref.set(onlineValue);
+      this._presenceBits[ref.toString()] = {
+        ref: ref,
+        onlineValue: onlineValue,
+        offlineValue: offlineValue
+      };
+    },
+
+    // Remove an on-disconnect event from firing upon future disconnect and reconnect.
+    _removePresenceOperation: function(path, value) {
+      var ref = new Firebase(path);
+      ref.onDisconnect().cancel();
+      ref.set(value);
+      delete this._presenceBits[path];
+    },
+
+    // Event to monitor current user state.
+    _onUpdateUser: function(snapshot) {
+      this._user = snapshot.val();
+      this._invokeEventCallbacks('user-update', this._user);
+    },
+
+    // Event to monitor current auth + user state.
+    _onAuthRequired: function() {
+      this._invokeEventCallbacks('auth-required');
+    },
+
+    // Events to monitor room entry / exit and messages additional / removal.
+    _onEnterRoom: function(room) {
+      this._invokeEventCallbacks('room-enter', room);
+    },
+    _onNewMessage: function(roomId, snapshot) {
+      var message = snapshot.val();
+      message.id = snapshot.key();
+      this._invokeEventCallbacks('message-add', roomId, message);
+    },
+    _onRemoveMessage: function(roomId, snapshot) {
+      var messageId = snapshot.key();
+      this._invokeEventCallbacks('message-remove', roomId, messageId);
+    },
+    _onLeaveRoom: function(roomId) {
+      this._invokeEventCallbacks('room-exit', roomId);
+    },
+
+    // Event to listen for notifications from administrators and moderators.
+    _onNotification: function(snapshot) {
+      var notification = snapshot.val();
+      if (!notification.read) {
+        if (notification.notificationType !== 'suspension' || notification.data.suspendedUntil < new Date().getTime()) {
+          snapshot.ref().child('read').set(true);
+        }
+        this._invokeEventCallbacks('notification', notification);
+      }
+    },
+
+    // Events to monitor chat invitations and invitation replies.
+    _onFirechatInvite: function(snapshot) {
+      var self = this,
+          invite = snapshot.val();
+
+      // Skip invites we've already responded to.
+      if (invite.status) {
+        return;
+      }
+
+      invite.id = invite.id || snapshot.key();
+      self.getRoom(invite.roomId, function(room) {
+        invite.toRoomName = room.name;
+        self._invokeEventCallbacks('room-invite', invite);
+      });
+    },
+    _onFirechatInviteResponse: function(snapshot) {
+      var self = this,
+          invite = snapshot.val();
+
+      invite.id = invite.id || snapshot.key();
+      this._invokeEventCallbacks('room-invite-response', invite);
+    }
+  };
+
+  // Firechat External Methods
+  // --------------
+
+  // Initialize the library and setup data listeners.
+  Firechat.prototype.setUser = function(userId, userName, callback) {
+    var self = this;
+
+    self._firebase.onAuth(function(authData) {
+      if (authData) {
+        self._userId = userId.toString();
+        self._userName = userName.toString();
+        self._userRef = self._firebase.child('users').child(self._userId);
+        self._loadUserMetadata(function() {
+          root.setTimeout(function() {
+            callback(self._user);
+            self._setupDataEvents();
+          }, 0);
+        });
+      } else {
+        self.warn('Firechat requires an authenticated Firebase reference. Pass an authenticated reference before loading.');
+      }
+    });
+  };
+
+  // Resumes the previous session by automatically entering rooms.
+  Firechat.prototype.resumeSession = function() {
+    this._userRef.child('rooms').once('value', function(snapshot) {
+      var rooms = snapshot.val();
+      for (var roomId in rooms) {
+        this.enterRoom(rooms[roomId].id);
+      }
+    }, /* onError */ function(){}, /* context */ this);
+  };
+
+  // Callback registration. Supports each of the following events:
+  Firechat.prototype.on = function(eventType, cb) {
+    this._addEventCallback(eventType, cb);
+  };
+
+  // Create and automatically enter a new chat room.
+  Firechat.prototype.createRoom = function(roomName, roomType, callback) {
+    var self = this,
+        newRoomRef = this._roomRef.push();
+
+    var newRoom = {
+      id: newRoomRef.key(),
+      name: roomName,
+      type: roomType || 'public',
+      createdByUserId: this._userId,
+      createdAt: Firebase.ServerValue.TIMESTAMP
+    };
+
+    if (roomType === 'private') {
+      newRoom.authorizedUsers = {};
+      newRoom.authorizedUsers[this._userId] = true;
+    }
+
+    newRoomRef.set(newRoom, function(error) {
+      if (!error) {
+        self.enterRoom(newRoomRef.key());
+      }
+      if (callback) {
+        callback(newRoomRef.key());
+      }
+    });
+  };
+
+  // Enter a chat room.
+  Firechat.prototype.enterRoom = function(roomId) {
+    var self = this;
+    self.getRoom(roomId, function(room) {
+      var roomName = room.name;
+
+      if (!roomId || !roomName) return;
+
+      // Skip if we're already in this room.
+      if (self._rooms[roomId]) {
+        return;
+      }
+
+      self._rooms[roomId] = true;
+
+      if (self._user) {
+        // Save entering this room to resume the session again later.
+        self._userRef.child('rooms').child(roomId).set({
+          id: roomId,
+          name: roomName,
+          active: true
+        });
+
+        // Set presence bit for the room and queue it for removal on disconnect.
+        var presenceRef = self._firebase.child('room-users').child(roomId).child(self._userId).child(self._sessionId);
+        self._queuePresenceOperation(presenceRef, {
+          id: self._userId,
+          name: self._userName
+        }, null);
+      }
+
+      // Invoke our callbacks before we start listening for new messages.
+      self._onEnterRoom({ id: roomId, name: roomName });
+
+      // Setup message listeners
+      self._roomRef.child(roomId).once('value', function(snapshot) {
+        self._messageRef.child(roomId).limitToLast(self._options.numMaxMessages).on('child_added', function(snapshot) {
+          self._onNewMessage(roomId, snapshot);
+        }, /* onCancel */ function() {
+          // Turns out we don't have permission to access these messages.
+          self.leaveRoom(roomId);
+        }, /* context */ self);
+
+        self._messageRef.child(roomId).limitToLast(self._options.numMaxMessages).on('child_removed', function(snapshot) {
+          self._onRemoveMessage(roomId, snapshot);
+        }, /* onCancel */ function(){}, /* context */ self);
+      }, /* onFailure */ function(){}, self);
+    });
+  };
+
+  // Leave a chat room.
+  Firechat.prototype.leaveRoom = function(roomId) {
+    var self = this,
+        userRoomRef = self._firebase.child('room-users').child(roomId);
+
+    // Remove listener for new messages to this room.
+    self._messageRef.child(roomId).off();
+
+    if (self._user) {
+      var presenceRef = userRoomRef.child(self._userId).child(self._sessionId);
+
+      // Remove presence bit for the room and cancel on-disconnect removal.
+      self._removePresenceOperation(presenceRef.toString(), null);
+
+      // Remove session bit for the room.
+      self._userRef.child('rooms').child(roomId).remove();
+    }
+
+    delete self._rooms[roomId];
+
+    // Invoke event callbacks for the room-exit event.
+    self._onLeaveRoom(roomId);
+  };
+
+  Firechat.prototype.sendMessage = function(roomId, messageContent, messageType, cb) {
+    var self = this,
+        message = {
+          userId: self._userId,
+          name: self._userName,
+          timestamp: Firebase.ServerValue.TIMESTAMP,
+          message: messageContent,
+          type: messageType || 'default'
+        },
+        newMessageRef;
+
+    if (!self._user) {
+      self._onAuthRequired();
+      if (cb) {
+        cb(new Error('Not authenticated or user not set!'));
+      }
+      return;
+    }
+
+    newMessageRef = self._messageRef.child(roomId).push();
+    newMessageRef.setWithPriority(message, Firebase.ServerValue.TIMESTAMP, cb);
+  };
+
+  Firechat.prototype.deleteMessage = function(roomId, messageId, cb) {
+    var self = this;
+
+    self._messageRef.child(roomId).child(messageId).remove(cb);
+  };
+
+  // Mute or unmute a given user by id. This list will be stored internally and
+  // all messages from the muted clients will be filtered client-side after
+  // receipt of each new message.
+  Firechat.prototype.toggleUserMute = function(userId, cb) {
+    var self = this;
+
+    if (!self._user) {
+      self._onAuthRequired();
+      if (cb) {
+        cb(new Error('Not authenticated or user not set!'));
+      }
+      return;
+    }
+
+    self._userRef.child('muted').child(userId).transaction(function(isMuted) {
+      return (isMuted) ? null : true;
+    }, cb);
+  };
+
+  // Send a moderator notification to a specific user.
+  Firechat.prototype.sendSuperuserNotification = function(userId, notificationType, data, cb) {
+    var self = this,
+        userNotificationsRef = self._firebase.child('users').child(userId).child('notifications');
+
+    userNotificationsRef.push({
+      fromUserId: self._userId,
+      timestamp: Firebase.ServerValue.TIMESTAMP,
+      notificationType: notificationType,
+      data: data || {}
+    }, cb);
+  };
+
+  // Warn a user for violating the terms of service or being abusive.
+  Firechat.prototype.warnUser = function(userId) {
+    var self = this;
+
+    self.sendSuperuserNotification(userId, 'warning');
+  };
+
+  // Suspend a user by putting the user into read-only mode for a period.
+  Firechat.prototype.suspendUser = function(userId, timeLengthSeconds, cb) {
+    var self = this,
+        suspendedUntil = new Date().getTime() + 1000*timeLengthSeconds;
+
+    self._suspensionsRef.child(userId).set(suspendedUntil, function(error) {
+      if (error && cb) {
+        return cb(error);
+      } else {
+        self.sendSuperuserNotification(userId, 'suspension', {
+          suspendedUntil: suspendedUntil
+        });
+        return cb(null);
+      }
+    });
+  };
+
+  // Invite a user to a specific chat room.
+  Firechat.prototype.inviteUser = function(userId, roomId) {
+    var self = this,
+        sendInvite = function() {
+          var inviteRef = self._firebase.child('users').child(userId).child('invites').push();
+          inviteRef.set({
+            id: inviteRef.key(),
+            fromUserId: self._userId,
+            fromUserName: self._userName,
+            roomId: roomId
+          });
+
+          // Handle listen unauth / failure in case we're kicked.
+          inviteRef.on('value', self._onFirechatInviteResponse, function(){}, self);
+        };
+
+    if (!self._user) {
+      self._onAuthRequired();
+      return;
+    }
+
+    self.getRoom(roomId, function(room) {
+      if (room.type === 'private') {
+        var authorizedUserRef = self._roomRef.child(roomId).child('authorizedUsers');
+        authorizedUserRef.child(userId).set(true, function(error) {
+          if (!error) {
+            sendInvite();
+          }
+        });
+      } else {
+        sendInvite();
+      }
+    });
+  };
+
+  Firechat.prototype.acceptInvite = function(inviteId, cb) {
+    var self = this;
+
+    self._userRef.child('invites').child(inviteId).once('value', function(snapshot) {
+      var invite = snapshot.val();
+      if (invite === null && cb) {
+        return cb(new Error('acceptInvite(' + inviteId + '): invalid invite id'));
+      } else {
+        self.enterRoom(invite.roomId);
+        self._userRef.child('invites').child(inviteId).update({
+          'status': 'accepted',
+          'toUserName': self._userName
+        }, cb);
+      }
+    }, self);
+  };
+
+  Firechat.prototype.declineInvite = function(inviteId, cb) {
+    var self = this,
+        updates = {
+          'status': 'declined',
+          'toUserName': self._userName
+        };
+
+    self._userRef.child('invites').child(inviteId).update(updates, cb);
+  };
+
+  Firechat.prototype.getRoomList = function(cb) {
+    var self = this;
+
+    self._roomRef.once('value', function(snapshot) {
+      cb(snapshot.val());
+    });
+  };
+
+  Firechat.prototype.getUsersByRoom = function() {
+    var self = this,
+        roomId = arguments[0],
+        query = self._firebase.child('room-users').child(roomId),
+        cb = arguments[arguments.length - 1],
+        limit = null;
+
+    if (arguments.length > 2) {
+      limit = arguments[1];
+    }
+
+    query = (limit) ? query.limitToLast(limit) : query;
+
+    query.once('value', function(snapshot) {
+      var usernames = snapshot.val() || {},
+          usernamesUnique = {};
+
+      for (var username in usernames) {
+        for (var session in usernames[username]) {
+          // Skip all other sessions for this user as we only need one.
+          usernamesUnique[username] = usernames[username][session];
+          break;
+        }
+      }
+
+      root.setTimeout(function() {
+        cb(usernamesUnique);
+      }, 0);
+    });
+  };
+
+  Firechat.prototype.getUsersByPrefix = function(prefix, startAt, endAt, limit, cb) {
+    var self = this,
+        query = this._usersOnlineRef,
+        prefixLower = prefix.toLowerCase();
+
+    if (startAt) {
+      query = query.startAt(null, startAt);
+    } else if (endAt) {
+      query = query.endAt(null, endAt);
+    } else {
+      query = (prefixLower) ? query.startAt(null, prefixLower) : query.startAt();
+    }
+
+    query = (limit) ? query.limitToLast(limit) : query;
+
+    query.once('value', function(snapshot) {
+      var usernames = snapshot.val() || {},
+          usernamesFiltered = {};
+
+      for (var userNameKey in usernames) {
+        var sessions = usernames[userNameKey],
+            userName, userId, usernameClean;
+
+        // Grab the user data from the first registered active session.
+        for (var sessionId in sessions) {
+          userName = sessions[sessionId].name;
+          userId = sessions[sessionId].id;
+
+          // Skip all other sessions for this user as we only need one.
+          break;
+        }
+
+        // Filter out any usernames that don't match our prefix and break.
+        if ((prefix.length > 0) && (userName.toLowerCase().indexOf(prefixLower) !== 0))
+          continue;
+
+        usernamesFiltered[userName] = {
+          name: userName,
+          id: userId
+        };
+      }
+
+      root.setTimeout(function() {
+        cb(usernamesFiltered);
+      }, 0);
+    });
+  };
+
+  // Miscellaneous helper methods.
+  Firechat.prototype.getRoom = function(roomId, callback) {
+    this._roomRef.child(roomId).once('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  };
+
+  Firechat.prototype.userIsModerator = function() {
+    return this._isModerator;
+  };
+
+  Firechat.prototype.warn = function(msg) {
+    if (console) {
+      msg = 'Firechat Warning: ' + msg;
+      if (typeof console.warn === 'function') {
+        console.warn(msg);
+      } else if (typeof console.log === 'function') {
+        console.log(msg);
+      }
+    }
+  };
+})(Firebase);
+
+(function($) {
+
+
+  if (!$ || (parseInt($().jquery.replace(/\./g, ""), 10) < 170)) {
+    throw new Error("jQuery 1.7 or later required!");
+  }
+
+  var root = this,
+      previousFirechatUI = root.FirechatUI;
+
+  root.FirechatUI = FirechatUI;
+
+  if (!self.FirechatDefaultTemplates) {
+    throw new Error("Unable to find chat templates!");
+  }
+
+  function FirechatUI(firebaseRef, el, options) {
+    var self = this;
+
+    if (!firebaseRef) {
+      throw new Error('FirechatUI: Missing required argument `firebaseRef`');
+    }
+
+    if (!el) {
+      throw new Error('FirechatUI: Missing required argument `el`');
+    }
+
+    options = options || {};
+    this._options = options;
+
+    this._el = el;
+    this._user = null;
+    this._chat = new Firechat(firebaseRef, options);
+
+    // A list of rooms to enter once we've made room for them (once we've hit the max room limit).
+    this._roomQueue = [];
+
+    // Define some constants regarding maximum lengths, client-enforced.
+    this.maxLengthUsername = 15;
+    this.maxLengthUsernameDisplay = 15;
+    this.maxLengthRoomName = 24;
+    this.maxLengthMessage = 120;
+    this.maxUserSearchResults = 100;
+
+    // Define some useful regexes.
+    this.urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+    this.pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+    this._renderLayout();
+
+    // Grab shortcuts to commonly used jQuery elements.
+    this.$wrapper = $('#firechat');
+    this.$roomList = $('#firechat-room-list');
+    this.$tabList = $('#firechat-tab-list');
+    this.$tabContent = $('#firechat-tab-content');
+    this.$messages = {};
+
+    // Rate limit messages from a given user with some defaults.
+    this.$rateLimit = {
+      limitCount: 10,         // max number of events
+      limitInterval: 10000,   // max interval for above count in milliseconds
+      limitWaitTime: 30000,   // wait time if a user hits the wait limit
+      history: {}
+    };
+
+    // Setup UI bindings for chat controls.
+    this._bindUIEvents();
+
+    // Setup bindings to internal methods
+    this._bindDataEvents();
+  }
+
+  // Run FirechatUI in *noConflict* mode, returning the `FirechatUI` variable to
+  // its previous owner, and returning a reference to the FirechatUI object.
+  FirechatUI.noConflict = function noConflict() {
+    root.FirechatUI = previousFirechatUI;
+    return FirechatUI;
+  };
+
+  FirechatUI.prototype = {
+
+    _bindUIEvents: function() {
+      // Chat-specific custom interactions and functionality.
+      this._bindForHeightChange();
+      this._bindForTabControls();
+      this._bindForRoomList();
+      this._bindForUserRoomList();
+      this._bindForUserSearch();
+      this._bindForUserMuting();
+      this._bindForChatInvites();
+      this._bindForRoomListing();
+
+      // Generic, non-chat-specific interactive elements.
+      this._setupTabs();
+      this._setupDropdowns();
+      this._bindTextInputFieldLimits();
+    },
+
+    _bindDataEvents: function() {
+      this._chat.on('user-update', this._onUpdateUser.bind(this));
+
+      // Bind events for new messages, enter / leaving rooms, and user metadata.
+      this._chat.on('room-enter', this._onEnterRoom.bind(this));
+      this._chat.on('room-exit', this._onLeaveRoom.bind(this));
+      this._chat.on('message-add', this._onNewMessage.bind(this));
+      this._chat.on('message-remove', this._onRemoveMessage.bind(this));
+
+      // Bind events related to chat invitations.
+      this._chat.on('room-invite', this._onChatInvite.bind(this));
+      this._chat.on('room-invite-response', this._onChatInviteResponse.bind(this));
+
+      // Binds events related to admin or moderator notifications.
+      this._chat.on('notification', this._onNotification.bind(this));
+    },
+
+    _renderLayout: function() {
+      var template = FirechatDefaultTemplates["templates/layout-full.html"];
+      $(this._el).html(template({
+        maxLengthUsername: this.maxLengthUsername
+      }));
+    },
+
+    _onUpdateUser: function(user) {
+      // Update our current user state and render latest user name.
+      this._user = user;
+
+      // Update our interface to reflect which users are muted or not.
+      var mutedUsers = this._user.muted || {};
+      $('[data-event="firechat-user-mute-toggle"]').each(function(i, el) {
+        var userId = $(this).closest('[data-user-id]').data('user-id');
+        $(this).toggleClass('red', !!mutedUsers[userId]);
+      });
+
+      // Ensure that all messages from muted users are removed.
+      for (var userId in mutedUsers) {
+        $('.message[data-user-id="' + userId + '"]').fadeOut();
+      }
+    },
+
+    _onEnterRoom: function(room) {
+      this.attachTab(room.id, room.name);
+    },
+    _onLeaveRoom: function(roomId) {
+      this.removeTab(roomId);
+
+      // Auto-enter rooms in the queue
+      if ((this._roomQueue.length > 0)) {
+        this._chat.enterRoom(this._roomQueue.shift(roomId));
+      }
+    },
+    _onNewMessage: function(roomId, message) {
+      var userId = message.userId;
+      if (!this._user || !this._user.muted || !this._user.muted[userId]) {
+        this.showMessage(roomId, message);
+      }
+    },
+    _onRemoveMessage: function(roomId, messageId) {
+      this.removeMessage(roomId, messageId);
+    },
+
+    // Events related to chat invitations.
+    _onChatInvite: function(invitation) {
+      var self = this;
+      var template = FirechatDefaultTemplates["templates/prompt-invitation.html"];
+      var $prompt = this.prompt('Invite', template(invitation));
+      $prompt.find('a.close').click(function() {
+        $prompt.remove();
+        self._chat.declineInvite(invitation.id);
+        return false;
+      });
+
+      $prompt.find('[data-toggle=accept]').click(function() {
+        $prompt.remove();
+        self._chat.acceptInvite(invitation.id);
+        return false;
+      });
+
+      $prompt.find('[data-toggle=decline]').click(function() {
+        $prompt.remove();
+        self._chat.declineInvite(invitation.id);
+        return false;
+      });
+    },
+    _onChatInviteResponse: function(invitation) {
+      if (!invitation.status) return;
+
+      var self = this,
+          template = FirechatDefaultTemplates["templates/prompt-invite-reply.html"],
+          $prompt;
+
+      if (invitation.status && invitation.status === 'accepted') {
+        $prompt = this.prompt('Accepted', template(invitation));
+        this._chat.getRoom(invitation.roomId, function(room) {
+          self.attachTab(invitation.roomId, room.name);
+        });
+      } else {
+        $prompt = this.prompt('Declined', template(invitation));
+      }
+
+      $prompt.find('a.close').click(function() {
+        $prompt.remove();
+        return false;
+      });
+    },
+
+    // Events related to admin or moderator notifications.
+    _onNotification: function(notification) {
+      if (notification.notificationType === 'warning') {
+        this.renderAlertPrompt('Warning', 'You are being warned for inappropriate messaging. Further violation may result in temporary or permanent ban of service.');
+      } else if (notification.notificationType === 'suspension') {
+        var suspendedUntil = notification.data.suspendedUntil,
+            secondsLeft = Math.round((suspendedUntil - new Date().getTime()) / 1000),
+            timeLeft = '';
+
+        if (secondsLeft > 0) {
+          if (secondsLeft > 2*3600) {
+            var hours = Math.floor(secondsLeft / 3600);
+            timeLeft = hours + ' hours, ';
+            secondsLeft -= 3600*hours;
+          }
+          timeLeft += Math.floor(secondsLeft / 60) + ' minutes';
+          this.renderAlertPrompt('Suspended', 'A moderator has suspended you for violating site rules. You cannot send messages for another ' + timeLeft + '.');
+        }
+      }
+    }
+  };
+
+  /**
+   * Initialize an authenticated session with a user id and name.
+   * This method assumes that the underlying Firebase reference has
+   * already been authenticated.
+   */
+  FirechatUI.prototype.setUser = function(userId, userName) {
+    var self = this;
+
+    // Initialize data events
+    self._chat.setUser(userId, userName, function(user) {
+      self._user = user;
+
+      if (self._chat.userIsModerator()) {
+        self._bindSuperuserUIEvents();
+      }
+
+      self._chat.resumeSession();
+    });
+  };
+
+  /**
+   * Exposes internal chat bindings via this external interface.
+   */
+  FirechatUI.prototype.on = function(eventType, cb) {
+    var self = this;
+
+    this._chat.on(eventType, cb);
+  };
+
+  /**
+   * Binds a custom context menu to messages for superusers to warn or ban
+   * users for violating terms of service.
+   */
+  FirechatUI.prototype._bindSuperuserUIEvents = function() {
+    var self = this,
+        parseMessageVars = function(event) {
+          var $this = $(this),
+          messageId = $this.closest('[data-message-id]').data('message-id'),
+          userId = $('[data-message-id="' + messageId + '"]').closest('[data-user-id]').data('user-id'),
+          roomId = $('[data-message-id="' + messageId + '"]').closest('[data-room-id]').data('room-id');
+
+          return { messageId: messageId, userId: userId, roomId: roomId };
+        },
+        clearMessageContextMenus = function() {
+          // Remove any context menus currently showing.
+          $('[data-toggle="firechat-contextmenu"]').each(function() {
+            $(this).remove();
+          });
+
+          // Remove any messages currently highlighted.
+          $('#firechat .message.highlighted').each(function() {
+            $(this).removeClass('highlighted');
+          });
+        },
+        showMessageContextMenu = function(event) {
+          var $this = $(this),
+              $message = $this.closest('[data-message-id]'),
+              template = FirechatDefaultTemplates["templates/message-context-menu.html"],
+              messageVars = parseMessageVars.call(this, event),
+              $template;
+
+          event.preventDefault();
+
+          // Clear existing menus.
+          clearMessageContextMenus();
+
+          // Highlight the relevant message.
+          $this.addClass('highlighted');
+
+          self._chat.getRoom(messageVars.roomId, function(room) {
+            // Show the context menu.
+            $template = $(template({
+              id: $message.data('message-id')
+            }));
+            $template.css({
+              left: event.clientX,
+              top: event.clientY
+            }).appendTo(self.$wrapper);
+          });
+        };
+
+    // Handle dismissal of message context menus (any non-right-click click event).
+    $(document).bind('click', { self: this }, function(event) {
+      if (!event.button || event.button != 2) {
+        clearMessageContextMenus();
+      }
+    });
+
+    // Handle display of message context menus (via right-click on a message).
+    $(document).delegate('[data-class="firechat-message"]', 'contextmenu', showMessageContextMenu);
+
+    // Handle click of the 'Warn User' contextmenu item.
+    $(document).delegate('[data-event="firechat-user-warn"]', 'click', function(event) {
+      var messageVars = parseMessageVars.call(this, event);
+      self._chat.warnUser(messageVars.userId);
+    });
+
+    // Handle click of the 'Suspend User (1 Hour)' contextmenu item.
+    $(document).delegate('[data-event="firechat-user-suspend-hour"]', 'click', function(event) {
+      var messageVars = parseMessageVars.call(this, event);
+      self._chat.suspendUser(messageVars.userId, /* 1 Hour = 3600s */ 60*60);
+    });
+
+    // Handle click of the 'Suspend User (1 Day)' contextmenu item.
+    $(document).delegate('[data-event="firechat-user-suspend-day"]', 'click', function(event) {
+      var messageVars = parseMessageVars.call(this, event);
+      self._chat.suspendUser(messageVars.userId, /* 1 Day = 86400s */ 24*60*60);
+    });
+
+    // Handle click of the 'Delete Message' contextmenu item.
+    $(document).delegate('[data-event="firechat-message-delete"]', 'click', function(event) {
+      var messageVars = parseMessageVars.call(this, event);
+      self._chat.deleteMessage(messageVars.roomId, messageVars.messageId);
+    });
+  };
+
+  /**
+   * Binds to height changes in the surrounding div.
+   */
+  FirechatUI.prototype._bindForHeightChange = function() {
+    var self = this,
+        $el = $(this._el),
+        lastHeight = null;
+
+    setInterval(function() {
+      var height = $el.height();
+      if (height != lastHeight) {
+        lastHeight = height;
+        $('.chat').each(function(i, el) {
+
+        });
+      }
+    }, 500);
+  };
+
+  /**
+   * Binds custom inner-tab events.
+   */
+  FirechatUI.prototype._bindForTabControls = function() {
+    var self = this;
+
+    // Handle click of tab close button.
+    $(document).delegate('[data-event="firechat-close-tab"]', 'click', function(event) {
+      var roomId = $(this).closest('[data-room-id]').data('room-id');
+      self._chat.leaveRoom(roomId);
+      return false;
+    });
+  };
+
+  /**
+   * Binds room list dropdown to populate room list on-demand.
+   */
+  FirechatUI.prototype._bindForRoomList = function() {
+    var self = this;
+
+    $('#firechat-btn-rooms').bind('click', function() {
+      if ($(this).parent().hasClass('open')) {
+        return;
+      }
+
+      var $this = $(this),
+          template = FirechatDefaultTemplates["templates/room-list-item.html"],
+          selectRoomListItem = function() {
+            var parent = $(this).parent(),
+                roomId = parent.data('room-id'),
+                roomName = parent.data('room-name');
+
+            if (self.$messages[roomId]) {
+              self.focusTab(roomId);
+            } else {
+              self._chat.enterRoom(roomId, roomName);
+            }
+            return false;
+          };
+
+      self._chat.getRoomList(function(rooms) {
+        self.$roomList.empty();
+        for (var roomId in rooms) {
+          var room = rooms[roomId];
+          if (room.type != "public") continue;
+          room.isRoomOpen = !!self.$messages[room.id];
+          var $roomItem = $(template(room));
+          $roomItem.children('a').bind('click', selectRoomListItem);
+          self.$roomList.append($roomItem.toggle(true));
+        }
+      });
+    });
+  };
+
+  /**
+   * Binds user list dropdown per room to populate user list on-demand.
+   */
+  FirechatUI.prototype._bindForUserRoomList = function() {
+    var self = this;
+
+    // Upon click of the dropdown, autofocus the input field and trigger list population.
+    $(document).delegate('[data-event="firechat-user-room-list-btn"]', 'click', function(event) {
+      event.stopPropagation();
+
+      var $this = $(this),
+          roomId = $this.closest('[data-room-id]').data('room-id'),
+          template = FirechatDefaultTemplates["templates/room-user-list-item.html"],
+          targetId = $this.data('target'),
+          $target = $('#' + targetId);
+
+      $target.empty();
+      self._chat.getUsersByRoom(roomId, function(users) {
+        for (var username in users) {
+          user = users[username];
+          user.disableActions = (!self._user || user.id === self._user.id);
+          user.nameTrimmed = self.trimWithEllipsis(user.name, self.maxLengthUsernameDisplay);
+          user.isMuted = (self._user && self._user.muted && self._user.muted[user.id]);
+          $target.append($(template(user)));
+        }
+        self.sortListLexicographically('#' + targetId);
+      });
+    });
+  };
+
+  /**
+   * Binds user search buttons, dropdowns, and input fields for searching all
+   * active users currently in chat.
+   */
+  FirechatUI.prototype._bindForUserSearch = function() {
+    var self = this,
+        handleUserSearchSubmit = function(event) {
+          var $this = $(this),
+              targetId = $this.data('target'),
+              controlsId = $this.data('controls'),
+              templateId = $this.data('template'),
+              prefix = $this.val() || $this.data('prefix') || '',
+              startAt = $this.data('startAt') || null,
+              endAt = $this.data('endAt') || null;
+
+          event.preventDefault();
+
+          userSearch(targetId, templateId, controlsId, prefix, startAt, endAt);
+        },
+        userSearch = function(targetId, templateId, controlsId, prefix, startAt, endAt) {
+          var $target = $('#' + targetId),
+              $controls = $('#' + controlsId),
+              template = FirechatDefaultTemplates[templateId];
+
+          // Query results, filtered by prefix, using the defined startAt and endAt markets.
+          self._chat.getUsersByPrefix(prefix, startAt, endAt, self.maxUserSearchResults, function(users) {
+            var numResults = 0,
+                $prevBtn, $nextBtn, username, firstResult, lastResult;
+
+            $target.empty();
+
+            for (username in users) {
+              var user = users[username];
+
+              // Disable buttons for <me>.
+              user.disableActions = (!self._user || user.id === self._user.id);
+
+              numResults += 1;
+
+              $target.append(template(user));
+
+              // If we've hit our result limit, the additional value signifies we should paginate.
+              if (numResults === 1) {
+                firstResult = user.name.toLowerCase();
+              } else if (numResults >= self.maxUserSearchResults) {
+                lastResult = user.name.toLowerCase();
+                break;
+              }
+            }
+
+            if ($controls) {
+              $prevBtn = $controls.find('[data-toggle="firechat-pagination-prev"]');
+              $nextBtn = $controls.find('[data-toggle="firechat-pagination-next"]');
+
+              // Sort out configuration for the 'next' button
+              if (lastResult) {
+                $nextBtn
+                  .data('event', 'firechat-user-search')
+                  .data('startAt', lastResult)
+                  .data('prefix', prefix)
+                  .removeClass('disabled').removeAttr('disabled');
+              } else {
+                $nextBtn
+                  .data('event', null)
+                  .data('startAt', null)
+                  .data('prefix', null)
+                  .addClass('disabled').attr('disabled', 'disabled');
+              }
+            }
+          });
+        };
+
+    $(document).delegate('[data-event="firechat-user-search"]', 'keyup', handleUserSearchSubmit);
+    $(document).delegate('[data-event="firechat-user-search"]', 'click', handleUserSearchSubmit);
+
+    // Upon click of the dropdown, autofocus the input field and trigger list population.
+    $(document).delegate('[data-event="firechat-user-search-btn"]', 'click', function(event) {
+      event.stopPropagation();
+      var $input = $(this).next('div.firechat-dropdown-menu').find('input');
+      $input.focus();
+      $input.trigger(jQuery.Event('keyup'));
+    });
+
+    // Ensure that the dropdown stays open despite clicking on the input element.
+    $(document).delegate('[data-event="firechat-user-search"]', 'click', function(event) {
+      event.stopPropagation();
+    });
+  };
+
+  /**
+   * Binds user mute toggles and removes all messages for a given user upon mute.
+   */
+  FirechatUI.prototype._bindForUserMuting = function() {
+    var self = this;
+    $(document).delegate('[data-event="firechat-user-mute-toggle"]', 'click', function(event) {
+      var $this = $(this),
+          userId = $this.closest('[data-user-id]').data('user-id'),
+          userName = $this.closest('[data-user-name]').data('user-name'),
+          isMuted = $this.hasClass('red'),
+          template = FirechatDefaultTemplates["templates/prompt-user-mute.html"];
+
+      event.preventDefault();
+
+      // Require user confirmation for muting.
+      if (!isMuted) {
+        var $prompt = self.prompt('Mute User?', template({
+          userName: userName
+        }));
+
+        $prompt.find('a.close').first().click(function() {
+          $prompt.remove();
+          return false;
+        });
+
+        $prompt.find('[data-toggle=decline]').first().click(function() {
+          $prompt.remove();
+          return false;
+        });
+
+        $prompt.find('[data-toggle=accept]').first().click(function() {
+          self._chat.toggleUserMute(userId);
+          $prompt.remove();
+          return false;
+        });
+      } else {
+        self._chat.toggleUserMute(userId);
+      }
+    });
+  };
+
+  /**
+   * Binds to elements with the data-event='firechat-user-(private)-invite' and
+   * handles invitations as well as room creation and entering.
+   */
+  FirechatUI.prototype._bindForChatInvites = function() {
+    var self = this,
+        renderInvitePrompt = function(event) {
+          var $this = $(this),
+              userId = $this.closest('[data-user-id]').data('user-id'),
+              roomId = $this.closest('[data-room-id]').data('room-id'),
+              userName = $this.closest('[data-user-name]').data('user-name'),
+              template = FirechatDefaultTemplates["templates/prompt-invite-private.html"],
+              $prompt;
+
+          self._chat.getRoom(roomId, function(room) {
+            $prompt = self.prompt('Invite', template({
+              userName: userName,
+              roomName: room.name
+            }));
+
+            $prompt.find('a.close').click(function() {
+              $prompt.remove();
+              return false;
+            });
+
+            $prompt.find('[data-toggle=decline]').click(function() {
+              $prompt.remove();
+              return false;
+            });
+
+            $prompt.find('[data-toggle=accept]').first().click(function() {
+              $prompt.remove();
+              self._chat.inviteUser(userId, roomId, room.name);
+              return false;
+            });
+            return false;
+          });
+          return false;
+        },
+        renderPrivateInvitePrompt = function(event) {
+          var $this = $(this),
+              userId = $this.closest('[data-user-id]').data('user-id'),
+              userName = $this.closest('[data-user-name]').data('user-name'),
+              template = FirechatDefaultTemplates["templates/prompt-invite-private.html"],
+              $prompt;
+
+          if (userId && userName) {
+            $prompt = self.prompt('Private Invite', template({
+              userName: userName,
+              roomName: 'Private Chat'
+            }));
+
+            $prompt.find('a.close').click(function() {
+              $prompt.remove();
+              return false;
+            });
+
+            $prompt.find('[data-toggle=decline]').click(function() {
+              $prompt.remove();
+              return false;
+            });
+
+            $prompt.find('[data-toggle=accept]').first().click(function() {
+              $prompt.remove();
+              var roomName = 'Private Chat';
+              self._chat.createRoom(roomName, 'private', function(roomId) {
+                self._chat.inviteUser(userId, roomId, roomName);
+              });
+              return false;
+            });
+          }
+          return false;
+        };
+
+    $(document).delegate('[data-event="firechat-user-chat"]', 'click', renderPrivateInvitePrompt);
+    $(document).delegate('[data-event="firechat-user-invite"]', 'click', renderInvitePrompt);
+  };
+
+  /**
+   * Binds to room dropdown button, menu items, and create room button.
+   */
+  FirechatUI.prototype._bindForRoomListing = function() {
+    var self = this,
+        $createRoomPromptButton = $('#firechat-btn-create-room-prompt'),
+        $createRoomButton = $('#firechat-btn-create-room'),
+        renderRoomList = function(event) {
+          var type = $(this).data('room-type');
+
+          self.sortListLexicographically('#firechat-room-list');
+        };
+
+    // Handle click of the create new room prompt-button.
+    $createRoomPromptButton.bind('click', function(event) {
+      self.promptCreateRoom();
+      return false;
+    });
+
+    // Handle click of the create new room button.
+    $createRoomButton.bind('click', function(event) {
+      var roomName = $('#firechat-input-room-name').val();
+      $('#firechat-prompt-create-room').remove();
+      self._chat.createRoom(roomName);
+      return false;
+    });
+  };
+
+  /**
+   * A stripped-down version of bootstrap-tab.js.
+   *
+   * Original bootstrap-tab.js Copyright 2012 Twitter, Inc.,licensed under the Apache v2.0
+   */
+  FirechatUI.prototype._setupTabs = function() {
+    var self = this,
+        show = function($el) {
+          var $this = $el,
+              $ul = $this.closest('ul:not(.firechat-dropdown-menu)'),
+              selector = $this.attr('data-target'),
+              previous = $ul.find('.active:last a')[0],
+              $target,
+              e;
+
+          if (!selector) {
+            selector = $this.attr('href');
+            selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
+          }
+
+          if ($this.parent('li').hasClass('active')) return;
+
+          e = $.Event('show', { relatedTarget: previous });
+
+          $this.trigger(e);
+
+          if (e.isDefaultPrevented()) return;
+
+          $target = $(selector);
+
+          activate($this.parent('li'), $ul);
+          activate($target, $target.parent(), function () {
+            $this.trigger({
+              type: 'shown',
+              relatedTarget: previous
+            });
+          });
+        },
+        activate = function (element, container, callback) {
+          var $active = container.find('> .active'),
+              transition = callback && $.support.transition && $active.hasClass('fade');
+
+          function next() {
+            $active
+              .removeClass('active')
+              .find('> .firechat-dropdown-menu > .active')
+              .removeClass('active');
+
+            element.addClass('active');
+
+            if (transition) {
+              element.addClass('in');
+            } else {
+              element.removeClass('fade');
+            }
+
+            if (element.parent('.firechat-dropdown-menu')) {
+              element.closest('li.firechat-dropdown').addClass('active');
+            }
+
+            if (callback) {
+              callback();
+            }
+          }
+
+          if (transition) {
+            $active.one($.support.transition.end, next);
+          } else {
+            next();
+          }
+
+          $active.removeClass('in');
+      };
+
+    $(document).delegate('[data-toggle="firechat-tab"]', 'click', function(event) {
+      event.preventDefault();
+      show($(this));
+    });
+  };
+
+  /**
+   * A stripped-down version of bootstrap-dropdown.js.
+   *
+   * Original bootstrap-dropdown.js Copyright 2012 Twitter, Inc., licensed under the Apache v2.0
+   */
+  FirechatUI.prototype._setupDropdowns = function() {
+    var self = this,
+        toggle = '[data-toggle=firechat-dropdown]',
+        toggleDropdown = function(event) {
+          var $this = $(this),
+              $parent = getParent($this),
+              isActive = $parent.hasClass('open');
+
+          if ($this.is('.disabled, :disabled')) return;
+
+          clearMenus();
+
+          if (!isActive) {
+            $parent.toggleClass('open');
+          }
+
+          $this.focus();
+
+          return false;
+        },
+        clearMenus = function() {
+          $('[data-toggle=firechat-dropdown]').each(function() {
+            getParent($(this)).removeClass('open');
+          });
+        },
+        getParent = function($this) {
+          var selector = $this.attr('data-target'),
+              $parent;
+
+          if (!selector) {
+            selector = $this.attr('href');
+            selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '');
+          }
+
+          $parent = selector && $(selector);
+
+          if (!$parent || !$parent.length) $parent = $this.parent();
+
+          return $parent;
+        };
+
+      $(document)
+        .bind('click', clearMenus)
+        .delegate('.firechat-dropdown-menu', 'click', function(event) { event.stopPropagation(); })
+        .delegate('[data-toggle=firechat-dropdown]', 'click', toggleDropdown);
+  };
+
+  /**
+   * Binds to any text input fields with data-provide='limit' and
+   * data-counter='<selector>', and upon value change updates the selector
+   * content to reflect the number of characters remaining, as the 'maxlength'
+   * attribute less the current value length.
+   */
+  FirechatUI.prototype._bindTextInputFieldLimits = function() {
+    $('body').delegate('input[data-provide="limit"], textarea[data-provide="limit"]', 'keyup', function(event) {
+      var $this = $(this),
+          $target = $($this.data('counter')),
+          limit = $this.attr('maxlength'),
+          count = $this.val().length;
+
+      $target.html(Math.max(0, limit - count));
+    });
+  };
+
+  /**
+   * Given a title and message content, show an alert prompt to the user.
+   *
+   * @param    {string}    title
+   * @param    {string}    message
+   */
+  FirechatUI.prototype.renderAlertPrompt = function(title, message) {
+    var template = FirechatDefaultTemplates["templates/prompt-alert.html"],
+        $prompt = this.prompt(title, template({ message: message }));
+
+      $prompt.find('.close').click(function() {
+        $prompt.remove();
+        return false;
+      });
+      return;
+  };
+
+  /**
+   * Toggle input field s if we want limit / unlimit input fields.
+   */
+  FirechatUI.prototype.toggleInputs = function(isEnabled) {
+    $('#firechat-tab-content textarea').each(function() {
+      var $this = $(this);
+      if (isEnabled) {
+        $(this).val('');
+      } else {
+        $(this).val('You have exceeded the message limit, please wait before sending.');
+      }
+      $this.prop('disabled', !isEnabled);
+    });
+    $('#firechat-input-name').prop('disabled', !isEnabled);
+  };
+
+  /**
+   * Given a room id and name, attach the tab to the interface and setup events.
+   *
+   * @param    {string}    roomId
+   * @param    {string}    roomName
+   */
+  FirechatUI.prototype.attachTab = function(roomId, roomName) {
+    var self = this;
+
+    // If this tab already exists, give it focus.
+    if (this.$messages[roomId]) {
+      this.focusTab(roomId);
+      return;
+    }
+
+    var room = {
+      id: roomId,
+      name: roomName
+    };
+
+    // Populate and render the tab content template.
+    var tabTemplate = FirechatDefaultTemplates["templates/tab-content.html"];
+    var $tabContent = $(tabTemplate(room));
+    this.$tabContent.prepend($tabContent);
+    var $messages = $('#firechat-messages' + roomId);
+
+    // Keep a reference to the message listing for later use.
+    this.$messages[roomId] = $messages;
+
+    // Attach on-enter event to textarea.
+    var $textarea = $tabContent.find('textarea').first();
+    $textarea.bind('keydown', function(e) {
+      var message = self.trimWithEllipsis($textarea.val(), self.maxLengthMessage);
+      if ((e.which === 13) && (message !== '')) {
+        $textarea.val('');
+        self._chat.sendMessage(roomId, message);
+        return false;
+      }
+    });
+
+    // Populate and render the tab menu template.
+    var tabListTemplate = FirechatDefaultTemplates["templates/tab-menu-item.html"];
+    var $tab = $(tabListTemplate(room));
+    this.$tabList.prepend($tab);
+
+    // Attach on-shown event to move tab to front and scroll to bottom.
+    $tab.bind('shown', function(event) {
+      $messages.scrollTop($messages[0].scrollHeight);
+    });
+
+    // Dynamically update the width of each tab based upon the number open.
+    var tabs = this.$tabList.children('li');
+    var tabWidth = Math.floor($('#firechat-tab-list').width() / tabs.length);
+    this.$tabList.children('li').css('width', tabWidth);
+
+    // Update the room listing to reflect that we're now in the room.
+    this.$roomList.children('[data-room-id=' + roomId + ']').children('a').addClass('highlight');
+
+    // Sort each item in the user list alphabetically on click of the dropdown.
+    $('#firechat-btn-room-user-list-' + roomId).bind('click', function() {
+      self.sortListLexicographically('#firechat-room-user-list-' + roomId);
+      return false;
+    });
+
+    // Automatically select the new tab.
+    this.focusTab(roomId);
+  };
+
+  /**
+   * Given a room id, focus the given tab.
+   *
+   * @param    {string}    roomId
+   */
+  FirechatUI.prototype.focusTab = function(roomId) {
+    if (this.$messages[roomId]) {
+      var $tabLink = this.$tabList.find('[data-room-id=' + roomId + ']').find('a');
+      if ($tabLink.length) {
+        $tabLink.first().trigger('click');
+      }
+    }
+  };
+
+  /**
+   * Given a room id, remove the tab and all child elements from the interface.
+   *
+   * @param    {string}    roomId
+   */
+  FirechatUI.prototype.removeTab = function(roomId) {
+    delete this.$messages[roomId];
+
+    // Remove the inner tab content.
+    this.$tabContent.find('[data-room-id=' + roomId + ']').remove();
+
+    // Remove the tab from the navigation menu.
+    this.$tabList.find('[data-room-id=' + roomId + ']').remove();
+
+    // Dynamically update the width of each tab based upon the number open.
+    var tabs = this.$tabList.children('li');
+    var tabWidth = Math.floor($('#firechat-tab-list').width() / tabs.length);
+    this.$tabList.children('li').css('width', tabWidth);
+
+    // Automatically select the next tab if there is one.
+    this.$tabList.find('[data-toggle="firechat-tab"]').first().trigger('click');
+
+    // Update the room listing to reflect that we're now in the room.
+    this.$roomList.children('[data-room-id=' + roomId + ']').children('a').removeClass('highlight');
+  };
+
+  /**
+   * Render a new message in the specified chat room.
+   *
+   * @param    {string}    roomId
+   * @param    {string}    message
+   */
+  FirechatUI.prototype.showMessage = function(roomId, rawMessage) {
+    var self = this;
+
+    // Setup defaults
+    var message = {
+      id              : rawMessage.id,
+      localtime       : self.formatTime(rawMessage.timestamp),
+      message         : rawMessage.message || '',
+      userId          : rawMessage.userId,
+      name            : rawMessage.name,
+      type            : rawMessage.type || 'default',
+      isSelfMessage   : (self._user && rawMessage.userId == self._user.id),
+      disableActions  : (!self._user || rawMessage.userId == self._user.id)
+    };
+
+    // While other data is escaped in the Underscore.js templates, escape and
+    // process the message content here to add additional functionality (add links).
+    // Also trim the message length to some client-defined maximum.
+    var messageConstructed = '';
+    message.message = _.map(message.message.split(' '), function(token) {
+      if (self.urlPattern.test(token) || self.pseudoUrlPattern.test(token)) {
+        return self.linkify(encodeURI(token));
+      } else {
+        return _.escape(token);
+      }
+    }).join(' ');
+    message.message = self.trimWithEllipsis(message.message, self.maxLengthMessage);
+
+    // Populate and render the message template.
+    var template = FirechatDefaultTemplates["templates/message.html"];
+    var $message = $(template(message));
+    var $messages = self.$messages[roomId];
+    if ($messages) {
+
+      var scrollToBottom = false;
+      if ($messages.scrollTop() / ($messages[0].scrollHeight - $messages[0].offsetHeight) >= 0.95) {
+        // Pinned to bottom
+        scrollToBottom = true;
+      } else if ($messages[0].scrollHeight <= $messages.height()) {
+        // Haven't added the scrollbar yet
+        scrollToBottom = true;
+      }
+
+      $messages.append($message);
+
+      if (scrollToBottom) {
+        $messages.scrollTop($messages[0].scrollHeight);
+      }
+    }
+  };
+
+  /**
+   * Remove a message by id.
+   *
+   * @param    {string}    roomId
+   * @param    {string}    messageId
+   */
+  FirechatUI.prototype.removeMessage = function(roomId, messageId) {
+    $('.message[data-message-id="' + messageId + '"]').remove();
+  };
+
+  /**
+   * Given a selector for a list element, sort the items alphabetically.
+   *
+   * @param    {string}    selector
+   */
+  FirechatUI.prototype.sortListLexicographically = function(selector) {
+    $(selector).children("li").sort(function(a, b) {
+        var upA = $(a).text().toUpperCase();
+        var upB = $(b).text().toUpperCase();
+        return (upA < upB) ? -1 : (upA > upB) ? 1 : 0;
+    }).appendTo(selector);
+  };
+
+  /**
+   * Remove leading and trailing whitespace from a string and shrink it, with
+   * added ellipsis, if it exceeds a specified length.
+   *
+   * @param    {string}    str
+   * @param    {number}    length
+   * @return   {string}
+   */
+  FirechatUI.prototype.trimWithEllipsis = function(str, length) {
+    str = str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    return (length && str.length <= length) ? str : str.substring(0, length) + '...';
+  };
+
+  /**
+   * Given a timestamp, format it in the form hh:mm am/pm. Defaults to now
+   * if the timestamp is undefined.
+   *
+   * @param    {Number}    timestamp
+   * @param    {string}    date
+   */
+  FirechatUI.prototype.formatTime = function(timestamp) {
+    var date = (timestamp) ? new Date(timestamp) : new Date(),
+        hours = date.getHours() || 12,
+        minutes = '' + date.getMinutes(),
+        ampm = (date.getHours() >= 12) ? 'pm' : 'am';
+
+    hours = (hours > 12) ? hours - 12 : hours;
+    minutes = (minutes.length < 2) ? '0' + minutes : minutes;
+    return '' + hours + ':' + minutes + ampm;
+  };
+
+  /**
+   * Launch a prompt to allow the user to create a new room.
+   */
+  FirechatUI.prototype.promptCreateRoom = function() {
+    var self = this;
+    var template = FirechatDefaultTemplates["templates/prompt-create-room.html"];
+
+    var $prompt = this.prompt('Create Public Room', template({
+      maxLengthRoomName: this.maxLengthRoomName,
+      isModerator: self._chat.userIsModerator()
+    }));
+    $prompt.find('a.close').first().click(function() {
+      $prompt.remove();
+      return false;
+    });
+
+
+    $prompt.find('[data-toggle=submit]').first().click(function() {
+      var name = $prompt.find('[data-input=firechat-room-name]').first().val();
+      if (name !== '') {
+        self._chat.createRoom(name, 'public');
+        $prompt.remove();
+      }
+      return false;
+    });
+
+    $prompt.find('[data-input=firechat-room-name]').first().focus();
+    $prompt.find('[data-input=firechat-room-name]').first().bind('keydown', function(e) {
+      if (e.which === 13) {
+        var name = $prompt.find('[data-input=firechat-room-name]').first().val();
+        if (name !== '') {
+          self._chat.createRoom(name, 'public');
+          $prompt.remove();
+          return false;
+        }
+      }
+    });
+  };
+
+  /**
+   * Inner method to launch a prompt given a specific title and HTML content.
+   * @param    {string}    title
+   * @param    {string}    content
+   */
+  FirechatUI.prototype.prompt = function(title, content) {
+    var template = FirechatDefaultTemplates["templates/prompt.html"],
+        $prompt;
+
+    $prompt = $(template({
+      title: title,
+      content: content
+    })).css({
+      top: this.$wrapper.position().top + (0.333 * this.$wrapper.height()),
+      left: this.$wrapper.position().left + (0.125 * this.$wrapper.width()),
+      width: 0.75 * this.$wrapper.width()
+    });
+    this.$wrapper.append($prompt.removeClass('hidden'));
+    return $prompt;
+  };
+
+  // see http://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links
+  FirechatUI.prototype.linkify = function(str) {
+    var self = this;
+    return str
+      .replace(self.urlPattern, '<a target="_blank" href="$&">$&</a>')
+      .replace(self.pseudoUrlPattern, '$1<a target="_blank" href="http://$2">$2</a>');
+  };
+
+})(jQuery);
