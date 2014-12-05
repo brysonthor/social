@@ -2,7 +2,7 @@
   page = { 'title': 'Social', 'key': 'Social', 'ngApp': 'social' };
   page.description = "FamilySearch Social";
   assets = {
-    'css': [ 'index.css', 'bootstrap.css', 'firechat.css'],
+    'css': [ 'index.css', 'bootstrap.css', 'familysearch-styles.styl', 'firechat.css'],
     'js': [
       'angular.min.js',
       'app.js',
@@ -123,3 +123,17 @@
   <div id='firechat-wrapper'></div>
 </div>
 <% } %>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+  // Get inbox count
+  // TODO: u2ms is not on prod yet
+  // $.ajax({
+  //   url: "/u2ms/api/v1/mailbox/counters",
+  //   headers: {"Authorization": "bearer "+FS.social.sessionId}
+  // })
+  // .done(function(rsp) {
+  //   console.log(rsp);
+  // });  
+});
+</script>

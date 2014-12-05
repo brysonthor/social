@@ -4,7 +4,6 @@ var env = require('envs');
 var serviceAccount = require('fs-service-account');
 var FirebaseTokenGenerator = require("firebase-token-generator");
 
-
 // Mongo Schemas
 var friendSchema = new mongoose.Schema({ user_id: String, name: String, friends: [{display_name: String, user_id: String, portrait: String, email: String }]});
 var Friend = mongoose.model('friends', friendSchema);
@@ -90,24 +89,40 @@ module.exports = function(app) {
               if (err) {
                 res.send(err, 400);
               } else {
-                // Service account is required to talk to UMS
-                // serviceAccount.appLogin(function(err, sessionId) {
-                //   if (err) return console.log(err);
-                //   console.log('session:', sessionId);
-                // });
+                // Get a service account sessionId, and post to UMS
+                serviceAccount.appLogin(function(err, sessionId) {
+                  if (err) return console.log(err);
+                  var acceptUrl = "https://familysearch.org/friends/api/accept?id="+rsp._id;
+                  var snippet = {
+                    type: "friend_invite",
+                    version: "1",
+                    recipientLocale: "EN",
+                    recipientName: " ",
+                    recipientEmail: req.body.email,
+                    properties: '{ "senderName" : "'+req.user.profile.displayName+'", "acceptUrl" : "'+acceptUrl+'" }'
+                  };
+                  req.superagent
+                    .post("http://familysearch.org/fst/user-messaging/api/snippets")
+                    .set('Authorization', 'Bearer '+sessionId)
+                    .send(snippet)
+                    .end(function(err, response) {
+                      if (err) console.log(err)
+                      else console.log(response.body);
+                    });
+                });
 
                 // email potential friend
-                var sendgrid = require('sendgrid')(env('SENDGRID_USERNAME'), env('SENDGRID_PASSWORD'));
-                var payload = {
-                  to: req.body.email,
-                  fromname: "FamilySearch",
-                  from: "noreply@familysearch.org",
-                  subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                  html: '<p>You have a friend request! Accept '+req.user.profile.displayName+' as your friend now so you can begin sharing memories on FamilySearch.</p><p><a href="https://familysearch.org/friends/api/accept?id='+rsp._id+'">Click here to accept this friend request</a>. You will then be able to see shared FamilySearch content from '+req.user.profile.displayName+'.</p><br><br>'
-                }
-                sendgrid.send(payload, function(err, json) {
-                  if (err) { console.error(err); }
-                });
+                // var sendgrid = require('sendgrid')(env('SENDGRID_USERNAME'), env('SENDGRID_PASSWORD'));
+                // var payload = {
+                //   to: req.body.email,
+                //   fromname: "FamilySearch",
+                //   from: "noreply@familysearch.org",
+                //   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
+                //   html: '<p>You have a friend request! Accept '+req.user.profile.displayName+' as your friend now so you can begin sharing memories on FamilySearch.</p><p><a href="https://familysearch.org/friends/api/accept?id='+rsp._id+'">Click here to accept this friend request</a>. You will then be able to see shared FamilySearch content from '+req.user.profile.displayName+'.</p><br><br>'
+                // }
+                // sendgrid.send(payload, function(err, json) {
+                //   if (err) { console.error(err); }
+                // });
 
                 res.send(rsp, 200);
               }
@@ -182,7 +197,7 @@ module.exports = function(app) {
                   Invite.find({'_id': req.query.id}).remove().exec();
 
                   // Take user to new friend's page
-                  return res.redirect(req.resolvePath('/'+rsp[0].user_id+'?newFriendName='+rsp[0].display_name));
+                  return res.redirect(req.resolvePath('/'+rsp[0].user_id.split(".")[2]+'?newFriendName='+rsp[0].display_name));
                 });
               });
           });
