@@ -92,7 +92,7 @@ module.exports = function(app) {
                 // Get a service account sessionId, and post to UMS
                 serviceAccount.appLogin(function(err, sessionId) {
                   if (err) return console.log(err);
-                  var acceptUrl = "https://familysearch.org/friends/api/accept?id="+rsp._id;
+                  var acceptUrl = baseUrl+"/friends/api/accept?id="+rsp._id;
                   var snippet = {
                     type: "friend_invite",
                     version: "1",
@@ -102,7 +102,7 @@ module.exports = function(app) {
                     properties: '{ "senderName" : "'+req.user.profile.displayName+'", "acceptUrl" : "'+acceptUrl+'" }'
                   };
                   req.superagent
-                    .post("http://familysearch.org/fst/user-messaging/api/snippets")
+                    .post(baseUrl+"/fst/user-messaging/api/snippets")
                     .set('Authorization', 'Bearer '+sessionId)
                     .send(snippet)
                     .end(function(err, response) {
