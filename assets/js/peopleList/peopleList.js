@@ -12,7 +12,6 @@ angular.module('social').directive('peopleList', ['peopleListService', function(
 
         // Not sharing
         if (data.sharedPeople.length < 1) {
-          console.log("here")
           $('.peoplelist-component').append("<p>No people are shared.</p>");
         }
       });
