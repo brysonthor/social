@@ -14,8 +14,10 @@ angular.module('social').directive('composeMessage', ['composeMessageService', f
         });
       });
 
+      // Get mailbox count
       composeMessageService.getMailboxCount().success(function(rsp) {
-        console.log(rsp);
+        var unread = rsp.totalUnreadMessages;
+        if (unread) $('.subnav_messages').parent().append('<span class="fs-badge fs-badge--dark message-count">'+unread+'</span>');
       });
 
       // Send Message

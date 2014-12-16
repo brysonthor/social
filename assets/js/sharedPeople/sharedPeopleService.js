@@ -8,6 +8,10 @@ angular.module('social').service('sharedPeopleService', ['$http', function($http
     $http.get('/artifactmanager/patrons/'+userId+'/taggedPersons?maxRecords=999').success(function(data) {
       // Get shared people list
       $http.get('api/share').success(function(rsp) {
+
+        // Create sharedPeople array if doesn't exist
+        if (typeof rsp.sharedPeople == "undefined") rsp.sharedPeople = [];
+        
         // Iterate over shared people
         for (var i=0; i<rsp.sharedPeople.length; i++) {
           // Iterate people list

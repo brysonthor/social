@@ -8,7 +8,7 @@ angular.module('social').service('composeMessageService', ['$http', function($ht
 
 	// Send email
   this.sendMessage = function(composeMessage) {
-    return $http.post('api/share', composeMessage);
+    return $http.post('/u2ms/api/v1/messages', composeMessage);
   };
   
   // Get mailbox count
