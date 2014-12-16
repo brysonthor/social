@@ -1,0 +1,34 @@
+<div class="compose-message-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>New Message</h3>
+			</div>
+			<div class="modal-body people-list-modal-body">
+				<form class="form-horizontal" role="form">
+				  <div class="form-group">
+				    <label for="message-to" class="col-sm-2 control-label">To</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control message-to-input" id="message-to" value="cis.user.MM9V-4T3Z">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="message-subject" class="col-sm-2 control-label">Subject</label>
+				    <div class="col-sm-10">
+				      <input class="form-control message-subject-input" id="message-subject">
+				    </div>
+				  </div>
+				    <label for="message-body" class="col-sm-2 control-label">Message</label>
+				    <div class="col-sm-10">
+						  <textarea id="message-body" class="form-control message-body-input" rows="10"></textarea>
+				    </div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="fs-button fs-button--tertiary" data-dismiss="modal" aria-hidden="true">Cancel</button>
+				<button class="fs-button fs-button--small save-people" data-dismiss="modal" ng-click="sendMsg()">Send</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -91,6 +91,7 @@ module.exports = function(app) {
               } else {
                 // Get a service account sessionId, and post to UMS
                 serviceAccount.appLogin(function(err, sessionId) {
+                  console.log(sessionId);
                   if (err) return console.log(err);
                   var acceptUrl = baseUrl+"/friends/api/accept?id="+rsp._id;
                   var snippet = {

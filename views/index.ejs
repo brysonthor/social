@@ -18,7 +18,8 @@
       'getFriends.js',
       'newFriend.js',
       'firebase.js',
-      'firechat.js'
+      'firechat.js',
+      'composeMessage.js'
     ]
   };
   partial('partials/_pageGlobals');
@@ -46,9 +47,11 @@
 <% if (feature('chatEx')) { %>
     <a href=""><span class="friend-chat glyphicon glyphicon-comment pull-right" title="Chat" aria-hidden="true"></span></a>
 <% } %>
-    <button class="fs-button fs-button--secondary fs-button--small pull-right invite-btn" invite-friend="">Invite a Friend</button>
-    <button class="fs-button fs-button--secondary fs-button--small pull-right shared-people">Share Memory Person</button>
-    <shared-people data="<%= userId %>">
+    <button class="fs-button fs-button--secondary fs-button--small pull-right invite-btn" invite-friend="">Invite</button>
+    <button class="fs-button fs-button--secondary fs-button--small pull-right shared-people">Share</button>
+    <button class="fs-button fs-button--secondary fs-button--small pull-right compose-message" compose-message>Compose</button>
+    <shared-people data="<%= userId %>"></shared-people>
+    <compose-message></compose-message>
   </div>
 </div>
 <% } %>
@@ -123,17 +126,3 @@
   <div id='firechat-wrapper'></div>
 </div>
 <% } %>
-
-<script type="text/javascript">
-$( document ).ready(function() {
-  // Get inbox count
-  // TODO: u2ms is not on prod yet
-  // $.ajax({
-  //   url: "/u2ms/api/v1/mailbox/counters",
-  //   headers: {"Authorization": "bearer "+FS.social.sessionId}
-  // })
-  // .done(function(rsp) {
-  //   console.log(rsp);
-  // });  
-});
-</script>

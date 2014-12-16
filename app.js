@@ -21,6 +21,7 @@ app.configure('development', function() {
   app.stack.unshift({ route: "/alertservice", handle: proxy(baseUrl + "/alertservice/")});
   app.stack.unshift({ route: "/ident", handle: proxy(baseUrl + "/ident")});
   app.stack.unshift({ route: "/cis-public-api", handle: proxy(baseUrl + "/cis-public-api")});
+  app.stack.unshift({ route: "/u2ms", handle: proxy(baseUrl + "/u2ms")});
 
   app.get("/hj", function(req, res) {
     res.cookie("fssessionid", req.query.id);

@@ -26,6 +26,7 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 	border-color: #ffffff;
 }
 .affix {
+	width: 700px;
 	top: 0px;
 	padding-top: 6px;
 	border-width: 3px;

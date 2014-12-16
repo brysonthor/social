@@ -1,0 +1,7 @@
+{
+  "files": [
+    "composeMessage.js",
+    "composeMessageService.js"
+  ],
+  "simpleWrap": true
+}
