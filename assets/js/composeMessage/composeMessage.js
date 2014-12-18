@@ -5,13 +5,13 @@ angular.module('social').directive('composeMessage', ['composeMessageService', f
     restrict: 'E',
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
-      // Popup Modal when
+      // Show new message modal
       $('.compose-message').on('click', function(e) {
         $('.compose-message-modal').modal('show');
-
-        composeMessageService.getFriends(attrs.data, function (data) {
-          scope.people = data;
-        });
+        for (var i=0; i<FS.social.friends.length; i++) {
+          var friend = FS.social.friends[i];
+          $('.message-to-list').append('<option value="'+friend.user_id+'">'+friend.display_name+'</option>');
+        }
       });
 
       // Get mailbox count
@@ -28,9 +28,10 @@ angular.module('social').directive('composeMessage', ['composeMessageService', f
           // meta: { "u2ms:about":"Verland Elmer 1920-2014" },
           deleteAbout: false,
           // toUsers: [{ "userName": "misbach", "id": $('.message-to-input').val(), "password": "1234pass", "name": "Matt"}],
-          toUserIds: [$('.message-to-input').val()]
+          toUserIds: [$('.message-to-list').val()]
         };
         composeMessageService.sendMessage(message).success(function(data) {
+          // console.log(data);
         });
       }
 

@@ -19,7 +19,8 @@
       'newFriend.js',
       'firebase.js',
       'firechat.js',
-      'composeMessage.js'
+      'composeMessage.js',
+      'activityFeed.js'
     ]
   };
   partial('partials/_pageGlobals');
@@ -96,6 +97,11 @@
     <div class="col-md-6">
       <h3 class="shared-people-heading">Shared Memory People</h3>
       <div class="peoplelist-component" people-list="<%= friendUserId %>"></div>
+    </div>
+    
+    <div>
+      <!-- <h3>Activity Feed</h3> -->
+      <div class="activity-feed" activity-feed="<%= friendUserId %>"></div>
     </div>
   </div>
 </section>

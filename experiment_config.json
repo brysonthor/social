@@ -4,7 +4,7 @@
     "chatEx": 0
   },
   "envs": {
-    "beta": {},
+    "beta": { "chatEx": 1 },
     "local": { "chatEx": 1 },
     "int": {},
     "sandbox": {}

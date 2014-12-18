@@ -1,0 +1,7 @@
+{
+  "files": [
+    "activityFeed.js",
+    "activityFeedService.js"
+  ],
+  "simpleWrap": true
+}
