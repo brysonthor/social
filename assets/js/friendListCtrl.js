@@ -15,7 +15,7 @@ angular.module('social')
 	    	$('.friend-list-owner').text("Friends of "+data.friendList.name+" ("+data.friendList.friends.length+")");
 	  	} else {
 		    // You have no friends
-	  		$('.friend-list').html('<p class="no-friends">Invite your friends to begin sharing and collaborating with them on FamilySearch.</p>');	
+	  		$('.friend-list').append('<p class="no-friends">Invite your friends to begin sharing and collaborating with them on FamilySearch.</p>');	
 	  	}
 	  });
 	}]);
