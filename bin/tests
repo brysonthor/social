@@ -4,12 +4,11 @@
 set -o errexit
 set -o pipefail
 
-MOCHA=node_modules/.bin/mocha
-_MOCHA=node_modules/.bin/_mocha
-ISTANBUL=node_modules/.bin/istanbul
-TESTS="test/server/*.js"
+./node_modules/karma/bin/karma start test/karma.conf.js --single-run
 
-mkdir -p reports
-
-XUNIT_FILE="reports/TESTS-xunit.xml" $ISTANBUL cover --report lcov --dir ./reports $_MOCHA -- $TESTS -R xunit-file && \
-  ./node_modules/karma/bin/karma start test/karma.conf.js --single-run
+# MOCHA=node_modules/.bin/mocha
+# _MOCHA=node_modules/.bin/_mocha
+# ISTANBUL=node_modules/.bin/istanbul
+# TESTS="test/server/*.js"
+# mkdir -p reports
+# XUNIT_FILE="reports/TESTS-xunit.xml" $ISTANBUL cover --report lcov --dir ./reports $_MOCHA -- $TESTS -R xunit-file && \

@@ -6,13 +6,15 @@ var path = require('path'),
 module.exports = function(config) {
   masterConf(config, {
     browsers: ["PhantomJS"],
+    browserNoActivityTimeout: 20000,
+    logLevel: config.LOG_INFO,
     projectPath: projectPath,
     testFiles: [
-      'node_modules/theme-engage/vendor/underscore-1.3.3/js/modules/underscore.js',
-      'node_modules/theme-engage/vendor/angularjs/js/angular-1.2.16/angular.js',
-      'node_modules/theme-engage/vendor/angularjs/js/angular-1.2.16/angular-mocks.js',
-      'node_modules/theme-engage/vendor/angularjs/js/angular-1.2.16/angular-sanitize.js',
-      'node_modules/theme-engage/vendor/bootstrap/js/bootstrap.js',
+      'assets/js/angular.min.js',
+      'assets/js/angular-mocks.js',
+      'assets/js/angular-sanitize.js',
+      // 'node_modules/theme-engage/vendor/jquery-2.1.1/js/jquery-2.1.1.js',
+      // 'vendor/bootstrap/js/bootstrap.js',
       'node_modules/expect.js/expect.js',
       'node_modules/sinon/lib/sinon.js',
       'node_modules/sinon/lib/sinon/spy.js',
@@ -26,12 +28,8 @@ module.exports = function(config) {
       'node_modules/sinon/lib/sinon/assert.js',
       'node_modules/sinon/lib/sinon/test_case.js',
       'node_modules/sinon/lib/sinon/match.js',
-      'assets/js/modules/*.js',
-      'assets/js/modules/**/assembly.json',
-
-      'assets/js/modules/**/test/*Test.js',
-      'assets/js/angular/**/test/*Test.js',
-      'client/*test.js'
+      
+      {pattern: 'assets/js/**/test/*Test.js', watched: true, included: true, served: true}
     ]
   });
 };

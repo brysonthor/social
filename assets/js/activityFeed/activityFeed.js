@@ -5,10 +5,10 @@ angular.module('social').directive('activityFeed', ['activityFeedService', funct
     restrict: 'A',
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
-      // activityFeedService.getFeed(attrs.activityFeed).success(function(data) {
-      //   scope.activityFeed = data;
-      //   console.log(data);
-      // });
+      activityFeedService.getFeed(attrs.activityFeed).success(function(data) {
+        scope.activityFeed = data;
+        console.log(data);
+      });
     }
   };
 }]);
