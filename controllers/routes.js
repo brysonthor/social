@@ -282,7 +282,7 @@ module.exports = function(app) {
 
   // Get user activity feed
   app.get('/api/activity/:id?', function(req, res, next) {
-    var userId = (req.params.id) ? req.params.id.split(".")[2] : req.user.profile.id.split(".")[2];
+    var userId = req.params.id;
     
     // Get a service account sessionId, and post to UMS
     serviceAccount.appLogin(function(err, sessionId) {
@@ -294,7 +294,7 @@ module.exports = function(app) {
         .set('Authorization', 'Bearer '+sessionId)
         .end(function(err, rsp) {
           if (rsp.statusCode != 200) console.log(rsp)
-          else console.log(rsp.body);
+          else console.log(rsp.error);
           res.send(rsp.body, rsp.statusCode);
         });
     });

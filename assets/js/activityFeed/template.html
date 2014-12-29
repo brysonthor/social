@@ -1,8 +1,6 @@
 <ul class="activity-list">
 	<li class="activity-item" ng-repeat="activity in activityFeed">
-		<a href="/photos/people/{{activity.id}}?returnLabel=Back%20To:%20Friends&returnUrl=/friends">
-			<img class="peoplelist-portrait center-block" ng-src="{{activity.portrait || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
-			<div class="peoplelist-name">{{activity.name}}</div>
-		</a>
+		<a href="/tree/#view=ancestor&person={{activity.targetId}}" target="_blank">
+			{{activity.action}}</a> - {{activity.timeStamp}}
 	</li>
 </ul>

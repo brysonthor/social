@@ -9,7 +9,7 @@
       'friendService.js',
       'friendListCtrl.js',
       'userPortrait.js',
-      'currentUserService.js',
+      'currentPersonService.js',
       'bootstrap.js',
       'inviteFriend.js',
       'sharedPeople.js',
@@ -97,12 +97,11 @@
     <div class="col-md-6">
       <h3 class="shared-people-heading">Shared Memory People</h3>
       <div class="peoplelist-component" people-list="<%= friendUserId %>"></div>
-    </div>
-    
-    <div>
-      <!-- <h3>Activity Feed</h3> -->
+      
+      <h3>Activity Feed</h3>
       <div class="activity-feed" activity-feed="<%= friendUserId %>"></div>
     </div>
+
   </div>
 </section>
 
