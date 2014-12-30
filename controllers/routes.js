@@ -293,7 +293,10 @@ module.exports = function(app) {
         .get(url)
         .set('Authorization', 'Bearer '+sessionId)
         .end(function(err, rsp) {
-          if (rsp.statusCode != 200) console.log(rsp)
+          if (rsp.statusCode != 200) {
+            console.log(rsp.body);
+            res.send(err, rsp.statusCode);
+          }
           else console.log(rsp.error);
           res.send(rsp.body, rsp.statusCode);
         });
