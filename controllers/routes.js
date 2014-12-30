@@ -295,10 +295,11 @@ module.exports = function(app) {
         .end(function(err, rsp) {
           if (rsp.statusCode != 200) {
             console.log(rsp.body);
+            console.log(rsp.error);
             res.send(err, rsp.statusCode);
+          } else {
+            res.send(rsp.body, rsp.statusCode);
           }
-          else console.log(rsp.error);
-          res.send(rsp.body, rsp.statusCode);
         });
     });
   });
