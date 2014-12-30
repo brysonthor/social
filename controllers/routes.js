@@ -286,7 +286,10 @@ module.exports = function(app) {
     
     // Get a service account sessionId, and post to UMS
     serviceAccount.appLogin(function(err, sessionId) {
-      if (err) return console.log(err);
+      if (err) {
+        console.log("SERVICE ACCOUNT LOGIN FAILED",err)
+        return res.send(err, 400);
+      }
       var url = baseUrl+'/ct/admin/changes/contributor/'+userId;
       console.log(url,sessionId);
       req.superagent
