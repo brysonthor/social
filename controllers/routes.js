@@ -92,7 +92,10 @@ module.exports = function(app) {
                 // Get a service account sessionId, and post to UMS
                 serviceAccount.appLogin(function(err, sessionId) {
                   console.log(sessionId);
-                  if (err) return console.log(err);
+                  if (err) {
+                    console.log("SERVICE ACCOUNT LOGIN FAILED",err)
+                    return res.send(err, sessionId);
+                  }
                   var acceptUrl = baseUrl+"/friends/api/accept?id="+rsp._id;
                   var snippet = {
                     type: "friend_invite",
@@ -288,7 +291,7 @@ module.exports = function(app) {
     serviceAccount.appLogin(function(err, sessionId) {
       if (err) {
         console.log("SERVICE ACCOUNT LOGIN FAILED",err)
-        return res.send(err, 400);
+        return res.send(err, sessionId);
       }
       var url = baseUrl+'/ct/admin/changes/contributor/'+userId;
       console.log(url,sessionId);
