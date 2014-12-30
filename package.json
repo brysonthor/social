@@ -11,7 +11,6 @@
     "startup": "~1.0.0",
     "mongoose": "~3.8.17",
     "strong": "0.2.x",
-    "sendgrid": "1.2",
     "envs": "~0.1.6",
     "firebase-token-generator": "~2.0.0"
   },
