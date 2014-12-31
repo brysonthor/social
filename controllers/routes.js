@@ -5,9 +5,9 @@ var serviceAccount = require('fs-service-account');
 var FirebaseTokenGenerator = require("firebase-token-generator");
 
 // Mongo Schemas
-var friendSchema = new mongoose.Schema({ user_id: String, name: String, friends: [{display_name: String, user_id: String, portrait: String, email: String }]});
+var friendSchema = new mongoose.Schema({ user_id: String, name: String, person_id: String, tree_user_id: String, friends: [{display_name: String, user_id: String, portrait: String, email: String, person_id: String, tree_user_id: String }]});
 var Friend = mongoose.model('friends', friendSchema);
-var inviteSchema = new mongoose.Schema({ user_id: String, display_name: String, friend_email: String, inviter_email: String, portrait: String });
+var inviteSchema = new mongoose.Schema({ user_id: String, display_name: String, friend_email: String, inviter_email: String, portrait: String, person_id: String, tree_user_id: String });
 var Invite = mongoose.model('invites', inviteSchema);
 var shareSchema = new mongoose.Schema({ user_id: String, people: [{id: Number, name: String, portrait: String }]});
 var Share = mongoose.model('share', shareSchema);
@@ -61,28 +61,32 @@ module.exports = function(app) {
 
   // Invite a friend: Save invite info. Send email to invitee with the ID of the invite
   app.post('/api/invite', function(req, res, next) {
-    // Get tree id of current logged in user
+    // Get personId and treeUserId of current logged in user (inviter)
     req.superagent
-      .get(baseUrl+'/platform/tree/current-person?access_token='+req.user.sessionId)
+      .get(baseUrl+'/platform/users/current?access_token='+req.user.sessionId)
+      .set('Accept', 'application/json')
       .end(function(err, response) {
         if (err) return next(err);
-        var personObj = JSON.parse(response.text);
+        var personId = response.body.users[0].personId;
+        var treeUserId = response.body.users[0].treeUserId;
 
         // Get portrait url of current logged in user
         req.superagent
-          .get(baseUrl+'/platform/tree/persons/'+personObj.persons[0].id+"/portraits")
+          .get(baseUrl+'/platform/tree/persons/'+personId+"/portraits")
           .set('Authorization', 'Bearer '+req.user.sessionId)
           .end(function(err, response) {
             if (err) return next(err);
-            var portraitObj = JSON.parse(response.text);
-            var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+            var portraitUrl = (response.body.sourceDescriptions.length > 0) ? response.body.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
+            // Save invite to DB
             var invitObj = {
               user_id: req.user.profile.id,
               display_name: req.user.profile.displayName,
               friend_email: req.body.email,
               inviter_email: req.user.profile.email,
-              portrait: portraitUrl
+              portrait: portraitUrl,
+              person_id: personId,
+              tree_user_id: treeUserId
             };
             var invite = new Invite(invitObj);
             invite.save(function (err, rsp) {
@@ -115,19 +119,6 @@ module.exports = function(app) {
                     });
                 });
 
-                // email potential friend
-                // var sendgrid = require('sendgrid')(env('SENDGRID_USERNAME'), env('SENDGRID_PASSWORD'));
-                // var payload = {
-                //   to: req.body.email,
-                //   fromname: "FamilySearch",
-                //   from: "noreply@familysearch.org",
-                //   subject: 'FamilySearch Friend Request from '+req.user.profile.displayName,
-                //   html: '<p>You have a friend request! Accept '+req.user.profile.displayName+' as your friend now so you can begin sharing memories on FamilySearch.</p><p><a href="https://familysearch.org/friends/api/accept?id='+rsp._id+'">Click here to accept this friend request</a>. You will then be able to see shared FamilySearch content from '+req.user.profile.displayName+'.</p><br><br>'
-                // }
-                // sendgrid.send(payload, function(err, json) {
-                //   if (err) { console.error(err); }
-                // });
-
                 res.send(rsp, 200);
               }
             });
@@ -135,7 +126,7 @@ module.exports = function(app) {
       });
   });
 
-  // Add/Accept a friend
+  // Accept a friend request
   app.get('/api/accept', app.restrict(), function(req, res, next) {
     // Return error if no id query param
     if (typeof req.query.id == "undefined") return res.send({"error": "Missing id query parameter"}, 300);
@@ -149,27 +140,27 @@ module.exports = function(app) {
         if (rsp.length != 1) return res.send({error: "Invalid id"}, 300);
         // Get Tree ID of current logged in user
         req.superagent
-          .get(baseUrl+'/platform/tree/current-person?access_token='+req.user.sessionId)
+          .get(baseUrl+'/platform/users/current?access_token='+req.user.sessionId)
           // .set('Authorization', 'Bearer '+req.user.sessionId)
           .end(function(err, response) {
             if (err) return next(err);
-            var personObj = JSON.parse(response.text);
+            var personId = response.body.users[0].personId;
+            var treeUserId = response.body.users[0].treeUserId;
 
             // Get portrait url of current logged in user
             req.superagent
-              .get(baseUrl+'/platform/tree/persons/'+personObj.persons[0].id+"/portraits")
+              .get(baseUrl+'/platform/tree/persons/'+personId+"/portraits")
               .set('Authorization', 'Bearer '+req.user.sessionId)
               .end(function(err, response) {
                 if (err) return next(err);
-                var portraitObj = JSON.parse(response.text);
-                var portraitUrl = (portraitObj.sourceDescriptions.length > 0) ? portraitObj.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+                var portraitUrl = (response.body.sourceDescriptions.length > 0) ? response.body.sourceDescriptions[0].links['image-thumbnail'].href : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
                 // Add friend: Get current list of freinds (to add this friend to)
-                var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait, email: rsp[0].inviter_email };
+                var friendObj = { display_name: rsp[0].display_name, user_id: rsp[0].user_id, portrait: rsp[0].portrait, email: rsp[0].inviter_email, person_id: rsp[0].person_id, tree_user_id: rsp[0].tree_user_id };
                 Friend.findOne({'user_id': userId}, function (err, doc) {
                   // If first time user create new friend list, else add invitee to existing friendlist
                   if (doc == null) {
-                    friends = { user_id: userId, name: req.user.profile.displayName, friends: []};
+                    friends = { user_id: userId, name: req.user.profile.displayName, person_id: personId, tree_user_id: treeUserId, friends: []};
                     friends.friends.push(friendObj);
                     var friends = new Friend(friends);
                     friends.save(function(err, rsp) {
@@ -181,11 +172,11 @@ module.exports = function(app) {
                   }
 
                   // Add friend to the inviter friend list
-                  var friendObj2 = { display_name: req.user.profile.displayName, user_id: req.user.profile.id, portrait: portraitUrl, email: req.user.profile.email };
+                  var friendObj2 = { display_name: req.user.profile.displayName, user_id: req.user.profile.id, portrait: portraitUrl, email: req.user.profile.email, person_id: personId, tree_user_id: treeUserId };
                   Friend.findOne({'user_id': rsp[0].user_id.split(".")[2]}, function (err, doc) {
                     // If first time user create new friend list, else add invitee to existing friendlist
                     if (doc == null) {
-                      friends = { user_id: rsp[0].user_id.split(".")[2], name: rsp[0].display_name, friends: []};
+                      friends = { user_id: rsp[0].user_id.split(".")[2], name: rsp[0].display_name, person_id: rsp[0].person_id, tree_user_id: rsp[0].tree_user_id, friends: []};
                       friends.friends.push(friendObj2);
                       var friends = new Friend(friends);
                       friends.save(function(err, rsp) {

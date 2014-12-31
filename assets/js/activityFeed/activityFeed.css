@@ -1,3 +1,12 @@
 .activity-list {
 	list-style-type: none;
 }
+.activity-feed-portrait {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #D8D8D8;
+}
+.activity-time-stamp { color: #666460; }

@@ -1,6 +1,7 @@
 <ul class="activity-list">
 	<li class="activity-item" ng-repeat="activity in activityFeed">
 		<a href="/tree/#view=ancestor&person={{activity.targetId}}" target="_blank">
-			{{activity.action}}</a> - {{activity.timeStamp}}
+			<img class="activity-feed-portrait" ng-src="{{activity.portrait}}">
+			{{activity.action}}</a> <span class="activity-time-stamp">on {{activity.timeStamp}}</span>
 	</li>
 </ul>

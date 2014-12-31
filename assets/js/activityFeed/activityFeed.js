@@ -1,4 +1,4 @@
-angular.module('social').directive('activityFeed', ['activityFeedService', function(activityFeedService) {
+angular.module('social').directive('activityFeed', ['activityFeedService', 'friendService', function(activityFeedService, friendService) {
   var styles = FS.File.loadCSS('activityFeed.css');
 
   return {
@@ -6,12 +6,11 @@ angular.module('social').directive('activityFeed', ['activityFeedService', funct
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
       // Get tree userId
-      // TODO: Add the tree userId to the req.user object
-      activityFeedService.getCurrentUser().success(function(data) {
-        var userId = data.users[0].treeUserId;
+      friendService.getFriends(attrs.activityFeed).success(function(data) {
+        var treeUserId = data.friendList.tree_user_id;
         
         // Get activity feed for tree userId
-        activityFeedService.getFeed(userId).success(function(data) {
+        activityFeedService.getFeed(treeUserId).success(function(data) {
           // Message the data
           var feed = [];
           for (var i=0; i<data.list.length; i++) {
@@ -21,8 +20,9 @@ angular.module('social').directive('activityFeed', ['activityFeedService', funct
                 var actionName = toTitleCase(data.list[i][key].changeAction.replace(/_/g,' '));
                 var targetId = data.list[i][key].changeTargetId;
                 var timeStamp = data.list[i][key].timeStamp;
+                var portrait = 'https://beta.familysearch.org/platform/tree/persons/'+targetId+'/portrait?default=http://www.clker.com/cliparts/5/f/9/1/11971249021105469155FunDraw_dot_com_Abraham_Lincoln.svg';
                 timeStamp = new Date(timeStamp).toJSON().substring(0,10);
-                feed.push({action: actionName, targetId: targetId, timeStamp: timeStamp});
+                feed.push({action: actionName, targetId: targetId, timeStamp: timeStamp, portrait: portrait});
               }
             }
           }
