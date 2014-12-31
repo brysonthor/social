@@ -6,8 +6,10 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
       // Get activity feed from localstorage
-      var cachedFeed = localStorage.getItem('social-activity-feed');
-      if (cachedFeed) scope.activityFeed = JSON.parse(cachedFeed);
+      var cachedFeed = JSON.parse(localStorage.getItem('social-activity-feed'));
+      if (FS.social.profile.id == attrs.activityFeed) {
+        scope.activityFeed = cachedFeed.feed;
+      }
         
       // Get tree userId from friendlist object
       friendService.getFriends(attrs.activityFeed).success(function(data) {
@@ -31,7 +33,11 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
             }
           }
           scope.activityFeed = feed;
-          localStorage.setItem('social-activity-feed', JSON.stringify(feed));
+          // Only store logged in user's activity feed
+          if (FS.social.profile.id == attrs.activityFeed) {
+            cachedFeed = { userId: FS.social.profile.id, feed: feed };
+            localStorage.setItem('social-activity-feed', JSON.stringify(cachedFeed));
+          }
         });
       });
 
