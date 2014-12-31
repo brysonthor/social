@@ -5,7 +5,7 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
     restrict: 'A',
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
-      // Get activity feed from localstorage
+      // Get cached activity feed from localstorage
       var cachedFeed = JSON.parse(localStorage.getItem('social-activity-feed'));
       if (FS.social.profile.id == attrs.activityFeed) {
         scope.activityFeed = cachedFeed.feed;

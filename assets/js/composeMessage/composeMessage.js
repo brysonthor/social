@@ -18,6 +18,8 @@ angular.module('social').directive('composeMessage', ['composeMessageService', f
       composeMessageService.getMailboxCount().success(function(rsp) {
         var unread = rsp.totalUnreadMessages;
         if (unread) $('.subnav_messages').parent().append('<span class="fs-badge fs-badge--dark message-count">'+unread+'</span>');
+        var title= ' '+$('.subnav_messages').attr('title');
+        $('.subnav_messages').attr('title', rsp.totalMessages+title);
       });
 
       // Send Message
