@@ -5,7 +5,11 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
     restrict: 'A',
     template: $(getSnippets()).html(),
     link: function(scope, element, attrs) {
-      // Get tree userId
+      // Get activity feed from localstorage
+      var cachedFeed = localStorage.getItem('social-activity-feed');
+      if (cachedFeed) scope.activityFeed = JSON.parse(cachedFeed);
+        
+      // Get tree userId from friendlist object
       friendService.getFriends(attrs.activityFeed).success(function(data) {
         var treeUserId = data.friendList.tree_user_id;
         
@@ -20,13 +24,14 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
                 var actionName = toTitleCase(data.list[i][key].changeAction.replace(/_/g,' '));
                 var targetId = data.list[i][key].changeTargetId;
                 var timeStamp = data.list[i][key].timeStamp;
-                var portrait = 'https://beta.familysearch.org/platform/tree/persons/'+targetId+'/portrait?default=http://www.clker.com/cliparts/5/f/9/1/11971249021105469155FunDraw_dot_com_Abraham_Lincoln.svg';
+                var portrait = 'https://beta.familysearch.org/platform/tree/persons/'+targetId+'/portrait?default=https://cdn.mediacru.sh/j/jVaj3U2BwJqn.svg';
                 timeStamp = new Date(timeStamp).toJSON().substring(0,10);
                 feed.push({action: actionName, targetId: targetId, timeStamp: timeStamp, portrait: portrait});
               }
             }
           }
           scope.activityFeed = feed;
+          localStorage.setItem('social-activity-feed', JSON.stringify(feed));
         });
       });
 
