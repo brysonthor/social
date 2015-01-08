@@ -72,6 +72,7 @@
         <div class="row friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:searchText">
           <a href="{{friend.user_id | cisid: true}}">
             <div class="col-md-2">
+              <!-- <img class="friend-avatar" ng-src="/platform/tree/persons/{{friend.person_id}}/portrait?default=https://cdn.mediacru.sh/j/jVaj3U2BwJqn.svg"> -->
               <img class="friend-avatar" ng-src="{{friend.portrait}}">
             </div>
             <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
