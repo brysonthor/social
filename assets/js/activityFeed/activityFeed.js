@@ -8,7 +8,7 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
       // Get cached activity feed from localstorage
       var cachedFeed = JSON.parse(localStorage.getItem('social-activity-feed'));
       if (FS.social.profile.id == attrs.activityFeed) {
-        scope.activityFeed = cachedFeed.feed;
+        if (cachedFeed != null) scope.activityFeed = cachedFeed.feed;
       }
         
       // Get tree userId from friendlist object
