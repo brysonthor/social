@@ -26,14 +26,21 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
       var invites = [];
       inviteFriendService.pendingInvitations().success(function(rsp) {
         invites = rsp.invites;
-      });
-      $('body').on('click', '.show-pending', function(e) {
         if (invites.length == 0) $('.no-invites').removeClass('hide');
         $('.show-pending').hide();
         for (var i=0; i<invites.length; i++) {
           $('.invites-list').append('<li>'+invites[i].friend_email+'</li>');
         }
+        $('.outgoing-invites-count').text(invites.length);
       });
+
+      // $('body').on('click', '.show-pending', function(e) {
+      //   if (invites.length == 0) $('.no-invites').removeClass('hide');
+      //   $('.show-pending').hide();
+      //   for (var i=0; i<invites.length; i++) {
+      //     $('.invites-list').append('<li>'+invites[i].friend_email+'</li>');
+      //   }
+      // });
 
       // This closes the popover when user clicks anywhere outside the popover
       $('body').on('click', function (e) {

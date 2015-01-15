@@ -9,6 +9,7 @@ angular.module('social').directive('peopleList', ['peopleListService', function(
         scope.sharedPeople = data.sharedPeople;
         if (typeof data.sharedPeople != "undefined") {
           $('.shared-people-heading').append(" ("+data.sharedPeople.length+")");
+          $('.shared-count').text(data.sharedPeople.length);
         } else {
           $('.peoplelist-component').append("<p>No people are shared.</p>");
         }

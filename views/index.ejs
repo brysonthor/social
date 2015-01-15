@@ -27,84 +27,113 @@
 %>
 <script type="text/javascript">FS.social = <%- JSON.stringify(user) %></script>
 
-<!-- Banner -->
-<% if (userId == friendUserId) { %>
-<div class="banner">
-    <a id="decoration" href="<%- appPath('/') %>"><img class=" user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
+<div class="row">
+  <!-- Left Column -->
+  <div class="col-md-4 left-column text-center">
+    <!-- Portrait -->
+    <a id="decoration" href="<%- appPath('/') %>"><img class="user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
+    
+    <!-- display/contact names -->
     <% if (userId == friendUserId) { %>
     <div class="user-name"><%= displayName %></div>
+    <div class="contact-name">Contact Name: <%= user.profile.contactName %></div>
     <% } %>
-</div>
-
-<!-- Banner Nav -->
-<div class="banner-nav-container">
-  <div class="banner-nav" data-spy="affix" data-offset-top="260">
-    <form class="form-inline pull-left" role="form">
-    <div class="input-group">
-      <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-      <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
-    </div>
-    </form>
-<% if (feature('chatEx')) { %>
-    <a href=""><span class="friend-chat glyphicon glyphicon-comment pull-right" title="Chat" aria-hidden="true"></span></a>
-<% } %>
-    <button class="fs-button fs-button--secondary fs-button--small pull-right invite-btn" invite-friend="">Invite</button>
-    <button class="fs-button fs-button--secondary fs-button--small pull-right shared-people">Share</button>
-    <button class="fs-button fs-button--secondary fs-button--small pull-right compose-message" compose-message>Compose</button>
+    
+    <button class="fs-button fs-button--small invite-btn" invite-friend="">Invite</button>
+    <button class="fs-button fs-button--small shared-people">Share</button>
+    <button class="fs-button fs-button--small compose-message" compose-message>Compose</button>
     <shared-people data="<%= userId %>"></shared-people>
     <compose-message></compose-message>
+
+    <% if (feature('chatEx')) { %>
+    <a href=""><span class="friend-chat glyphicon glyphicon-comment" title="Chat" aria-hidden="true"></span></a>
+    <% } %>
+
+    <!-- Friend Requests -->
+    <div class="invite-section text-left">
+      <h5 class="invite-header"><strong>Incoming Friend Requests</strong></h5><span class="fs-badge fs-badge--dark incoming-invites-count">0</span>
+      <hr class="invite-hr">
+      <h5 class="invite-header"><strong>Outgoing Friend Requests</strong></h5><span class="fs-badge fs-badge--dark outgoing-invites-count">0</span>
+      <hr class="invite-hr">
+      <div class="pending-invites">
+        <ul class="invites-list"></ul>
+        <p class="no-invites hide">You have no pending invitations.</p>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Right Column -->
+  <div class="col-md-8">
+    <div role="tabpanel">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#sharing" aria-controls="sharing" role="tab" data-toggle="tab">Memories Shared
+            <span class="fs-badge fs-badge--dark shared-count">0</span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#friend-activity" aria-controls="friend-activity" role="tab" data-toggle="tab">Activity
+          <span class="fs-badge fs-badge--dark activity-count">0</span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#friends" aria-controls="friends" role="tab" data-toggle="tab">Friends
+          <span class="fs-badge fs-badge--dark friends-count">0</span>
+          </a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!-- Shared Memories -->
+        <div role="tabpanel" class="tab-pane active" id="sharing">
+          <div class="peoplelist-component" people-list="<%= friendUserId %>"></div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div role="tabpanel" class="tab-pane" id="friend-activity">
+          <div class="activity-feed" activity-feed="<%= friendUserId %>"></div>
+        </div>
+
+        <!-- My Friend List -->
+        <div role="tabpanel" class="tab-pane" id="friends">
+          <!-- Banner Nav -->
+          <% if (userId == friendUserId) { %>
+          <form class="form-inline friend-search-form" role="form">
+            <div class="input-group">
+              <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+              <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
+            </div>
+          </form>
+          <% } %>
+
+          <!-- Friend List -->
+          <div ng-cloak ng-controller="friendListCtrl" model="<%= friendUserId %>">
+            <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:searchText">
+              <a href="{{friend.user_id | cisid: true}}">
+                <!-- <img class="friend-avatar" ng-src="/platform/tree/persons/{{friend.person_id}}/portrait?default=https://cdn.mediacru.sh/j/jVaj3U2BwJqn.svg"> -->
+                  <img class="friend-avatar" ng-src="{{friend.portrait}}">
+                <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
+                <div class="name">{{friend.display_name}}</div>
+              </a>
+
+              <% if (userId == friendUserId) { %>
+              <a href="" class="pull-right fs-button fs-button--small fs-button--secondary remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<% } %>
 
 <!-- Alert -->
 <div class="page-alerts alert alert-warning alert-dismissible fade in" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
   <strong>Warning!</strong> This is a FamilySearch prototype, all social data will be deleted throughout the prototyping process.
 </div>
-
-<!-- Friend List -->
-<section class="friend-list">
-  <div class="row">
-    <div class="col-md-6">
-      <h3 class="friend-list-owner"></h3>
-      <div ng-cloak ng-controller="friendListCtrl" model="<%= friendUserId %>">
-        <div class="row friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:searchText">
-          <a href="{{friend.user_id | cisid: true}}">
-            <div class="col-md-2">
-              <!-- <img class="friend-avatar" ng-src="/platform/tree/persons/{{friend.person_id}}/portrait?default=https://cdn.mediacru.sh/j/jVaj3U2BwJqn.svg"> -->
-              <img class="friend-avatar" ng-src="{{friend.portrait}}">
-            </div>
-            <!-- <span class="badge badge-info pull-left friends-number" title="Number of friends" get-friends="{{friend.user_id}}">0</span> -->
-            <div class="col-md-7 name-container">
-              <div class="name">{{friend.display_name}}</div>
-            </div>
-          </a>
-
-          <% if (userId == friendUserId) { %>
-          <div class="col-md-1 btn-group remove-btn">
-            <a class="fs-button fs-button--small fs-button--secondary dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="" class="remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove Friend</a></li>
-              <!-- <li><a href="mailto:{{friend.email}}" class="remove-btn" target="_blank">Send Email</a></li> -->
-            </ul>
-          </div>
-          <% } %>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <h3 class="shared-people-heading">Shared Memory People</h3>
-      <div class="peoplelist-component" people-list="<%= friendUserId %>"></div>
-      
-      <h3>Activity Feed</h3>
-      <div class="activity-feed" activity-feed="<%= friendUserId %>"></div>
-    </div>
-
-  </div>
-</section>
 
 <!-- Show modal when accepting new friend requests -->
 <% if (newFriendName) { %>

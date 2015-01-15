@@ -3,67 +3,48 @@
 /* TODO: Remove this line when it gets moved to theme-engage */
 ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 
-/* Header/Banner */
-.banner { background-color: #ffffff; padding: 10px 0px; text-align: center; background-image: url('banner_bg.jpg') }
-.banner-nav-container { height: 50px; }
-.banner-nav { height: 50px; padding: 10px 20px 10px 20px; box-shadow: 0px 13px 9px -8px #B5B5B5; background: linear-gradient(#f4f4f4, #ffffff); }
-.user-name {
-	text-shadow: 0px 2px #838383;
-	font-family: museo, sans-serif;
-	font-size: 26px;
-	margin-left: 10px;
-	display: inline-block;
-	position: relative;
-	top: 5px;
-	color: #ffffff;
+.secondary-nav-wrapper { border-bottom: 1px solid #666460; }
+
+/* New column layout */
+.row { margin-right: 0px !important; margin-left: 0px !important; }
+.left-column {
+	padding-top: 20px;
+	background-color: #ECECEC;
+	height: 700px;
 }
 .user-portrait {
-	width: 80px;
-	height: 80px;
+	width: 120px;
+	height: 120px;
 	border-radius: 50%;
 	border-style: solid;
-	border-width: 3px;
+	border-width: 4px;
 	border-color: #ffffff;
+	margin-bottom: 20px;
 }
-.affix {
-	width: 700px;
-	top: 0px;
-	padding-top: 6px;
-	border-width: 3px;
-	border-style: solid;
-	z-index: 1;
-	border-color: #808080;
-	border-top: none;
-	margin: 0px 0 0 15%;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+.user-name {
+	font-family: museo, sans-serif;
+	font-size: 26px;
 }
-
-.page-alerts { margin: 20px 20px 0px 20px; }
+.contact-name { margin-bottom: 30px; }
+.nav-tabs { margin-left: auto; margin-right: auto; display: table; }
+.tab-content { margin-top: 10px; }
 
 /* Friend List */
-.search-friends-input .form-control{ width: 100px; }
-.friend-list { padding-left: 20px; }
-.friend-container {
-	background-color: #ffffff;
-	margin-bottom: 15px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	border-radius: 5px;
+
+#friends {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 450px;
 }
-.row .friend-container { margin-left: 0px; margin-right: 0px; }
-.name-container { display: inline;  padding-top: 10px; padding-top: 15px; margin-left: -15px; }
-.name { display: inline; font-size: 20px; margin-top: 5px; }
-.sub-friend-text { display: inline; font-size: 16px; }
+
+.friend-search-form { text-align: center; margin-bottom: 20px; }
+.search-friends-input .form-control{ width: 100px; }
+.friend-container { padding-bottom: 10px; }
+.name { font-size: 20px; display: inline; }
 .friend-avatar { display: inline; margin-left: 5px; margin-right: 10px; width: 60px; height: 60px; border-radius: 50%; border-style: solid; border-width: 3px; border-color: #B0B0B0; }
 .friends-number { margin-left: -30px; margin-top: 50px; }
 .no-friends { font-size: 20px; text-align: center; margin-top: 100px; }
 .friend-list-header { width: 50%; }
-
-@media (max-width: 1200px) {
-  .affix { position: static !important; }
-}
 
 /* Firechat */
 .friend-chat { font-size: 25px; padding-left: 15px; color: #000000; }

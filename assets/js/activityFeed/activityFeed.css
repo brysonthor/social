@@ -1,12 +1,18 @@
 .activity-list {
 	list-style-type: none;
 }
+.activity-item { margin-bottom: 10px; }
 .activity-feed-portrait {
-	width: 32px;
-	height: 32px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #D8D8D8;
+}
+.activity-feed {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 500px;
 }
 .activity-time-stamp { color: #666460; }

@@ -12,6 +12,7 @@ angular.module('social')
 	    FS.social.friends = data.friendList.friends;
 	    if (typeof data.friendList.friends != "undefined") {
 	    	$('.friend-list-owner').text("Friends of "+data.friendList.name+" ("+data.friendList.friends.length+")");
+	    	$('.friends-count').text(data.friendList.friends.length);
 	  	} else {
 		    // You have no friends
 	  		$('.friend-list').append('<p class="no-friends">Invite your friends to begin sharing and collaborating with them on FamilySearch.</p>');	
