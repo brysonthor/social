@@ -31,25 +31,28 @@
   <!-- Left Column -->
   <div class="col-md-4 left-column text-center">
     <!-- Portrait -->
-    <a id="decoration" href="<%- appPath('/') %>"><img class="user-portrait" user-portrait="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
+    <a href="<%- appPath('/') %>"><img class="user-portrait" user-portrait="<%= friendUserId %>" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
     
     <!-- display/contact names -->
-    <% if (userId == friendUserId) { %>
     <div class="user-name"><%= displayName %></div>
+    <% if (userId == friendUserId) { %>
     <div class="contact-name">Contact Name: <%= user.profile.contactName %></div>
     <% } %>
     
-    <button class="fs-button fs-button--small invite-btn" invite-friend="">Invite</button>
-    <button class="fs-button fs-button--small shared-people">Share</button>
-    <button class="fs-button fs-button--small compose-message" compose-message>Compose</button>
-    <shared-people data="<%= userId %>"></shared-people>
-    <compose-message></compose-message>
+    <div class="user-tools">
+      <button class="fs-button fs-button--small invite-btn" invite-friend="">Invite</button>
+      <button class="fs-button fs-button--small shared-people">Share</button>
+      <button class="fs-button fs-button--small compose-message" compose-message>Compose</button>
+      <shared-people data="<%= userId %>"></shared-people>
+      <compose-message></compose-message>
 
-    <% if (feature('chatEx')) { %>
-    <a href=""><span class="friend-chat glyphicon glyphicon-comment" title="Chat" aria-hidden="true"></span></a>
-    <% } %>
+      <% if (feature('chatEx')) { %>
+      <a href=""><span class="friend-chat glyphicon glyphicon-comment" title="Chat" aria-hidden="true"></span></a>
+      <% } %>
+    </div>
 
     <!-- Friend Requests -->
+    <% if (userId == friendUserId) { %>
     <div class="invite-section text-left">
       <h5 class="invite-header"><strong>Incoming Friend Requests</strong></h5><span class="fs-badge fs-badge--dark incoming-invites-count">0</span>
       <hr class="invite-hr">
@@ -59,8 +62,8 @@
         <ul class="invites-list"></ul>
         <p class="no-invites hide">You have no pending invitations.</p>
       </div>
-
     </div>
+    <% } %>
   </div>
   
   <!-- Right Column -->

@@ -11,7 +11,6 @@ angular.module('social')
 	    $scope.friends = data.friendList.friends;
 	    FS.social.friends = data.friendList.friends;
 	    if (typeof data.friendList.friends != "undefined") {
-	    	$('.friend-list-owner').text("Friends of "+data.friendList.name+" ("+data.friendList.friends.length+")");
 	    	$('.friends-count').text(data.friendList.friends.length);
 	  	} else {
 		    // You have no friends
