@@ -7,3 +7,4 @@ hr { border-top: 1px solid #9D9D9D; margin-top: 5px; }
 .invite-header { display: inline; }
 .pending-invites { margin-top: -10px; }
 .invite-section { padding-top: 30px; }
+.permission-note { color: #666464; margin-top: 20px; }
