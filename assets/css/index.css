@@ -47,7 +47,16 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 .friend-list-header { width: 50%; }
 
 /* Firechat */
-.friend-chat { font-size: 25px; padding-left: 15px; color: #000000; }
+.friend-chat { font-size: 25px; padding-left: 15px; color: #000000;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+#chat-bubble {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
 .chat-container {
 	display: none;
 	position: fixed;
