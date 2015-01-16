@@ -14,7 +14,7 @@
 
 			<div class="modal-body people-list-modal-body">
 				<ul class="people-list">
-					<li ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
+					<li class="text-left" ng-repeat="person in people | orderBy: 'name' | filter:peopleText">
 						<label class="checkbox">
 						<input type="checkbox" ng-model="person.selected">
 						<img class="people-list-portriat" ng-src="{{person.thumbIconUrl || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}}">
