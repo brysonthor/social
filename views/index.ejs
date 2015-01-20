@@ -31,7 +31,7 @@
   <!-- Left Column -->
   <div class="col-md-4 left-column text-center">
     <!-- Portrait -->
-    <a href="<%- appPath('/') %>"><img class="user-portrait" user-portrait="<%= friendUserId %>" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
+    <img class="user-portrait" user-portrait="<%= friendUserId %>" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
     
     <!-- display/contact names -->
     <div class="user-name"><%= displayName %></div>
@@ -40,12 +40,13 @@
     <% } %>
     
     <div class="user-tools">
+      <% if (userId == friendUserId) { %>
       <button class="fs-button fs-button--small invite-btn" invite-friend="">Invite</button>
       <button class="fs-button fs-button--small shared-people">Share</button>
       <button class="fs-button fs-button--small compose-message" compose-message>Compose</button>
       <shared-people data="<%= userId %>"></shared-people>
       <compose-message></compose-message>
-
+      <% } %>
       <% if (feature('chatEx')) { %>
       <a href=""><span id="chat-bubble" class="friend-chat glyphicon glyphicon-comment" title="Chat" aria-hidden="true"></span></a>
       <% } %>
@@ -114,6 +115,8 @@
           <!-- Friend List -->
           <div ng-cloak ng-controller="friendListCtrl" model="<%= friendUserId %>">
             <div class="friend-container" ng-repeat="friend in friends | orderBy: 'display_name' | filter:searchText">
+              <!-- Don't show remove button or hyperlinks if viewing a friend page -->
+              <% if (userId == friendUserId) { %>
               <a href="{{friend.user_id | cisid: true}}">
                 <!-- <img class="friend-avatar" ng-src="/platform/tree/persons/{{friend.person_id}}/portrait?default=https://cdn.mediacru.sh/j/jVaj3U2BwJqn.svg"> -->
                   <img class="friend-avatar" ng-src="{{friend.portrait}}">
@@ -121,8 +124,10 @@
                 <div class="name">{{friend.display_name}}</div>
               </a>
 
-              <% if (userId == friendUserId) { %>
               <a href="" class="pull-right fs-button fs-button--small fs-button--secondary remove-btn" remove-friend="{{friend.user_id}}" data-handle="{{friend.display_name}}">Remove</a>
+              <% } else { %>
+              <img class="friend-avatar" ng-src="{{friend.portrait}}">
+              <div class="name">{{friend.display_name}}</div>
               <% } %>
             </div>
           </div>
