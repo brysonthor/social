@@ -4,13 +4,11 @@
 ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 
 .secondary-nav-wrapper { border-bottom: 1px solid #666460; }
-
-/* New column layout */
 .row { margin-right: 0px !important; margin-left: 0px !important; }
 .left-column {
 	padding-top: 20px;
 	background-color: #ECECEC;
-	height: 700px;
+	height: 800px;
 }
 .user-portrait {
 	width: 120px;
@@ -25,12 +23,15 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 	font-family: museo, sans-serif;
 	font-size: 26px;
 }
-.user-tools { margin-top: 30px; }
+.user-tools { margin-top: 30px; margin-bottom: 30px; }
 .nav-tabs { margin-left: auto; margin-right: auto; display: table; }
 .tab-content { margin-top: 10px; }
 
-/* Friend List */
+.stats-table { width: 100%; table-layout: fixed; }
+.stats-row { font-size: 25px; font-weight: bold; color: blue; }
+.stats-footer { font-size: 14px; padding-bottom: 20px; }
 
+/* Friend List */
 #friends {
 	margin-left: auto;
 	margin-right: auto;

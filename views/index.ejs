@@ -52,6 +52,18 @@
       <% } %>
     </div>
 
+    <!-- Stats -->
+    <% if (userId == friendUserId) { %>
+    <hr>
+      <table class="stats-table">
+        <tr class="stats-row"><td class="stats-ordinances">?</td><td class="friends-count">?</td></tr>
+        <tr class="stats-footer"><td class="stats-footer">Ordinaces Reserved</td><td class="stats-footer">Friends</td></tr>
+        <tr class="stats-row"><td class="stats-indexing">?</td><td class=""></td></tr>
+        <tr class="stats-footer"><td>Indexing</td><td></td></tr>
+      </table>
+    <hr>
+    <% } %>
+
     <!-- Friend Requests -->
     <% if (userId == friendUserId) { %>
     <div class="invite-section text-left">

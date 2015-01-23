@@ -43,6 +43,51 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
             localStorage.setItem('social-activity-feed', JSON.stringify(cachedFeed));
           }
         });
+
+        // Get Rerservation Count
+        // TODO: Move this into its own service
+        $.ajax({
+          url: '/oss/list/'+treeUserId+'?start=0&count=200&disableNoCache=true',
+          type: 'GET',
+          headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
+          contentType: 'text/plain',
+          success: function(data, status, jqXHR) {
+            $('.stats-ordinances').text(data.list.reservation.length);
+          },
+          error: function(jqXHR, data, error) {
+            console.error("Ordinances: ",error);
+          }
+        });
+
+        // Get Indexing Counts
+        // TODO: Move this into its own service
+        // Get UUID
+        $.ajax({
+          url: '/indexing-service/user/users/authenticated',
+          type: 'GET',
+          headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
+          contentType: 'text/plain',
+          success: function(data, status, jqXHR) {
+            var uuid = data.uuid;
+            // Get project stats
+            $.ajax({
+              url: '/indexing-service/statistic/facts/users/'+uuid+'/projects',
+              type: 'GET',
+              headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
+              contentType: 'text/plain',
+              success: function(data, status, jqXHR) {
+                var count = 0;
+                if (typeof data != "undefined") {
+                  console.log("Indexing Stats: ",data);
+                  // TODO: Update the count
+                }
+                $('.stats-indexing').text(count);
+              }, error: function(jqXHR, data, error) { console.error("Indexing Projects: ",error); }
+            });
+          }, error: function(jqXHR, data, error) { console.error("Indexing UUID: ",error); }
+        });
+
+
       });
 
       function toTitleCase(str) {

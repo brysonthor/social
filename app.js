@@ -23,6 +23,8 @@ app.configure('development', function() {
   app.stack.unshift({ route: "/cis-public-api", handle: proxy(baseUrl + "/cis-public-api")});
   app.stack.unshift({ route: "/u2ms", handle: proxy(baseUrl + "/u2ms")});
   app.stack.unshift({ route: "/ct", handle: proxy(baseUrl + "/ct")});
+  app.stack.unshift({ route: "/oss", handle: proxy(baseUrl + "/oss")});
+  app.stack.unshift({ route: "/indexing-service", handle: proxy(baseUrl + "/indexing-service")});
 
   app.get("/hj", function(req, res) {
     res.cookie("fssessionid", req.query.id);
