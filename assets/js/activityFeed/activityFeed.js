@@ -59,6 +59,21 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
           }
         });
 
+        // Get Person Watch Count
+        // TODO: Move this into its own service
+        $.ajax({
+          url: '/tree-data/watch/list',
+          type: 'GET',
+          headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
+          contentType: 'text/plain',
+          success: function(data, status, jqXHR) {
+            $('.stats-watching').text(data.data.count);
+          },
+          error: function(jqXHR, data, error) {
+            console.error("Watch: ",error);
+          }
+        });
+
         // Get Indexing Counts
         // TODO: Move this into its own service
         // Get UUID
