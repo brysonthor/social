@@ -8,7 +8,7 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 .left-column {
 	padding-top: 20px;
 	background-color: #ECECEC;
-	height: 800px;
+	height: 1200px;
 }
 .user-portrait {
 	width: 120px;
@@ -30,6 +30,10 @@ ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 .stats-table { width: 100%; table-layout: fixed; }
 .stats-row { font-size: 25px; font-weight: bold; color: blue; }
 .stats-footer { font-size: 14px; padding-bottom: 20px; }
+
+/* Recent Blog Posts */
+.recent-blog-posts { margin-top: 40px; }
+.recent-blog li { list-style-type: none; margin-left: -35px; margin-bottom: 15px; }
 
 /* Friend List */
 #friends {

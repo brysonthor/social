@@ -77,6 +77,16 @@
       </div>
     </div>
     <% } %>
+    
+    <!-- Recent Blog Posts -->
+    <% if (userId == friendUserId) { %>
+    <div class="recent-blog-posts text-left">
+      <h5><strong>Recent Blog Posts</strong></h5>
+      <hr>
+      <ul class="recent-blog"></ul>
+    </div>
+    <% } %>
+    
   </div>
   
   <!-- Right Column -->

@@ -50,12 +50,29 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
           url: '/oss/list/'+treeUserId+'?start=0&count=200&disableNoCache=true',
           type: 'GET',
           headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
-          contentType: 'text/plain',
           success: function(data, status, jqXHR) {
             $('.stats-ordinances').text(data.list.reservation.length);
           },
           error: function(jqXHR, data, error) {
             console.error("Ordinances: ",error);
+          }
+        });
+
+        // Get recent blog articles
+        // TODO: Move this into its own service
+        $.ajax({
+          url: 'https://familysearch.org/blog/en/feed/',
+          type: 'GET',
+          headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
+          success: function(data, status, jqXHR) {
+            var elements = data.getElementsByTagName("title");
+            for (var i=1; i<6; i++) {
+              var link = data.getElementsByTagName("title")[i].nextSibling.nextSibling.innerHTML;
+              $('.recent-blog').append('<li><a href="'+link+'">'+elements[i].innerHTML+'</a></li>');
+            }
+          },
+          error: function(jqXHR, data, error) {
+            console.error("blog: ",error);
           }
         });
 
@@ -65,7 +82,6 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
           url: '/tree-data/watch/list',
           type: 'GET',
           headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
-          contentType: 'text/plain',
           success: function(data, status, jqXHR) {
             $('.stats-watching').text(data.data.count);
           },
@@ -81,7 +97,6 @@ angular.module('social').directive('activityFeed', ['activityFeedService', 'frie
           url: '/indexing-service/user/users/authenticated',
           type: 'GET',
           headers: {"Authorization": 'Bearer '+FS.social.sessionId, "Accept": "application/json"},
-          contentType: 'text/plain',
           success: function(data, status, jqXHR) {
             var uuid = data.uuid;
             // Get project stats
