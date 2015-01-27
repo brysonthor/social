@@ -41,8 +41,8 @@
     
     <div class="user-tools">
       <% if (userId == friendUserId) { %>
-      <button class="fs-button fs-button--small invite-btn" invite-friend="">Invite</button>
       <button class="fs-button fs-button--small shared-people">Share</button>
+      <button class="fs-button fs-button--small invite-btn" invite-friend="">Invite</button>
       <button class="fs-button fs-button--small compose-message" compose-message>Compose</button>
       <shared-people data="<%= userId %>"></shared-people>
       <compose-message></compose-message>
