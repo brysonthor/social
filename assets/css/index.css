@@ -4,11 +4,16 @@
 ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
 
 .secondary-nav-wrapper { border-bottom: 1px solid #666460; }
-.row { margin-right: 0px !important; margin-left: 0px !important; }
+.row { margin-right: 0px !important; margin-left: 0px !important; overflow: hidden; }
 .left-column {
 	padding-top: 20px;
 	background-color: #ECECEC;
-	height: 1200px;
+	margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+.right-column {
+	margin-bottom: -99999px;
+  padding-bottom: 99999px;
 }
 .user-portrait {
 	width: 120px;
