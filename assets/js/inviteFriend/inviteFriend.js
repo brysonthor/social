@@ -17,7 +17,12 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
       $('body').on('click', '.invite-button', function(e) {
         popover.popover('hide');
         var email = $('.invite-email').val();
-        inviteFriendService.inviteUser({email: email}).error(function(data) {
+        inviteFriendService.inviteUser({email: email})
+        .success(function(rsp) {
+          $('.no-invites').remove();
+          $('.invites-list').append('<li>'+email+'</li>');
+        })
+        .error(function(data) {
           $('.page-alerts').html('Invite Failed').addClass('alert-danger');
         });
       });
@@ -33,14 +38,6 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
         }
         $('.outgoing-invites-count').text(invites.length);
       });
-
-      // $('body').on('click', '.show-pending', function(e) {
-      //   if (invites.length == 0) $('.no-invites').removeClass('hide');
-      //   $('.show-pending').hide();
-      //   for (var i=0; i<invites.length; i++) {
-      //     $('.invites-list').append('<li>'+invites[i].friend_email+'</li>');
-      //   }
-      // });
 
       // This closes the popover when user clicks anywhere outside the popover
       $('body').on('click', function (e) {

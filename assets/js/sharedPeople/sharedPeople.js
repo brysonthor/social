@@ -19,6 +19,7 @@ angular.module('social').directive('sharedPeople', ['sharedPeopleService', funct
 
       scope.savePeople = function() {
         sharedPeopleService.savePeople(scope.people).success(function(data) {
+          location.reload();
         });
       }
 
