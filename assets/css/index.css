@@ -1,7 +1,7 @@
 [ng\:cloak], [ng-cloak], .ng-cloak { display: none; }
 
 /* TODO: Remove this line when it gets moved to theme-engage */
-ul.unstyled, ol.unstyled { padding-left: 0; list-style: none; }
+ul.unstyled { padding-left: 0; list-style: none; }
 
 .secondary-nav-wrapper { border-bottom: 1px solid #666460; }
 .row { margin-right: 0px !important; margin-left: 0px !important; overflow: hidden; }
