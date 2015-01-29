@@ -21,6 +21,7 @@ angular.module('social').directive('inviteFriend', ['inviteFriendService', funct
         .success(function(rsp) {
           $('.no-invites').remove();
           $('.invites-list').append('<li>'+email+'</li>');
+          $('.invite-email').val("");
         })
         .error(function(data) {
           $('.page-alerts').html('Invite Failed').addClass('alert-danger');
