@@ -5,7 +5,7 @@ angular.module('social').service('sharedPeopleService', ['$http', function($http
   this.getPeople = function(userId, cb) {
     // return $http.get('/artifactmanager/patrons/'+userId+'/taggedPersons?maxRecords=999');
 
-    $http.get('/artifactmanager/patrons/'+userId+'/taggedPersons?maxRecords=999').success(function(data) {
+    $http.get('/artifactmanager/patrons/'+userId+'/taggedPersons?includeSoi=false&maxRecords=999').success(function(data) {
       // Get shared people list
       $http.get('api/share').success(function(rsp) {
 
