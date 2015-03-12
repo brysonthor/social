@@ -131,7 +131,7 @@
           <% if (userId == friendUserId) { %>
           <form class="form-inline friend-search-form" role="form">
             <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+              <div class="input-group-addon"><img class="search-icon" src="<%= img('search.svg') %>"></div>
               <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
             </div>
           </form>

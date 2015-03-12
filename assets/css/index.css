@@ -38,6 +38,8 @@ ul.unstyled { padding-left: 0; list-style: none; }
 .stats-footer { font-size: 14px; padding-bottom: 20px; }
 .stats-row a:visited, .stats-row a:hover, .stats-row a:link { color: #646464; text-decoration: none;}
 
+.search-icon { width: 15px; height: 15px; }
+
 /* Recent Blog Posts */
 .recent-blog-posts { margin-top: 40px; }
 .recent-blog li { list-style-type: none; margin-left: -35px; margin-bottom: 15px; }
