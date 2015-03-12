@@ -49,7 +49,9 @@
       <compose-message></compose-message>
       <% } %>
       <% if (feature('chatEx')) { %>
-      <a href=""><span id="chat-bubble" class="friend-chat glyphicon glyphicon-comment" title="Chat" aria-hidden="true"></span></a>
+      <a href="">
+        <img class="friend-chat" src="<%= img('chat.svg') %>">
+      </a>
       <% } %>
     </div>
 
