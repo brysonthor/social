@@ -48,11 +48,7 @@
       <shared-people data="<%= userId %>"></shared-people>
       <compose-message></compose-message>
       <% } %>
-      <% if (feature('chatEx')) { %>
-      <a href="">
-        <img class="friend-chat" src="<%= img('chat.svg') %>">
-      </a>
-      <% } %>
+      <a href=""><span id="chat-bubble" class="friend-chat glyphicon glyphicon-comment" title="Chat" aria-hidden="true"></span></a>
     </div>
 
     <!-- Stats -->
@@ -131,7 +127,7 @@
           <% if (userId == friendUserId) { %>
           <form class="form-inline friend-search-form" role="form">
             <div class="input-group">
-              <div class="input-group-addon"><img class="search-icon" src="<%= img('search.svg') %>"></div>
+              <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
               <input class="form-control search-friends-input" type="text" placeholder="Search Friends" ng-model="searchText.display_name">
             </div>
           </form>
@@ -174,7 +170,6 @@
 <% } %>
 
 <!-- Firechat -->
-<% if (feature('chatEx')) { %>
 <script type='text/javascript'>
   $( document ).ready(function() {
     var firechatRef = new Firebase('https://luminous-torch-8189.firebaseio.com/chat');
@@ -193,4 +188,3 @@
 <div class="chat-container">
   <div id='firechat-wrapper'></div>
 </div>
-<% } %>

@@ -1,11 +1,10 @@
 {
   "experiments": {
-    "nobsheader": 1,
-    "chatEx": 0
+    "nobsheader": 1
   },
   "envs": {
-    "beta": { "chatEx": 1 },
-    "local": { "chatEx": 1 },
+    "beta": { },
+    "local": { },
     "int": {},
     "sandbox": {}
   }
