@@ -30,7 +30,7 @@ angular.module('social').directive('composeMessage', ['composeMessageService', f
           subject: $('.message-subject-input').val(),
           body: $('.message-body-input').val(),
           // meta: { "u2ms:about":"Verland Elmer 1920-2014" },
-          deleteAbout: false,
+          // deleteAbout: false,
           // toUsers: [{ "userName": "misbach", "id": $('.message-to-input').val(), "password": "1234pass", "name": "Matt"}],
           toUserIds: [$('.message-to-list').val()]
         };
