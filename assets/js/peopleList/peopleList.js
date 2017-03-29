@@ -1,5 +1,4 @@
 angular.module('social').directive('peopleList', ['peopleListService', function(peopleListService) {
-  var styles = FS.File.loadCSS('peopleList.css');
 
   return {
     restrict: 'A',

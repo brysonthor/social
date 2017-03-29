@@ -1,5 +1,4 @@
 angular.module('social').directive('getFriends', ['getFriendsService', '$compile', function(getFriendsService, $compile) {
-  var styles = FS.File.loadCSS('getFriends.css');
 
   return {
     scope: { },

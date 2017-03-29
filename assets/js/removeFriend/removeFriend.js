@@ -1,5 +1,4 @@
 angular.module('social').directive('removeFriend', ['removeFriendService', function(removeFriendService) {
-  var styles = FS.File.loadCSS('removeFriend.css');
 
   return {
     restrict: 'A',

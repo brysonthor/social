@@ -3,5 +3,8 @@
     "inviteFriend.js",
     "inviteFriendService.js"
   ],
+  "styles": [
+    "inviteFriend.css"
+  ],
   "simpleWrap": true
 }

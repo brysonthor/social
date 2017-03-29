@@ -1,5 +1,4 @@
 angular.module('social').directive('activityFeed', ['activityFeedService', 'friendService', function(activityFeedService, friendService) {
-  var styles = FS.File.loadCSS('activityFeed.css');
 
   return {
     restrict: 'A',

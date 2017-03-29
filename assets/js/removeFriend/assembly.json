@@ -3,5 +3,8 @@
     "removeFriend.js",
     "removeFriendService.js"
   ],
+  "styles": [
+    "removeFriend.css"
+  ],
   "simpleWrap": true
 }

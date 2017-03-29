@@ -3,5 +3,8 @@
     "getFriends.js",
     "getFriendsService.js"
   ],
+  "styles": [
+    "getFriends.css"
+  ],
   "simpleWrap": true
 }

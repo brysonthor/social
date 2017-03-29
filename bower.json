@@ -1,0 +1,21 @@
+{
+  "name": "social",
+  "main": "app.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "ignore": [
+    "*",
+    "!assets/**/*.*",
+    "!asset.manifest.json"
+  ],
+  "dependencies": {
+    "fs-styles": "git+https://github.com/fs-webdev/fs-styles#^2.x.x",
+    "hf": "git+https://github.com/fs-webdev/hf.git#2.4.1",
+    "bootstrap": "3.3.2",
+    "jquery": "2.1.1"
+  },
+  "private": true
+}

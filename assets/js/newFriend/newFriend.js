@@ -1,5 +1,4 @@
 angular.module('social').directive('newFriend', [function(newFriendService) {
-  var styles = FS.File.loadCSS('newFriend.css');
 
   return {
     restrict: 'E',

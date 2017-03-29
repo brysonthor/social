@@ -3,14 +3,18 @@ angular.module('social').service('composeMessageService', ['$http', function($ht
 
 	// Send email
   this.sendMessage = function(composeMessage) {
-    // return $http.post('/u2ms/api/v1/messages', composeMessage);
-    return $http.post('/fst/mailbox/u2ms/api/v1/threads', composeMessage);
+    var sessionId = FS.Cookie.getCookie('fssessionid');
+    return $http({
+      "url":'/fst/mailbox/u2ms/api/v1/threads',
+      "method": 'POST',
+      "data": composeMessage,
+      "headers": {'Authorization': 'Bearer' + sessionId}
+    });
   };
   
   // Get mailbox count
   this.getMailboxCount = function() {
-    // return $http.get('/u2ms/api/v1/mailbox/counters');
-    return $http.get('/fst/mailbox/u2ms/api/v1/users/'+FS.social.profile.id+'/counters');
+    return $http.get('/fst/fs-messages/users/'+FS.social.profile.id+'/counters');
   }
 
 }]);

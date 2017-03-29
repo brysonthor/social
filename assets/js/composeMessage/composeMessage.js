@@ -1,5 +1,18 @@
 angular.module('social').directive('composeMessage', ['composeMessageService', function(composeMessageService) {
-  var styles = FS.File.loadCSS('composeMessage.css');
+
+  var convertDataToMessage = function (data) {
+    if(data.toIds.indexOf(FS.User.profile.cisId) == -1) {
+      data.toIds.push(FS.User.profile.cisId);
+    }
+    return {
+      "participantIds" : data.toIds,
+      "subject" : data.subject,
+      "firstMessage" : {
+        "authorId" : FS.User.profile.cisId,
+        "body" : data.body
+      }
+    };
+  };
 
   return {
     restrict: 'E',
@@ -18,22 +31,20 @@ angular.module('social').directive('composeMessage', ['composeMessageService', f
 
       // Get mailbox count
       composeMessageService.getMailboxCount().success(function(rsp) {
-        var unread = rsp.totalUnreadMessages;
+        var unread = rsp.totalUnreadMsgs;
         if (unread) $('.subnav_messages').parent().append('<span class="fs-badge fs-badge--dark message-count">'+unread+'</span>');
         var title= ' '+$('.subnav_messages').attr('title');
-        $('.subnav_messages').attr('title', rsp.totalMessages+title);
+        $('.subnav_messages').attr('title', rsp.totalMsgs+title);
       });
 
       // Send Message
       scope.sendMsg = function() {
-        var message = {
+        var data = {
+          toIds: [$('.message-to-list').val()],
           subject: $('.message-subject-input').val(),
-          body: $('.message-body-input').val(),
-          // meta: { "u2ms:about":"Verland Elmer 1920-2014" },
-          // deleteAbout: false,
-          // toUsers: [{ "userName": "misbach", "id": $('.message-to-input').val(), "password": "1234pass", "name": "Matt"}],
-          toUserIds: [$('.message-to-list').val()]
+          body: $('.message-body-input').val()
         };
+        var message = convertDataToMessage(data);
         composeMessageService.sendMessage(message).success(function(data) {
           // console.log(data);
         });

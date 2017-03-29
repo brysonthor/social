@@ -3,25 +3,31 @@
   page.showHelper = true;
   page.description = "FamilySearch Social";
   assets = {
-    'css': [ 'index.css', 'familysearch-styles.styl', 'firechat.css'],
+    'css': [
+      '/components/bootstrap/dist/css/bootstrap.css',
+      '/css/index.css',
+      '/components/fs-styles/dist/familysearch-styles.css',
+      '/vendor/firebase/css/firechat.css'
+    ],
     'js': [
-      'angular.min.js',
-      'app.js',
-      'friendService.js',
-      'friendListCtrl.js',
-      'userPortrait.js',
-      'currentPersonService.js',
-      '3.3.2/bootstrap.js',
-      'inviteFriend.js',
-      'sharedPeople.js',
-      'removeFriend.js',
-      'peopleList.js',
-      'getFriends.js',
-      'newFriend.js',
-      'firebase.js',
-      'firechat.js',
-      'composeMessage.js',
-      'activityFeed.js'
+      '/components/jquery/dist/jquery.js',
+      '/js/angular.min.js',
+      '/js/app.js',
+      '/js/friendService.js',
+      '/js/friendListCtrl.js',
+      '/js/userPortrait.js',
+      '/js/currentPersonService.js',
+      '/components/bootstrap/dist/js/bootstrap.js',
+      '/js/inviteFriend/inviteFriend.js',
+      '/js/sharedPeople/sharedPeople.js',
+      '/js/removeFriend/removeFriend.js',
+      '/js/peopleList/peopleList.js',
+      '/js/getFriends/getFriends.js',
+      '/js/newFriend/newFriend.js',
+      '/vendor/firebase/js/firebase.js',
+      '/vendor/firebase/js/firechat.js',
+      '/js/composeMessage/composeMessage.js',
+      '/js/activityFeed/activityFeed.js'
     ]
   };
   partial('partials/_pageGlobals');

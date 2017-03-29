@@ -3,5 +3,8 @@
     "activityFeed.js",
     "activityFeedService.js"
   ],
+  "styles": [
+    "activityFeed.css"
+  ],
   "simpleWrap": true
 }

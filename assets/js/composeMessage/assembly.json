@@ -3,5 +3,8 @@
     "composeMessage.js",
     "composeMessageService.js"
   ],
+  "styles": [
+    "composeMessage.css"
+  ],
   "simpleWrap": true
 }

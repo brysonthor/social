@@ -3,5 +3,8 @@
     "sharedPeople.js",
     "sharedPeopleService.js"
   ],
+  "styles": [
+    "sharedPeople.css"
+  ],
   "simpleWrap": true
 }

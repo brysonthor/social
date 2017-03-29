@@ -3,5 +3,8 @@
     "peopleList.js",
     "peopleListService.js"
   ],
+  "styles": [
+    "peopleList.css"
+  ],
   "simpleWrap": true
 }

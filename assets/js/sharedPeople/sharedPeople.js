@@ -1,5 +1,4 @@
 angular.module('social').directive('sharedPeople', ['sharedPeopleService', function(sharedPeopleService) {
-  var styles = FS.File.loadCSS('sharedPeople.css');
 
   return {
     restrict: 'E',

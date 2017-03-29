@@ -1,6 +1,5 @@
 // Module dependencies
 var mongoose = require ("mongoose");
-var env = require('envs');
 var serviceAccount = require('fs-service-account');
 var FirebaseTokenGenerator = require("firebase-token-generator");
 
@@ -12,12 +11,12 @@ var Invite = mongoose.model('invites', inviteSchema);
 var shareSchema = new mongoose.Schema({ user_id: String, people: [{id: Number, name: String, portrait: String }]});
 var Share = mongoose.model('share', shareSchema);
 
-var baseUrl = env("BASE_URL");
+var baseUrl = process.env.BASE_URL;
 
 // Connect to DB
-mongoose.connect(env("MONGOLAB_URI"), function (err, res) {
+mongoose.connect(process.env.MONGOLAB_URI, function (err, res) {
   if (err) { console.error ('DB ERROR: '+err); }
-  else { console.log ('DB connected: '+env("MONGOLAB_URI")); }
+  else { console.log ('DB connected: '+process.env.MONGOLAB_URI); }
 });
 
 module.exports = function(app) {
@@ -28,7 +27,7 @@ module.exports = function(app) {
     var displayName = (helping) ? req.user.helper.contactName : req.user.profile.displayName;
 
     // Generate firechat auth token
-    var tokenGenerator = new FirebaseTokenGenerator(env("FIREBASE_SECRET"));
+    var tokenGenerator = new FirebaseTokenGenerator(process.env.FIREBASE_SECRET);
     var token = tokenGenerator.createToken({uid: userId.split('.')[2], name: displayName}, {admin: false, debug: false});
 
     friendUserId = (req.params.id) ? "cis.user."+req.params.id : userId;
@@ -301,4 +300,17 @@ module.exports = function(app) {
     });
   });
 
+  app.use(errorHandler);
+
 };
+
+//*****************************************************************
+// Private helper functions
+function errorHandler(err, req, res, next) {
+  if (res.statusCode > 499) {
+    res.json({status:res.statusCode, err: err});
+  }
+  else {
+    next(err);
+  }
+}

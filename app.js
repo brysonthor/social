@@ -1,35 +1,33 @@
 // Module dependencies
-var woodruff = require("woodruff");
-var env = require('envs');
-var themeEngage = require("theme-engage");
+var snow = require("snow");
+var hf = require("hf");
 
 // Expose the app
-var app = module.exports = woodruff(__dirname, themeEngage, {
+var app = module.exports = snow(__dirname, hf, {
 	proxyUser: true,
 	session: process.env.SESSION_SECRET || 'ReallyIntricateSecretForLocalDevUseOnly1337'
 });
 
 // localhost proxies
-app.configure('development', function() {
+if (process.env.TARGET_ENV === 'local'){
   var proxy = require("simple-http-proxy");
-  var baseUrl = env("BASE_URL");
-  app.stack.unshift({ route: "/artifactmanager", handle: proxy(baseUrl + "/artifactmanager") });
-  app.stack.unshift({ route: "/platform", handle: proxy(baseUrl + "/platform")});
-  app.stack.unshift({ route: "/tree-data", handle: proxy(baseUrl + "/tree-data")});
-  app.stack.unshift({ route: "/ip", handle: proxy(baseUrl + "/ip/")});
-  app.stack.unshift({ route: "/assignment-service", handle: proxy(baseUrl + "/assignment-service/")});
-  app.stack.unshift({ route: "/alertservice", handle: proxy(baseUrl + "/alertservice/")});
-  app.stack.unshift({ route: "/ident", handle: proxy(baseUrl + "/ident")});
-  app.stack.unshift({ route: "/cis-public-api", handle: proxy(baseUrl + "/cis-public-api")});
-  app.stack.unshift({ route: "/u2ms", handle: proxy(baseUrl + "/u2ms")});
-  app.stack.unshift({ route: "/ct", handle: proxy(baseUrl + "/ct")});
-  app.stack.unshift({ route: "/oss", handle: proxy(baseUrl + "/oss")});
-  app.stack.unshift({ route: "/indexing-service", handle: proxy(baseUrl + "/indexing-service")});
-  app.stack.unshift({ route: "/fst", handle: proxy(baseUrl + "/fst")});
+  var baseUrl = process.env.BASE_URL;
+  app.stack.front(function (){ app.use( "/artifactmanager", proxy(baseUrl + "/artifactmanager"))});
+  app.stack.front(function (){ app.use( "/platform", proxy(baseUrl + "/platform"))});
+  app.stack.front(function (){ app.use( "/tree-data", proxy(baseUrl + "/tree-data"))});
+  app.stack.front(function (){ app.use( "/ip", proxy(baseUrl + "/ip/"))});
+  app.stack.front(function (){ app.use( "/assignment-service", proxy(baseUrl + "/assignment-service/"))});
+  app.stack.front(function (){ app.use( "/alertservice", proxy(baseUrl + "/alertservice/"))});
+  app.stack.front(function (){ app.use( "/ident", proxy(baseUrl + "/ident"))});
+  app.stack.front(function (){ app.use( "/cis-public-api", proxy(baseUrl + "/cis-public-api"))});
+  app.stack.front(function (){ app.use( "/u2ms", proxy(baseUrl + "/u2ms"))});
+  app.stack.front(function (){ app.use( "/ct", proxy(baseUrl + "/ct"))});
+  app.stack.front(function (){ app.use( "/oss", proxy(baseUrl + "/oss"))});
+  app.stack.front(function (){ app.use( "/indexing-service", proxy(baseUrl + "/indexing-service"))});
+  app.stack.front(function (){ app.use( "/fst", proxy(baseUrl + "/fst"))});
 
   app.get("/hj", function(req, res) {
     res.cookie("fssessionid", req.query.id);
     res.redirect("/");
   });
-
-});
+};
